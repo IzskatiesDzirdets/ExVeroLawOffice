@@ -63,7 +63,15 @@ nav.scrolled {
   padding: .85rem 4rem;
 }
 .nav-logo { display:flex; align-items:center; gap:.9rem; text-decoration:none; }
-.nav-logo img { height:38px; width:auto; filter:brightness(0) invert(1); }
+
+.nav-logo img { 
+  height: 38px; 
+  width: auto; 
+  filter: none !important; 
+  background: transparent !important; 
+  display: block;
+}
+
 .nav-logo-text { display:flex; flex-direction:column; line-height:1.1; }
 .nav-logo-name {
   font-family:'Playfair Display',serif;
@@ -521,13 +529,7 @@ footer {
   .time-grid { grid-template-columns:repeat(3,1fr); }
   .hero-stats { grid-template-columns:1fr 1fr; }
 }
-  .nav-logo img {
-  height: 38px;
-  width: auto;
-  background-color: transparent !important; /* Piespiež fonu būt caurspīdīgam */
-  border: none !important;
-  outline: none !important;
-}
+
 </style>
 </head>
 <body>
