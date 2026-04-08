@@ -238,40 +238,7 @@
     </div>
 </section>
 
-<section class="section" id="booking" style="background: var(--dark);">
-    <div class="section-inner">
-        <div class="booking-container">
-            <div>
-                <h2 class="sec-h2" style="font-size: 2.5rem;">Pieteikt konsultāciju</h2>
-                <p style="color: var(--gray); margin-bottom: 2rem;">Izvēlieties ērtāko laiku un mūsu speciālisti sazināsies ar Jums 24 stundu laikā.</p>
-                <div style="border-left: 2px solid var(--gold); padding-left: 1.5rem;">
-                    <p><strong>Rīga, Latvija</strong></p>
-                    <p>+371 20000000</p>
-                    <p>office@exvero.lv</p>
-                </div>
-            </div>
-            <form id="contact-form">
-                <div class="form-group">
-                    <label>Vārds Uzvārds</label>
-                    <input type="text" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>E-pasts</label>
-                    <input type="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Tālrunis</label>
-                    <input type="tel" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Ziņa</label>
-                    <textarea class="form-control" rows="4"></textarea>
-                </div>
-                <button type="submit" class="cta-btn" style="width: 100%; padding: 1rem; border: none; cursor: pointer;">Nosūtīt pieteikumu</button>
-            </form>
-        </div>
-    </div>
-</section>
+
 
 <script>
     // Valodas funkcija
@@ -292,22 +259,7 @@
         document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Forma un Sūtīšana (EmailJS integrācija)
-    document.getElementById('contact-form').onsubmit = function(e) {
-        e.preventDefault();
-        const btn = this.querySelector('button');
-        btn.innerText = "Sūta...";
-        
-        emailjs.sendForm('service_id', 'template_id', this)
-            .then(() => {
-                alert('Paldies! Mēs ar Jums sazināsimies.');
-                btn.innerText = "Nosūtīts";
-                this.reset();
-            }, (err) => {
-                alert('Kļūda. Lūdzu mēģiniet vēlreiz.');
-                btn.innerText = "Mēģināt vēlreiz";
-            });
-    };
+
 
     // Inicializācija
     document.addEventListener('DOMContentLoaded', () => {
