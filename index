@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="lv" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ex Vero Law Office — Juridiskais birojs Rīgā</title>
+<meta name="description" content="Ex Vero Law Office — profesionāli juridiskie pakalpojumi kopš 2007. gada. Korporatīvās tiesības, FinTech, civiltiesības. Rezervējiet konsultāciju.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>(function(){ emailjs.init("YHTsjioMXMQ917e10"); })();</script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+:root {
+  --black: #0A0A0A;
+  --dark: #111318;
+  --dark2: #1A1D24;
+  --dark3: #22252E;
+  --border: rgba(255,255,255,.08);
+  --border2: rgba(255,255,255,.14);
+  --gold: #C9A84C;
+  --gold-l: #E2C878;
+  --gold-d: #A8883A;
+  --white: #FAFAF8;
+  --off: #F0EDE8;
+  --gray: #8A8F9A;
+  --gray-l: #B8BCC8;
+  --text: #D8DDE8;
+  --accent: #2A3A5C;
+  --accent-l: #3A4F7A;
+  --green: #2E7D52;
+  --red: #8B2E2E;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--black);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--dark); }
+::-webkit-scrollbar-thumb { background:var(--gold-d); border-radius:2px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:1000;
+  padding: 1.2rem 4rem;
+  display: flex; align-items:center; justify-content:space-between;
+  transition: all .4s;
+}
+nav.scrolled {
+  background: rgba(10,10,10,.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: .85rem 4rem;
+}
+.nav-logo { display:flex; align-items:center; gap:.9rem; text-decoration:none; }
+.nav-logo img { height:38px; width:auto; filter:brightness(0) invert(1); }
+.nav-logo-text { display:flex; flex-direction:column; line-height:1.1; }
+.nav-logo-name {
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem; font-weight:600;
+  color:var(--white); letter-spacing:.02em;
+}
+.nav-logo-sub { font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); font-weight:500; }
+.nav-links { display:flex; gap:2.2rem; list-style:none; }
+.nav-links a {
+  font-size:.78rem; font-weight:400; color:var(--gray-l);
+  text-decoration:none; letter-spacing:.08em; text-transform:uppercase;
+  transition:color .2s; position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-3px; left:0; right:0;
+  height:1px; background:var(--gold); transform:scaleX(0);
+  transform-origin:left; transition:transform .25s;
+}
+.nav-links a:hover { color:var(--white); }
+.nav-links a:hover::after { transform:scaleX(1); }
+.nav-cta {
+  padding:.52rem 1.4rem; border-radius:2px;
+  background:var(--gold); color:var(--black);
+  font-size:.78rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  text-decoration:none; border:none; cursor:pointer;
+  font-family:'Outfit',sans-serif;
+  transition:all .25s;
+}
+.nav-cta:hover { background:var(--gold-l); }
+
+/* Lang switcher */
+.lang-switch { display:flex; gap:.3rem; align-items:center; }
+.lang-btn {
+  background:none; border:1px solid var(--border2);
+  color:var(--gray); font-size:.72rem; font-weight:500;
+  padding:.28rem .55rem; border-radius:2px; cursor:pointer;
+  font-family:'Outfit',sans-serif; letter-spacing:.04em;
+  transition:all .2s;
+}
+.lang-btn.active, .lang-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+/* Hamburger */
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:.3rem; border:none; background:none; z-index:1001; }
+.hamburger span { display:block; width:22px; height:1.5px; background:var(--white); border-radius:1px; transition:all .3s; }
+.hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+.mobile-menu {
+  display:none; position:fixed; inset:0;
+  background:var(--black); z-index:998;
+  flex-direction:column; align-items:center; justify-content:center; gap:2rem;
+  border-top:1px solid var(--border);
+}
+.mobile-menu.open { display:flex; }
+.mobile-menu a {
+  font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:400;
+  color:var(--white); text-decoration:none; letter-spacing:.02em; transition:color .2s;
+}
+.mobile-menu a:hover { color:var(--gold); }
+
+/* ── HERO ── */
+.hero {
+  position:relative; min-height:100vh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; overflow:hidden;
+  background: var(--black);
+}
+.hero-bg {
+  position:absolute; inset:0; z-index:0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(42,58,92,.28) 0%, transparent 70%),
+              radial-gradient(ellipse 40% 40% at 80% 80%, rgba(201,168,76,.06) 0%, transparent 60%);
+}
+.hero-grid {
+  position:absolute; inset:0; z-index:0; opacity:.03;
+  background-image: linear-gradient(var(--border2) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--border2) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-inner {
+  position:relative; z-index:2;
+  max-width:820px; padding:9rem 2rem 7rem;
+  display:flex; flex-direction:column; align-items:center;
+}
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:.7rem;
+  border:1px solid rgba(201,168,76,.25); border-radius:2px;
+  padding:.38rem 1rem; margin-bottom:2.2rem;
+  font-size:.68rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--gold);
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content:''; width:18px; height:1px; background:var(--gold-d);
+}
+.hero-h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.4rem,5vw,3.8rem);
+  font-weight:500; line-height:1.18;
+  color:var(--white); letter-spacing:-.01em;
+  margin-bottom:1.4rem;
+}
+.hero-h1 em { font-style:italic; color:var(--gold-l); font-weight:400; }
+.hero-sub {
+  font-size:1rem; color:var(--gray-l); line-height:1.8;
+  max-width:520px; margin:0 auto 2.6rem; font-weight:300;
+}
+.hero-btns { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-bottom:4rem; }
+.btn-primary {
+  padding:.85rem 2.2rem; background:var(--gold); color:var(--black);
+  font-weight:600; font-size:.82rem; letter-spacing:.08em; text-transform:uppercase;
+  border:none; border-radius:2px; cursor:pointer; font-family:'Outfit',sans-serif;
+  text-decoration:none; transition:all .28s;
+}
+.btn-primary:hover { background:var(--gold-l); transform:translateY(-1px); }
+.btn-outline {
+  padding:.85rem 2.2rem; background:transparent; color:var(--white);
+  font-weight:500; font-size:.82rem; letter-spacing:.08em; text-transform:uppercase;
+  border:1px solid var(--border2); border-radius:2px; cursor:pointer;
+  font-family:'Outfit',sans-serif; text-decoration:none; transition:all .28s;
+}
+.btn-outline:hover { border-color:var(--gold); color:var(--gold); }
+.hero-stats {
+  position:absolute; bottom:0; left:0; right:0;
+  background:var(--dark2); border-top:1px solid var(--border);
+  display:grid; grid-template-columns:repeat(4,1fr);
+}
+.hst {
+  padding:1.1rem; text-align:center;
+  border-right:1px solid var(--border);
+}
+.hst:last-child { border-right:none; }
+.hst-n {
+  font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:600;
+  color:var(--gold); display:block; line-height:1;
+}
+.hst-l {
+  font-size:.62rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gray); margin-top:.3rem; display:block;
+}
+
+/* ── SECTIONS COMMON ── */
+.section { padding:6rem 4rem; }
+.section-inner { max-width:1100px; margin:0 auto; }
+.sec-label {
+  font-size:.68rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--gold); display:flex; align-items:center; gap:.7rem; margin-bottom:1rem;
+}
+.sec-label::before { content:''; width:24px; height:1px; background:var(--gold-d); }
+.sec-h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3.5vw,2.8rem); font-weight:500;
+  color:var(--white); line-height:1.2; margin-bottom:1rem;
+}
+.sec-h2 em { font-style:italic; color:var(--gold-l); }
+.sec-sub { color:var(--gray-l); font-weight:300; font-size:.95rem; line-height:1.8; max-width:560px; }
+.divider { width:48px; height:1px; background:var(--gold-d); margin:1.4rem 0; }
+
+/* ── ABOUT ── */
+.about-sec { background:var(--dark); }
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+.about-right { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+.about-card {
+  background:var(--dark2); border:1px solid var(--border);
+  border-radius:3px; padding:1.6rem 1.4rem;
+  transition:all .3s; position:relative; overflow:hidden;
+}
+.about-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:var(--gold); transform:scaleX(0); transform-origin:left;
+  transition:transform .3s;
+}
+.about-card:hover { border-color:var(--border2); transform:translateY(-3px); }
+.about-card:hover::before { transform:scaleX(1); }
+.about-card-ico { font-size:.9rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:.7rem; display:block; }
+.about-card h3 { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--white); margin-bottom:.4rem; }
+.about-card p { font-size:.8rem; color:var(--gray); line-height:1.7; }
+
+/* ── SERVICES ── */
+.services-sec { background:var(--black); }
+.services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-top:3rem; }
+.srv-card {
+  background:var(--black); padding:2.2rem 2rem;
+  transition:all .3s; cursor:default; position:relative; overflow:hidden;
+}
+.srv-card::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(201,168,76,.05), transparent);
+  opacity:0; transition:opacity .3s;
+}
+.srv-card:hover { background:var(--dark2); }
+.srv-card:hover::after { opacity:1; }
+.srv-num {
+  font-size:.62rem; letter-spacing:.18em; color:var(--gold-d);
+  font-weight:600; display:block; margin-bottom:1.1rem;
+}
+.srv-icon {
+  width:38px; height:38px; margin-bottom:1.1rem;
+  border:1px solid var(--border2); border-radius:2px;
+  display:flex; align-items:center; justify-content:center;
+}
+.srv-icon svg { width:18px; height:18px; stroke:var(--gold); fill:none; stroke-width:1.5; }
+.srv-name {
+  font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:500;
+  color:var(--white); margin-bottom:.65rem; line-height:1.3;
+}
+.srv-desc { font-size:.8rem; color:var(--gray); line-height:1.75; }
+.srv-arrow {
+  position:absolute; bottom:1.6rem; right:1.8rem;
+  width:24px; height:24px; opacity:0; transition:all .3s; transform:translateX(-6px);
+}
+.srv-arrow svg { width:24px; height:24px; stroke:var(--gold); fill:none; stroke-width:1.5; }
+.srv-card:hover .srv-arrow { opacity:1; transform:translateX(0); }
+
+/* ── TRUST ── */
+.trust-sec {
+  background:var(--dark2);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.trust-inner { max-width:1100px; margin:0 auto; }
+.trust-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; }
+.trust-item {
+  padding:3rem 2.5rem; text-align:center;
+  border-right:1px solid var(--border);
+}
+.trust-item:last-child { border-right:none; }
+.trust-n {
+  font-family:'Playfair Display',serif; font-size:3.2rem; font-weight:500;
+  color:var(--gold); line-height:1; display:block; margin-bottom:.5rem;
+}
+.trust-label {
+  font-size:.75rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gray); display:block; margin-bottom:.7rem;
+}
+.trust-desc { font-size:.82rem; color:var(--gray-l); line-height:1.65; font-weight:300; }
+
+/* ── TESTIMONIALS ── */
+.testi-sec { background:var(--dark); }
+.testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; margin-top:3rem; }
+.testi-card {
+  background:var(--dark2); border:1px solid var(--border);
+  border-radius:3px; padding:2rem 1.8rem;
+  transition:all .3s;
+}
+.testi-card:hover { border-color:rgba(201,168,76,.2); }
+.testi-quote {
+  font-family:'Playfair Display',serif; font-size:.95rem; font-style:italic;
+  color:var(--text); line-height:1.8; margin-bottom:1.4rem;
+}
+.testi-quote::before { content:'\201C'; color:var(--gold-d); font-size:1.6rem; line-height:0; vertical-align:-.4em; margin-right:.1em; }
+.testi-author { display:flex; align-items:center; gap:.8rem; }
+.testi-av {
+  width:36px; height:36px; border-radius:50%;
+  background:var(--dark3); border:1px solid var(--border2);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Playfair Display',serif; font-size:.88rem; color:var(--gold); font-weight:600;
+}
+.testi-name { font-size:.82rem; font-weight:500; color:var(--white); display:block; }
+.testi-role { font-size:.72rem; color:var(--gray); }
+
+/* ── BOOKING ── */
+.booking-sec { background:var(--black); }
+.bk-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2.8rem; }
+.b-panel {
+  background:var(--dark2); border:1px solid var(--border);
+  border-radius:3px; padding:2rem;
+}
+.panel-ttl {
+  font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:500;
+  color:var(--white); margin-bottom:1.4rem; padding-bottom:1rem;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:.6rem;
+}
+.panel-ttl-icon { color:var(--gold); font-size:.9rem; }
+/* Calendar */
+.cal-hdr { display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; }
+.cal-btn {
+  background:var(--dark3); border:1px solid var(--border);
+  border-radius:2px; width:30px; height:30px; cursor:pointer;
+  font-size:.9rem; display:flex; align-items:center; justify-content:center;
+  color:var(--gray-l); transition:all .2s;
+}
+.cal-btn:hover { border-color:var(--gold); color:var(--gold); }
+.cal-month { font-family:'Playfair Display',serif; font-size:.95rem; font-weight:500; color:var(--white); }
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; }
+.cal-hd { text-align:center; font-size:.6rem; font-weight:600; color:var(--gray); padding:.3rem 0; text-transform:uppercase; letter-spacing:.06em; }
+.cal-day {
+  aspect-ratio:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  border-radius:2px; cursor:pointer; transition:all .18s;
+  font-size:.76rem; font-weight:400; border:1px solid transparent; min-height:30px;
+  position:relative;
+}
+.cal-day.empty { cursor:default; }
+.cal-day.past { opacity:.18; cursor:not-allowed; }
+.cal-day.avail { background:rgba(46,125,82,.12); border-color:rgba(46,125,82,.3); color:var(--text); }
+.cal-day.avail:hover { background:rgba(46,125,82,.25); transform:scale(1.08); }
+.cal-day.full { background:rgba(139,46,46,.1); border-color:rgba(139,46,46,.25); color:var(--gray); cursor:not-allowed; }
+.cal-day.sel { background:var(--gold); color:var(--black); border-color:transparent; font-weight:600; transform:scale(1.1); box-shadow:0 4px 14px rgba(201,168,76,.3); z-index:2; }
+.cal-day.disabled { opacity:.15; cursor:not-allowed; }
+.legend { display:flex; gap:1.2rem; flex-wrap:wrap; margin-top:.9rem; font-size:.7rem; }
+.leg-item { display:flex; align-items:center; gap:.35rem; font-weight:400; color:var(--gray); }
+.leg-dot { width:8px; height:8px; border-radius:1px; }
+/* Time grid */
+.time-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:.35rem; margin-top:.5rem; }
+.time-chip {
+  padding:.45rem .2rem; border:1px solid var(--border);
+  border-radius:2px; cursor:pointer; text-align:center;
+  font-size:.72rem; font-weight:400; color:var(--gray-l);
+  transition:all .18s; background:var(--dark3);
+}
+.time-chip:hover { border-color:var(--gold); color:var(--gold); }
+.time-chip.sel { background:var(--gold); border-color:var(--gold); color:var(--black); font-weight:600; }
+.time-chip.taken { opacity:.2; cursor:not-allowed; text-decoration:line-through; }
+/* Form */
+.f-group { margin-bottom:.75rem; }
+.f-label { display:block; font-weight:500; font-size:.68rem; color:var(--gray-l); margin-bottom:.3rem; text-transform:uppercase; letter-spacing:.08em; }
+.f-input, .f-area {
+  width:100%; padding:.62rem .9rem;
+  border:1px solid var(--border); border-radius:2px;
+  font-family:'Outfit',sans-serif; font-size:.85rem; color:var(--white);
+  background:var(--dark3); transition:border-color .2s;
+}
+.f-input:focus, .f-area:focus { outline:none; border-color:var(--gold); }
+.f-area { min-height:80px; resize:vertical; }
+.f-row { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }
+.f-select {
+  width:100%; padding:.62rem .9rem;
+  border:1px solid var(--border); border-radius:2px;
+  font-family:'Outfit',sans-serif; font-size:.85rem; color:var(--white);
+  background:var(--dark3); cursor:pointer; transition:border-color .2s;
+  -webkit-appearance:none; appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238A8F9A'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right .9rem center;
+}
+.f-select:focus { outline:none; border-color:var(--gold); }
+.f-select option { background:var(--dark2); }
+.sub-btn {
+  width:100%; padding:.95rem;
+  background:var(--gold); color:var(--black);
+  border:none; border-radius:2px;
+  font-family:'Outfit',sans-serif; font-size:.82rem; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase;
+  cursor:pointer; transition:all .3s; margin-top:.6rem;
+}
+.sub-btn:hover:not(:disabled) { background:var(--gold-l); transform:translateY(-1px); }
+.sub-btn:disabled { opacity:.3; cursor:not-allowed; }
+.sel-chip {
+  background:rgba(201,168,76,.1); border:1px solid rgba(201,168,76,.25);
+  border-radius:2px; padding:.6rem .9rem; margin-bottom:.85rem;
+  font-size:.8rem; color:var(--gold-l); font-weight:400;
+}
+.info-chip {
+  background:var(--dark3); border-radius:2px; padding:.6rem .9rem;
+  font-size:.78rem; color:var(--gray); margin-bottom:.85rem;
+  border-left:2px solid var(--gold-d);
+}
+.err-box {
+  background:rgba(139,46,46,.1); border:1px solid rgba(139,46,46,.3);
+  border-radius:2px; padding:.7rem .9rem; color:#E07070;
+  font-size:.8rem; margin-bottom:.85rem;
+}
+.ok-box {
+  background:var(--dark2); border:1px solid rgba(201,168,76,.2);
+  border-radius:3px; padding:3rem 2rem; text-align:center;
+}
+.ok-box h2 { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--white); margin-bottom:.7rem; }
+.ok-box p { color:var(--gray-l); font-size:.88rem; margin-bottom:.4rem; }
+.spin { display:inline-block; width:13px; height:13px; border:2px solid rgba(10,10,10,.3); border-top-color:var(--black); border-radius:50%; animation:spin .7s linear infinite; vertical-align:middle; margin-right:.35rem; }
+.big-spin { display:inline-block; width:38px; height:38px; border:2px solid var(--border2); border-top-color:var(--gold); border-radius:50%; animation:spin .8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg) } }
+.loading-wrap { text-align:center; padding:3rem; }
+
+/* ── CONTACT ── */
+.contact-sec { background:var(--dark); }
+.contact-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:5rem; align-items:start; }
+.c-item { display:flex; align-items:flex-start; gap:1rem; margin-bottom:1.8rem; }
+.c-ico {
+  width:40px; height:40px; border-radius:2px; flex-shrink:0;
+  background:var(--dark3); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+}
+.c-ico svg { width:16px; height:16px; stroke:var(--gold); fill:none; stroke-width:1.5; }
+.c-item h3 { font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gray); margin-bottom:.3rem; }
+.c-item a, .c-item p { color:var(--white); font-size:.88rem; text-decoration:none; transition:color .2s; }
+.c-item a:hover { color:var(--gold); }
+.map-box {
+  background:var(--dark2); border:1px solid var(--border);
+  border-radius:3px; padding:2rem; height:100%; min-height:260px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.map-box h3 { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--white); margin-bottom:.5rem; }
+.map-box p { color:var(--gray); font-size:.85rem; line-height:1.7; margin-bottom:1.2rem; }
+.map-btn {
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:transparent; border:1px solid var(--border2);
+  color:var(--gray-l); font-size:.75rem; letter-spacing:.08em; text-transform:uppercase;
+  padding:.5rem 1rem; border-radius:2px; text-decoration:none; transition:all .25s;
+}
+.map-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+/* ── FOOTER ── */
+footer {
+  background:var(--dark2); border-top:1px solid var(--border);
+  padding:1.8rem 4rem;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+}
+.foot-logo { display:flex; align-items:center; gap:.7rem; }
+.foot-logo img { height:28px; filter:brightness(0) invert(1) opacity(.5); }
+.foot-copy { font-size:.7rem; color:var(--gray); opacity:.5; }
+.foot-links { display:flex; gap:1.8rem; }
+.foot-links a { color:var(--gray); text-decoration:none; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; transition:color .2s; }
+.foot-links a:hover { color:var(--gold); }
+
+/* ── TOAST ── */
+.toast {
+  position:fixed; bottom:2rem; left:50%;
+  transform:translateX(-50%) translateY(8px);
+  background:var(--dark2); color:var(--white);
+  border:1px solid var(--gold-d);
+  font-size:.82rem; font-weight:500;
+  padding:.65rem 1.6rem; border-radius:2px;
+  z-index:9999; opacity:0; pointer-events:none;
+  transition:all .3s; white-space:nowrap;
+  font-family:'Playfair Display',serif;
+}
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* ── REVEAL ── */
+.rv { opacity:0; transform:translateY(16px); transition:opacity .6s ease,transform .6s ease; }
+.rv.vis { opacity:1; transform:none; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px) {
+  nav { padding:.9rem 2rem; }
+  nav.scrolled { padding:.7rem 2rem; }
+  .section { padding:5rem 2rem; }
+  .services-grid { grid-template-columns:repeat(2,1fr); }
+  footer { padding:1.5rem 2rem; }
+}
+@media(max-width:860px) {
+  .nav-links, .nav-cta, .lang-switch { display:none; }
+  .hamburger { display:flex; }
+  .about-grid { grid-template-columns:1fr; gap:2.5rem; }
+  .services-grid { grid-template-columns:1fr; }
+  .testi-grid { grid-template-columns:1fr; }
+  .bk-grid { grid-template-columns:1fr; }
+  .contact-grid { grid-template-columns:1fr; gap:2rem; }
+  .trust-grid { grid-template-columns:1fr; }
+  .trust-item { border-right:none; border-bottom:1px solid var(--border); }
+  .trust-item:last-child { border-bottom:none; }
+  .hero-stats { grid-template-columns:repeat(2,1fr); }
+  .about-right { grid-template-columns:1fr; }
+}
+@media(max-width:480px) {
+  .f-row { grid-template-columns:1fr; }
+  .time-grid { grid-template-columns:repeat(3,1fr); }
+  .hero-stats { grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#home" class="nav-logo">
+    <img src="logo_bez_fona.svg" alt="Ex Vero Law Office" id="nav-logo-img">
+    <div class="nav-logo-text">
+      <span class="nav-logo-name" data-lv="Ex Vero" data-ru="Ex Vero">Ex Vero</span>
+      <span class="nav-logo-sub" data-lv="Law Office" data-ru="Юридический офис">Law Office</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about" data-lv="Par mums" data-ru="О нас">Par mums</a></li>
+    <li><a href="#services" data-lv="Pakalpojumi" data-ru="Услуги">Pakalpojumi</a></li>
+    <li><a href="#booking" data-lv="Konsultācija" data-ru="Консультация">Konsultācija</a></li>
+    <li><a href="#contact" data-lv="Kontakti" data-ru="Контакты">Kontakti</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <div class="lang-switch">
+      <button class="lang-btn active" id="btn-lv" onclick="setLang('lv')">LV</button>
+      <button class="lang-btn" id="btn-ru" onclick="setLang('ru')">RU</button>
+    </div>
+    <a href="#booking" class="nav-cta" data-lv="Rezervēt" data-ru="Записаться">Rezervēt</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" id="mm1" data-lv="Par mums" data-ru="О нас">Par mums</a>
+  <a href="#services" id="mm2" data-lv="Pakalpojumi" data-ru="Услуги">Pakalpojumi</a>
+  <a href="#booking" id="mm3" data-lv="Konsultācija" data-ru="Консультация">Konsultācija</a>
+  <a href="#contact" id="mm4" data-lv="Kontakti" data-ru="Контакты">Kontakti</a>
+  <div class="lang-switch" style="margin-top:.5rem;">
+    <button class="lang-btn active" onclick="setLang('lv');closeMobile()">LV</button>
+    <button class="lang-btn" onclick="setLang('ru');closeMobile()">RU</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow" data-lv="Juridiskais birojs · Rīga · Kopš 2007" data-ru="Юридический офис · Рига · С 2007 года">Juridiskais birojs · Rīga · Kopš 2007</div>
+    <h1 class="hero-h1">
+      <span data-lv="Profesionāli juridiskie risinājumi" data-ru="Профессиональные юридические решения">Profesionāli juridiskie risinājumi</span><br>
+      <em data-lv="kopš 2007. gada" data-ru="с 2007 года">kopš 2007. gada</em>
+    </h1>
+    <p class="hero-sub" data-lv="Pieredze korporatīvajās, civiltiesībās un FinTech juridiskajā atbalstā. Precizitāte. Konfidencialitāte. Rezultāts." data-ru="Опыт в корпоративном праве, гражданском праве и юридической поддержке FinTech. Точность. Конфиденциальность. Результат.">
+      Pieredze korporatīvajās, civiltiesībās un FinTech juridiskajā atbalstā. Precizitāte. Konfidencialitāte. Rezultāts.
+    </p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-primary" data-lv="Rezervēt konsultāciju" data-ru="Записаться на консультацию">Rezervēt konsultāciju</a>
+      <a href="#contact" class="btn-outline" data-lv="Sazināties" data-ru="Связаться">Sazināties</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hst"><span class="hst-n">18+</span><span class="hst-l" data-lv="Gadu pieredze" data-ru="Лет опыта">Gadu pieredze</span></div>
+    <div class="hst"><span class="hst-n">1000+</span><span class="hst-l" data-lv="Lietas" data-ru="Дел">Lietas</span></div>
+    <div class="hst"><span class="hst-n">6</span><span class="hst-l" data-lv="Prakses jomas" data-ru="Практик">Prakses jomas</span></div>
+    <div class="hst"><span class="hst-n">100%</span><span class="hst-l" data-lv="Konfidencialitāte" data-ru="Конфиденциальность">Konfidencialitāte</span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-sec section rv" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div class="sec-label" data-lv="Par biroju" data-ru="О бюро">Par biroju</div>
+        <h2 class="sec-h2">
+          <span data-lv="Uzticams juridiskais partneris" data-ru="Надёжный юридический партнёр">Uzticams juridiskais partneris</span><br>
+          <em data-lv="jau 18 gadus" data-ru="уже 18 лет">jau 18 gadus</em>
+        </h2>
+        <div class="divider"></div>
+        <p class="sec-sub" style="margin-bottom:1.2rem;" data-lv="Ex Vero Law Office – uzticams juridiskais partneris kopš 2007. gada. Mēs palīdzam uzņēmumiem un privātpersonām risināt juridiskos jautājumus ar precizitāti, konfidencialitāti un profesionālismu." data-ru="Ex Vero Law Office – надёжный юридический партнёр с 2007 года. Мы помогаем компаниям и частным лицам решать юридические вопросы с точностью, конфиденциальностью и профессионализмом.">
+          Ex Vero Law Office – uzticams juridiskais partneris kopš 2007. gada. Mēs palīdzam uzņēmumiem un privātpersonām risināt juridiskos jautājumus ar precizitāti, konfidencialitāti un profesionālismu.
+        </p>
+        <p class="sec-sub" data-lv="Mūsu komanda apvieno dziļu juridisko zināšanu bāzi ar praktisku pieredzi gan Latvijas, gan starptautiskajā tiesību laukā." data-ru="Наша команда сочетает глубокую юридическую базу знаний с практическим опытом как в латвийском, так и в международном праве.">
+          Mūsu komanda apvieno dziļu juridisko zināšanu bāzi ar praktisku pieredzi gan Latvijas, gan starptautiskajā tiesību laukā.
+        </p>
+      </div>
+      <div class="about-right">
+        <div class="about-card">
+          <span class="about-card-ico">01</span>
+          <h3 data-lv="Precizitāte" data-ru="Точность">Precizitāte</h3>
+          <p data-lv="Katrs dokuments un juridisks lēmums tiek sagatavots ar augstāko rūpību." data-ru="Каждый документ и юридическое решение подготавливается с максимальной тщательностью.">Katrs dokuments un juridisks lēmums tiek sagatavots ar augstāko rūpību.</p>
+        </div>
+        <div class="about-card">
+          <span class="about-card-ico">02</span>
+          <h3 data-lv="Konfidencialitāte" data-ru="Конфиденциальность">Konfidencialitāte</h3>
+          <p data-lv="Klienta informācija vienmēr paliek stingri konfidenciāla." data-ru="Информация клиента всегда остаётся строго конфиденциальной.">Klienta informācija vienmēr paliek stingri konfidenciāla.</p>
+        </div>
+        <div class="about-card">
+          <span class="about-card-ico">03</span>
+          <h3 data-lv="Rezultāts" data-ru="Результат">Rezultāts</h3>
+          <p data-lv="Mūsu mērķis ir sasniegt optimālu rezultātu katram klientam." data-ru="Наша цель — достичь оптимального результата для каждого клиента.">Mūsu mērķis ir sasniegt optimālu rezultātu katram klientam.</p>
+        </div>
+        <div class="about-card">
+          <span class="about-card-ico">04</span>
+          <h3 data-lv="Pieredze" data-ru="Опыт">Pieredze</h3>
+          <p data-lv="18+ gadi praksē — korporatīvajās, civiltiesībās, FinTech." data-ru="18+ лет практики — корпоративное право, гражданское право, FinTech.">18+ gadi praksē — korporatīvajās, civiltiesībās, FinTech.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-sec section rv" id="services">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:600px;margin:0 auto;">
+      <div class="sec-label" style="justify-content:center;" data-lv="Pakalpojumi" data-ru="Услуги">Pakalpojumi</div>
+      <h2 class="sec-h2" data-lv="Juridiskās prakses <em>jomas</em>" data-ru="Области юридической <em>практики</em>">Juridiskās prakses <em>jomas</em></h2>
+    </div>
+    <div class="services-grid">
+      <!-- Service 1 -->
+      <div class="srv-card">
+        <span class="srv-num">01</span>
+        <div class="srv-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 17h7M17 14v7"/></svg>
+        </div>
+        <div class="srv-name" data-lv="Korporatīvās tiesības" data-ru="Корпоративное право">Korporatīvās tiesības</div>
+        <p class="srv-desc" data-lv="Uzņēmumu dibināšana, pārstrukturēšana, M&A darījumi, akcionāru līgumi, korporatīvā pārvaldība un atbilstība regulējumam." data-ru="Регистрация компаний, реструктуризация, M&A сделки, акционерные соглашения, корпоративное управление и соответствие требованиям.">Uzņēmumu dibināšana, pārstrukturēšana, M&A darījumi, akcionāru līgumi, korporatīvā pārvaldība un atbilstība regulējumam.</p>
+        <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <!-- Service 2 -->
+      <div class="srv-card">
+        <span class="srv-num">02</span>
+        <div class="srv-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="srv-name" data-lv="FinTech juridiskie pakalpojumi" data-ru="Юридические услуги FinTech">FinTech juridiskie pakalpojumi</div>
+        <p class="srv-desc" data-lv="Regulatīvā atbilstība, licencēšana, kriptovalūtu un maksājumu pakalpojumu tiesiskais nodrošinājums, DORA un AML prasības." data-ru="Регуляторное соответствие, лицензирование, правовое обеспечение криптовалют и платёжных услуг, требования DORA и AML.">Regulatīvā atbilstība, licencēšana, kriptovalūtu un maksājumu pakalpojumu tiesiskais nodrošinājums, DORA un AML prasības.</p>
+        <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <!-- Service 3 -->
+      <div class="srv-card">
+        <span class="srv-num">03</span>
+        <div class="srv-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="srv-name" data-lv="Civiltiesības" data-ru="Гражданское право">Civiltiesības</div>
+        <p class="srv-desc" data-lv="Līgumu sagatavošana un apstrīdēšana, īpašuma tiesības, mantojuma lietas, parādu piedziņa un strīdu risināšana." data-ru="Подготовка и оспаривание договоров, имущественные права, наследственные дела, взыскание долгов и урегулирование споров.">Līgumu sagatavošana un apstrīdēšana, īpašuma tiesības, mantojuma lietas, parādu piedziņa un strīdu risināšana.</p>
+        <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <!-- Service 4 -->
+      <div class="srv-card">
+        <span class="srv-num">04</span>
+        <div class="srv-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="srv-name" data-lv="Darba tiesības" data-ru="Трудовое право">Darba tiesības</div>
+        <p class="srv-desc" data-lv="Darba līgumu izstrāde, atlaišanas strīdi, darba koplīgumi, arodbiedrību attiecības un darba drošības atbilstība." data-ru="Разработка трудовых договоров, споры об увольнении, коллективные договоры, отношения с профсоюзами и соблюдение охраны труда.">Darba līgumu izstrāde, atlaišanas strīdi, darba koplīgumi, arodbiedrību attiecības un darba drošības atbilstība.</p>
+        <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <!-- Service 5 -->
+      <div class="srv-card">
+        <span class="srv-num">05</span>
+        <div class="srv-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="srv-name" data-lv="Administratīvās tiesības" data-ru="Административное право">Administratīvās tiesības</div>
+        <p class="srv-desc" data-lv="Pārsūdzības valsts iestādēs, atļauju un licenču iegūšana, administratīvo lēmumu apstrīdēšana un publisko iepirkumu jautājumi." data-ru="Обжалование в государственных органах, получение разрешений и лицензий, оспаривание административных решений и вопросы публичных закупок.">Pārsūdzības valsts iestādēs, atļauju un licenču iegūšana, administratīvo lēmumu apstrīdēšana un publisko iepirkumu jautājumi.</p>
+        <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <!-- Service 6 -->
+      <div class="srv-card">
+        <span class="srv-num">06</span>
+        <div class="srv-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+        </div>
+        <div class="srv-name" data-lv="Pārstāvība tiesā un šķīrējtiesā" data-ru="Представительство в суде и арбитраже">Pārstāvība tiesā un šķīrējtiesā</div>
+        <p class="srv-desc" data-lv="Profesionāla pārstāvība Latvijas tiesās, šķīrējtiesās un starptautiskos strīdu izšķiršanas procesos. Lietu stratēģija un taktika." data-ru="Профессиональное представительство в судах Латвии, арбитраже и международных процедурах разрешения споров. Стратегия и тактика дел.">Profesionāla pārstāvība Latvijas tiesās, šķīrējtiesās un starptautiskos strīdu izšķiršanas procesos. Lietu stratēģija un taktika.</p>
+        <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust-sec section rv" style="padding:0;">
+  <div class="trust-inner">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <span class="trust-n">18+</span>
+        <span class="trust-label" data-lv="Gadu pieredze" data-ru="Лет опыта">Gadu pieredze</span>
+        <p class="trust-desc" data-lv="Stabila prakse kopš 2007. gada gan Latvijā, gan starptautiskā mērogā." data-ru="Стабильная практика с 2007 года как в Латвии, так и на международном уровне.">Stabila prakse kopš 2007. gada gan Latvijā, gan starptautiskā mērogā.</p>
+      </div>
+      <div class="trust-item">
+        <span class="trust-n">1000+</span>
+        <span class="trust-label" data-lv="Veiksmīgas lietas" data-ru="Успешных дел">Veiksmīgas lietas</span>
+        <p class="trust-desc" data-lv="Plašs pieredzes klāsts — no privātpersonām līdz lieliem korporatīviem klientiem." data-ru="Широкий спектр опыта — от частных лиц до крупных корпоративных клиентов.">Plašs pieredzes klāsts — no privātpersonām līdz lieliem korporatīviem klientiem.</p>
+      </div>
+      <div class="trust-item">
+        <span class="trust-n">100%</span>
+        <span class="trust-label" data-lv="Konfidencialitāte" data-ru="Конфиденциальность">Konfidencialitāte un precizitāte</span>
+        <p class="trust-desc" data-lv="Klienta intereses un datu aizsardzība ir mūsu prioritāte katrā darbā." data-ru="Защита интересов клиента и данных — наш приоритет в каждой работе.">Klienta intereses un datu aizsardzība ir mūsu prioritāte katrā darbā.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec section rv" id="testimonials">
+  <div class="section-inner">
+    <div class="sec-label" data-lv="Klientu viedokļi" data-ru="Отзывы клиентов">Klientu viedokļi</div>
+    <h2 class="sec-h2" data-lv="Ko saka mūsu <em>klienti</em>" data-ru="Что говорят наши <em>клиенты</em>">Ko saka mūsu <em>klienti</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <p class="testi-quote" data-lv="Ex Vero komanda sniedza izcilu juridisko atbalstu mūsu uzņēmuma pārstrukturēšanas procesā. Profesionalitāte un precizitāte ir to, ko var sagaidīt no šī biroja." data-ru="Команда Ex Vero оказала превосходную юридическую поддержку в процессе реструктуризации нашей компании. Профессионализм и точность — это то, чего можно ожидать от этого бюро.">Ex Vero komanda sniedza izcilu juridisko atbalstu mūsu uzņēmuma pārstrukturēšanas procesā. Profesionalitāte un precizitāte ir to, ko var sagaidīt no šī biroja.</p>
+        <div class="testi-author">
+          <div class="testi-av">AK</div>
+          <div><span class="testi-name">A. Kalniņš</span><span class="testi-role" data-lv="SIA valdes loceklis" data-ru="Член правления ООО">SIA valdes loceklis</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote" data-lv="Sadarbojamies ar Ex Vero Law Office jau vairākus gadus. Viņu zināšanas FinTech regulatīvajos jautājumos ir neaizstājamas mūsu darbībā." data-ru="Мы сотрудничаем с Ex Vero Law Office уже несколько лет. Их знания в области регулирования FinTech незаменимы для нашей деятельности.">Sadarbojamies ar Ex Vero Law Office jau vairākus gadus. Viņu zināšanas FinTech regulatīvajos jautājumos ir neaizstājamas mūsu darbībā.</p>
+        <div class="testi-author">
+          <div class="testi-av">MB</div>
+          <div><span class="testi-name">M. Bērziņš</span><span class="testi-role" data-lv="FinTech uzņēmuma dibinātājs" data-ru="Основатель FinTech компании">FinTech uzņēmuma dibinātājs</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote" data-lv="Augsti vērtēju šī biroja pieeju — vienmēr skaidra komunikācija, savlaicīga atbilde un reāls rezultāts. Iesaku visiem, kas meklē uzticamu juridisku partneri." data-ru="Высоко ценю подход этого бюро — всегда чёткая коммуникация, своевременный ответ и реальный результат. Рекомендую всем, кто ищет надёжного юридического партнёра.">Augsti vērtēju šī biroja pieeju — vienmēr skaidra komunikācija, savlaicīga atbilde un reāls rezultāts. Iesaku visiem, kas meklē uzticamu juridisku partneri.</p>
+        <div class="testi-author">
+          <div class="testi-av">IL</div>
+          <div><span class="testi-name">I. Liepiņa</span><span class="testi-role" data-lv="Privātpersona" data-ru="Частное лицо">Privātpersona</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-sec section rv" id="booking">
+  <div class="section-inner">
+    <div class="sec-label" data-lv="Rezervācija" data-ru="Запись">Rezervācija</div>
+    <h2 class="sec-h2" data-lv="Rezervēt juridisko <em>konsultāciju</em>" data-ru="Записаться на юридическую <em>консультацию</em>">Rezervēt juridisko <em>konsultāciju</em></h2>
+    <p class="sec-sub" data-lv="Izvēlieties piemērotu datumu un laiku. Konsultācija ilgst 60 minūtes. Darba laiks: 09:00–17:00." data-ru="Выберите подходящую дату и время. Консультация длится 60 минут. Рабочее время: 09:00–17:00.">Izvēlieties piemērotu datumu un laiku. Konsultācija ilgst 60 minūtes. Darba laiks: 09:00–17:00.</p>
+    <div id="booking-app"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-sec section rv" id="contact">
+  <div class="section-inner">
+    <div class="sec-label" data-lv="Kontakti" data-ru="Контакты">Kontakti</div>
+    <h2 class="sec-h2" data-lv="Sazinieties <em>ar mums</em>" data-ru="Свяжитесь <em>с нами</em>">Sazinieties <em>ar mums</em></h2>
+    <div class="contact-grid" style="margin-top:3rem;">
+      <div>
+        <div class="c-item">
+          <div class="c-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><h3 data-lv="Telefons" data-ru="Телефон">Telefons</h3><a href="tel:+37129613155">+371 29 613 155</a></div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><h3>E-pasts</h3><a href="mailto:office@exvero.lv">office@exvero.lv</a></div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+          <div><h3>Facebook</h3><a href="https://facebook.com/exvero" target="_blank" rel="noopener noreferrer" data-lv="Ex Vero Law Office" data-ru="Ex Vero Law Office">Ex Vero Law Office</a></div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7.05 11.5 7.35 11.76a1 1 0 0 0 1.3 0C13 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg></div>
+          <div><h3 data-lv="Adrese" data-ru="Адрес">Adrese</h3><p data-lv="Rīga, Latvija" data-ru="Рига, Латвия">Rīga, Latvija</p></div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div><h3 data-lv="Darba laiks" data-ru="Рабочее время">Darba laiks</h3><p data-lv="Pirmdiena–Piektdiena: 09:00–17:00" data-ru="Понедельник–Пятница: 09:00–17:00">Pirmdiena–Piektdiena: 09:00–17:00</p></div>
+        </div>
+      </div>
+      <div class="map-box">
+        <h3 data-lv="Ex Vero Law Office" data-ru="Ex Vero Law Office">Ex Vero Law Office</h3>
+        <p data-lv="Juridiskais birojs ar 18 gadu pieredzi. Mēs sniedzam profesionālus juridiskos pakalpojumus privātpersonām un uzņēmumiem." data-ru="Юридическое бюро с 18-летним опытом. Мы предоставляем профессиональные юридические услуги частным лицам и компаниям.">Juridiskais birojs ar 18 gadu pieredzi. Mēs sniedzam profesionālus juridiskos pakalpojumus privātpersonām un uzņēmumiem.</p>
+        <a href="mailto:office@exvero.lv" class="map-btn" data-lv="Rakstīt e-pastu" data-ru="Написать e-mail">Rakstīt e-pastu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo">
+    <img src="logo_bez_fona.svg" alt="Ex Vero">
+    <span style="font-family:'Playfair Display',serif;font-size:.85rem;color:var(--gray);font-style:italic;">Law Office</span>
+  </div>
+  <span class="foot-copy">© 2026 Ex Vero Law Office. <span data-lv="Visas tiesības aizsargātas." data-ru="Все права защищены.">Visas tiesības aizsargātas.</span></span>
+  <div class="foot-links">
+    <a href="#about" data-lv="Par mums" data-ru="О нас">Par mums</a>
+    <a href="#services" data-lv="Pakalpojumi" data-ru="Услуги">Pakalpojumi</a>
+    <a href="#booking" data-lv="Rezervācija" data-ru="Запись">Rezervācija</a>
+  </div>
+</footer>
+
+<!-- ═══ VANILLA JS ═══ -->
+<script>
+(function(){
+  /* Nav scroll */
+  window.addEventListener('scroll', function(){
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  /* Mobile menu */
+  var hb = document.getElementById('hamburger');
+  var mm = document.getElementById('mobileMenu');
+  function closeMobile(){
+    hb.classList.remove('open'); mm.classList.remove('open');
+    hb.setAttribute('aria-expanded','false'); document.body.style.overflow = '';
+  }
+  window.closeMobile = closeMobile;
+  hb.addEventListener('click', function(){
+    var o = hb.classList.toggle('open');
+    mm.classList.toggle('open', o);
+    hb.setAttribute('aria-expanded', o ? 'true' : 'false');
+    document.body.style.overflow = o ? 'hidden' : '';
+  });
+  ['mm1','mm2','mm3','mm4'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.addEventListener('click', closeMobile);
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && mm.classList.contains('open')) closeMobile();
+  });
+
+  /* Language switcher */
+  var currentLang = 'lv';
+  window.setLang = function(lang){
+    currentLang = lang;
+    document.getElementById('btn-lv').classList.toggle('active', lang === 'lv');
+    document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+    document.querySelectorAll('[data-' + lang + ']').forEach(function(el){
+      var val = el.getAttribute('data-' + lang);
+      if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = val;
+      } else {
+        el.innerHTML = val;
+      }
+    });
+    // Update select options if booking rendered
+    if(window._updateBookingLang) window._updateBookingLang(lang);
+  };
+  window.getCurrentLang = function(){ return currentLang; };
+
+  /* Toast */
+  window.showToast = function(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 3000);
+  };
+
+  /* Reveal on scroll */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(x){ if(x.isIntersecting) x.target.classList.add('vis'); });
+  }, {threshold:.08});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<!-- ═══ BOOKING REACT ═══ -->
+<script type="text/babel">
+const { useState, useEffect, useCallback, useRef } = React;
+
+const SB_URL = 'https://ibnvqljclchzlbvfwugj.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlibnZxbGpjbGNoemxidmZ3dWdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEyNDM4MjIsImV4cCI6MjA4NjgxOTgyMn0.oQqSvLbbDcWDpgJdDYde11sd6SX96snBIYs1FzfcCvo';
+const sb = window.supabase.createClient(SB_URL, SB_KEY);
+
+// 60-min slots 09:00-17:00
+const TIMES = ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00'];
+
+const TOPICS_LV = [
+  'Izvēlieties konsultācijas tēmu...',
+  'Korporatīvās tiesības',
+  'FinTech juridiskie pakalpojumi',
+  'Civiltiesības',
+  'Darba tiesības',
+  'Administratīvās tiesības',
+  'Pārstāvība tiesā / šķīrējtiesā',
+  'Cits jautājums',
+];
+const TOPICS_RU = [
+  'Выберите тему консультации...',
+  'Корпоративное право',
+  'Юридические услуги FinTech',
+  'Гражданское право',
+  'Трудовое право',
+  'Административное право',
+  'Представительство в суде / арбитраже',
+  'Другой вопрос',
+];
+
+const CFG = { minDays:1, maxDays:60, maxPerDay:8 };
+
+function fmtDate(y, m, d){
+  return y + '-' + String(m+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+}
+
+const T = {
+  lv: {
+    calTitle: 'Datums',
+    formTitle: 'Kontaktinformācija',
+    noDate: 'Izvēlieties konsultācijas datumu pa kreisi',
+    noTime: 'Izvēlieties konsultācijas laiku',
+    selDateTime: (d,t) => `${d} plkst. ${t}`,
+    name: 'Vārds, Uzvārds *',
+    company: 'Uzņēmums (neobligāti)',
+    email: 'E-pasts *',
+    phone: 'Telefons *',
+    topic: 'Konsultācijas tēma *',
+    notes: 'Papildu informācija',
+    notesPlh: 'Īss jautājuma apraksts...',
+    submit: 'Rezervēt konsultāciju',
+    submitting: 'Apstrādā...',
+    okTitle: (n) => `Paldies, ${n}!`,
+    okSub: 'Jūsu konsultācija rezervēta. Sazināsimies tuvākajā laikā, lai apstiprinātu.',
+    newBook: 'Jauna rezervācija',
+    avail: 'Pieejams',
+    full: 'Aizņemts',
+    sel: 'Izvēlēts',
+    timeLabel: 'Konsultācijas laiks (60 min) *',
+    err: {
+      date: 'Lūdzu izvēlieties datumu.',
+      time: 'Lūdzu izvēlieties laiku.',
+      topic: 'Lūdzu izvēlieties konsultācijas tēmu.',
+      name: 'Lūdzu ievadiet vārdu un uzvārdu.',
+      email: 'Lūdzu ievadiet e-pastu.',
+      phone: 'Lūdzu ievadiet telefonu.',
+      server: 'Kļūda! Sazinieties pa e-pastu: office@exvero.lv',
+    }
+  },
+  ru: {
+    calTitle: 'Дата',
+    formTitle: 'Контактная информация',
+    noDate: 'Выберите дату консультации слева',
+    noTime: 'Выберите время консультации',
+    selDateTime: (d,t) => `${d} в ${t}`,
+    name: 'Имя, Фамилия *',
+    company: 'Компания (необязательно)',
+    email: 'E-mail *',
+    phone: 'Телефон *',
+    topic: 'Тема консультации *',
+    notes: 'Дополнительная информация',
+    notesPlh: 'Краткое описание вопроса...',
+    submit: 'Записаться на консультацию',
+    submitting: 'Обработка...',
+    okTitle: (n) => `Спасибо, ${n}!`,
+    okSub: 'Ваша консультация забронирована. Мы свяжемся с вами в ближайшее время для подтверждения.',
+    newBook: 'Новая запись',
+    avail: 'Доступно',
+    full: 'Занято',
+    sel: 'Выбрано',
+    timeLabel: 'Время консультации (60 мин) *',
+    err: {
+      date: 'Пожалуйста, выберите дату.',
+      time: 'Пожалуйста, выберите время.',
+      topic: 'Пожалуйста, выберите тему консультации.',
+      name: 'Пожалуйста, введите имя и фамилию.',
+      email: 'Пожалуйста, введите e-mail.',
+      phone: 'Пожалуйста, введите телефон.',
+      server: 'Ошибка! Напишите на e-mail: office@exvero.lv',
+    }
+  }
+};
+
+function BookingApp() {
+  const [lang, setLang] = useState(window.getCurrentLang ? window.getCurrentLang() : 'lv');
+  const [cal, setCal] = useState(new Date());
+  const [bks, setBks] = useState([]);
+  const [loading, setLoad] = useState(true);
+  const [selDate, setSD] = useState(null);
+  const [selTime, setST] = useState(null);
+  const [form, setF] = useState({ name:'', company:'', email:'', phone:'', topic:'', notes:'' });
+  const [sub, setSub] = useState(false);
+  const [ok, setOk] = useState(false);
+  const [err, setErr] = useState(null);
+
+  const tx = T[lang];
+  const topics = lang === 'lv' ? TOPICS_LV : TOPICS_RU;
+
+  // Listen for language changes
+  useEffect(() => {
+    window._updateBookingLang = function(l){ setLang(l); };
+    return () => { window._updateBookingLang = null; };
+  }, []);
+
+  const load = useCallback(async () => {
+    try {
+      const { data, error } = await sb.from('legal_consultations').select('consult_date,consult_time');
+      if(error) throw error;
+      setBks(data || []);
+    } catch(e) {
+      console.warn('Supabase load:', e);
+      setBks([]);
+    } finally { setLoad(false); }
+  }, []);
+
+  useEffect(() => { load(); }, [load]);
+
+  const onDay = d => bks.filter(b => b.consult_date === d);
+  const timesOn = d => bks.filter(b => b.consult_date === d).map(b => b.consult_time);
+
+  const avail = day => {
+    const y = cal.getFullYear(), m = cal.getMonth();
+    const dt = new Date(y, m, day);
+    const today = new Date(); today.setHours(0,0,0,0);
+    const minD = new Date(today); minD.setDate(minD.getDate() + CFG.minDays);
+    const maxD = new Date(today); maxD.setDate(maxD.getDate() + CFG.maxDays);
+    if(dt < minD || dt > maxD) return false;
+    // Skip weekends
+    const dow = dt.getDay();
+    if(dow === 0 || dow === 6) return false;
+    return onDay(fmtDate(y, m, day)).length < CFG.maxPerDay;
+  };
+
+  const calInfo = () => {
+    const y = cal.getFullYear(), m = cal.getMonth();
+    const first = new Date(y, m, 1);
+    let dow = first.getDay(); if(dow === 0) dow = 7;
+    return { total: new Date(y, m+1, 0).getDate(), start: dow - 1 };
+  };
+
+  const validate = () => {
+    if(!selDate) return tx.err.date;
+    if(!selTime) return tx.err.time;
+    if(!form.topic || form.topic === topics[0]) return tx.err.topic;
+    if(!form.name.trim()) return tx.err.name;
+    if(!form.email.trim() || !form.email.includes('@')) return tx.err.email;
+    if(!form.phone.trim() || form.phone.trim().length < 7) return tx.err.phone;
+    return null;
+  };
+
+  const submit = async () => {
+    const ve = validate();
+    if(ve) return setErr(ve);
+    setSub(true); setErr(null);
+    try {
+      const { error: dbErr } = await sb.from('legal_consultations').insert([{
+        consult_date: selDate,
+        consult_time: selTime,
+        client_name: form.name.trim(),
+        company: form.company.trim() || null,
+        client_email: form.email.trim().toLowerCase(),
+        client_phone: form.phone.trim(),
+        topic: form.topic,
+        notes: form.notes.trim() || null,
+        lang: lang
+      }]);
+      if(dbErr) throw dbErr;
+      try {
+        await emailjs.send('service_d52bopv', 'template_azl3ud8', {
+          to_email: form.email,
+          client_name: form.name,
+          client_email: form.email,
+          client_phone: form.phone,
+          booking_date: selDate,
+          host_name: 'Ex Vero Law Office',
+          event_type: form.topic,
+          guest_count: 1,
+          notes: 'Laiks: ' + selTime + '. ' + (form.company ? 'Uzn.: ' + form.company + '. ' : '') + (form.notes || '')
+        });
+      } catch(ee) { console.warn('Email non-critical:', ee); }
+      await load();
+      setOk(true);
+      window.showToast(lang === 'lv' ? 'Rezervācija veiksmīga!' : 'Запись успешна!');
+    } catch(e) {
+      console.error('Submit error:', e);
+      setErr(tx.err.server);
+    } finally { setSub(false); }
+  };
+
+  if(loading) return (
+    <div className="loading-wrap">
+      <div className="big-spin"></div>
+    </div>
+  );
+
+  if(ok) return (
+    <div className="ok-box" style={{marginTop:'2rem'}}>
+      <div style={{fontSize:'2.4rem',marginBottom:'1rem',color:'var(--gold)'}}>&#10003;</div>
+      <h2>{tx.okTitle(form.name.split(' ')[0])}</h2>
+      <p style={{marginBottom:'.4rem'}}>{tx.okSub}</p>
+      <p style={{color:'var(--gold)',fontSize:'.82rem',marginBottom:'1.8rem'}}>{selDate} · {selTime} · {form.topic}</p>
+      <button style={{background:'transparent',border:'1px solid var(--border2)',color:'var(--gray-l)',padding:'.6rem 1.4rem',borderRadius:'2px',cursor:'pointer',fontFamily:"'Outfit',sans-serif",fontSize:'.78rem',letterSpacing:'.06em',textTransform:'uppercase',transition:'all .2s'}}
+        onMouseEnter={e=>e.target.style.borderColor='var(--gold)'}
+        onMouseLeave={e=>e.target.style.borderColor='var(--border2)'}
+        onClick={() => {
+          setOk(false); setSD(null); setST(null);
+          setF({ name:'', company:'', email:'', phone:'', topic:'', notes:'' });
+        }}>
+        {tx.newBook}
+      </button>
+    </div>
+  );
+
+  const { total, start } = calInfo();
+  const y = cal.getFullYear(), m = cal.getMonth();
+  const taken = selDate ? timesOn(selDate) : [];
+
+  return (
+    <div className="bk-grid">
+      {/* LEFT — Calendar */}
+      <div className="b-panel">
+        <div className="panel-ttl">
+          <span className="panel-ttl-icon">&#128197;</span> {tx.calTitle}
+        </div>
+        <div className="cal-hdr">
+          <button className="cal-btn" onClick={() => { const d = new Date(cal); d.setMonth(m-1); setCal(d); }}>&#8249;</button>
+          <div className="cal-month">{cal.toLocaleDateString(lang === 'lv' ? 'lv-LV' : 'ru-RU', {month:'long', year:'numeric'})}</div>
+          <button className="cal-btn" onClick={() => { const d = new Date(cal); d.setMonth(m+1); setCal(d); }}>&#8250;</button>
+        </div>
+        <div className="cal-grid">
+          {(lang === 'lv' ? ['P','O','T','C','Pk','S','Sv'] : ['П','В','С','Ч','П','С','В']).map(d => <div key={d} className="cal-hd">{d}</div>)}
+          {Array(start).fill(null).map((_,i) => <div key={'e'+i} className="cal-day empty" />)}
+          {Array(total).fill(null).map((_,i) => {
+            const day = i+1;
+            const dt = new Date(y, m, day);
+            const today = new Date(); today.setHours(0,0,0,0);
+            const isPast = dt < today;
+            const d = fmtDate(y, m, day);
+            const isAvail = avail(day);
+            const cnt = onDay(d).length;
+            const isSel = selDate === d;
+            const isFull = cnt >= CFG.maxPerDay;
+            const isWeekend = dt.getDay() === 0 || dt.getDay() === 6;
+            let cls = 'cal-day';
+            if(isPast || isWeekend) cls += ' past';
+            else if(isSel) cls += ' sel';
+            else if(isFull) cls += ' full';
+            else if(isAvail) cls += ' avail';
+            else cls += ' disabled';
+            return (
+              <div key={day} className={cls} onClick={() => { if(!isPast && !isWeekend && isAvail) setSD(d); }}>
+                <div>{day}</div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="legend">
+          <div className="leg-item"><div className="leg-dot" style={{background:'rgba(46,125,82,.4)',border:'1px solid rgba(46,125,82,.6)'}} />{tx.avail}</div>
+          <div className="leg-item"><div className="leg-dot" style={{background:'rgba(139,46,46,.3)',border:'1px solid rgba(139,46,46,.5)'}} />{tx.full}</div>
+          <div className="leg-item"><div className="leg-dot" style={{background:'var(--gold)'}} />{tx.sel}</div>
+        </div>
+
+        {selDate && (
+          <div style={{marginTop:'1.4rem'}}>
+            <label className="f-label">{tx.timeLabel}</label>
+            <div className="time-grid">
+              {TIMES.map(t => {
+                const isTaken = taken.includes(t);
+                return (
+                  <div key={t}
+                    className={'time-chip' + (selTime===t ? ' sel' : '') + (isTaken ? ' taken' : '')}
+                    onClick={() => { if(!isTaken) setST(t); }}
+                    title={isTaken ? (lang === 'lv' ? 'Aiznemts' : 'Занято') : t}>
+                    {t}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* RIGHT — Form */}
+      <div className="b-panel">
+        <div className="panel-ttl">
+          <span className="panel-ttl-icon">&#128203;</span> {tx.formTitle}
+        </div>
+
+        {!selDate && <div className="info-chip">{tx.noDate}</div>}
+        {selDate && selTime && <div className="sel-chip">&#128197; {tx.selDateTime(selDate, selTime)}</div>}
+        {selDate && !selTime && <div className="info-chip">&#128336; {tx.noTime}</div>}
+        {err && <div className="err-box">{err}</div>}
+
+        <div className="f-row">
+          <div className="f-group">
+            <label className="f-label" htmlFor="bk-name">{tx.name}</label>
+            <input id="bk-name" type="text" className="f-input" value={form.name}
+              onChange={e => setF({...form, name:e.target.value})}
+              placeholder={lang === 'lv' ? 'Jānis Bērziņš' : 'Иван Иванов'}
+              autoComplete="name" />
+          </div>
+          <div className="f-group">
+            <label className="f-label" htmlFor="bk-company">{tx.company}</label>
+            <input id="bk-company" type="text" className="f-input" value={form.company}
+              onChange={e => setF({...form, company:e.target.value})}
+              placeholder={lang === 'lv' ? 'SIA Uznemums' : 'ООО Компания'} />
+          </div>
+        </div>
+        <div className="f-row">
+          <div className="f-group">
+            <label className="f-label" htmlFor="bk-email">{tx.email}</label>
+            <input id="bk-email" type="email" className="f-input" value={form.email}
+              onChange={e => setF({...form, email:e.target.value})}
+              placeholder="email@domain.lv" autoComplete="email" />
+          </div>
+          <div className="f-group">
+            <label className="f-label" htmlFor="bk-phone">{tx.phone}</label>
+            <input id="bk-phone" type="tel" className="f-input" value={form.phone}
+              onChange={e => setF({...form, phone:e.target.value})}
+              placeholder="+371 XXXXXXXX" autoComplete="tel" />
+          </div>
+        </div>
+        <div className="f-group">
+          <label className="f-label" htmlFor="bk-topic">{tx.topic}</label>
+          <select id="bk-topic" className="f-select" value={form.topic}
+            onChange={e => setF({...form, topic:e.target.value})}>
+            {topics.map((t,i) => <option key={i} value={i===0?'':t}>{t}</option>)}
+          </select>
+        </div>
+        <div className="f-group">
+          <label className="f-label" htmlFor="bk-notes">{tx.notes}</label>
+          <textarea id="bk-notes" className="f-area" value={form.notes}
+            onChange={e => setF({...form, notes:e.target.value})}
+            placeholder={tx.notesPlh} />
+        </div>
+        <button className="sub-btn" onClick={submit}
+          disabled={sub || !selDate || !selTime}>
+          {sub ? <><span className="spin" />{tx.submitting}</> : tx.submit}
+        </button>
+        <p style={{fontSize:'.68rem',color:'var(--gray)',textAlign:'center',marginTop:'.6rem',letterSpacing:'.04em'}}>
+          {lang === 'lv' ? 'Sazināsimies 24h laikā · office@exvero.lv' : 'Свяжемся в течение 24ч · office@exvero.lv'}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.render(<BookingApp />, document.getElementById('booking-app'));
+</script>
+
+</body>
+</html>
