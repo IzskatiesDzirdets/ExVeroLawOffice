@@ -316,5 +316,173 @@
     });
 </script>
 
+    <section class="booking-sec section rv" id="booking">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:600px;margin:0 auto 3rem;">
+      <div class="sec-label" style="justify-content:center;" data-lv="Rezervācija" data-ru="Бронирование">Rezervācija</div>
+      <h2 class="sec-h2" data-lv="Pieteikt <em>konsultāciju</em>" data-ru="Записаться на <em>консультацию</em>">Pieteikt <em>konsultāciju</em></h2>
+      <p class="sec-sub" data-lv="Izvēlieties sev ērtāko laiku mūsu kalendārā." data-ru="Выберите удобное для вас время в нашем календаре.">Izvēlieties sev ērtāko laiku mūsu kalendārā.</p>
+    </div>
+
+    <div id="booking-root">
+      <div class="loading-wrap"><div class="big-spin"></div></div>
+    </div>
+  </div>
+</section>
+
+<script type="text/babel">
+  const { useState, useEffect } = React;
+
+  function BookingSystem() {
+    const [viewDate, setViewDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedTime, setSelectedTime] = useState(null);
+    const [formData, setFormData] = useState({ name: '', email: '', phone: '', service: 'General' });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isDone, setIsDone] = useState(false);
+
+    const months = {
+      lv: ["Janvāris", "Februāris", "Marts", "Aprīlis", "Maijs", "Jūnijs", "Jūlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"],
+      ru: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
+    };
+
+    const timeSlots = ["09:00", "10:30", "13:00", "14:30", "16:00"];
+
+    const renderCalendar = () => {
+      const year = viewDate.getFullYear();
+      const month = viewDate.getMonth();
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const offset = firstDay === 0 ? 6 : firstDay - 1; // Pielāgošana Eiropeiskajai nedēļai (sākas ar Pr)
+
+      let days = [];
+      for (let i = 0; i < offset; i++) days.push(<div key={`e-${i}`} className="cal-day empty"></div>);
+      
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateObj = new Date(year, month, d);
+        const isPast = dateObj < new Date().setHours(0,0,0,0);
+        const isSelected = selectedDate && selectedDate.getDate() === d && selectedDate.getMonth() === month;
+        const isWeekend = dateObj.getDay() === 0 || dateObj.getDay() === 6;
+
+        days.push(
+          <div 
+            key={d} 
+            className={`cal-day ${isPast ? 'past' : 'avail'} ${isSelected ? 'sel' : ''} ${isWeekend ? 'weekend' : ''}`}
+            onClick={() => !isPast && setSelectedDate(dateObj)}
+          >
+            {d}
+          </div>
+        );
+      }
+      return days;
+    };
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setIsSubmitting(true);
+      
+      // Šeit notiek integrācija ar Supabase vai EmailJS
+      const payload = {
+        ...formData,
+        date: selectedDate.toLocaleDateString('lv-LV'),
+        time: selectedTime
+      };
+
+      console.log("Sūtam rezervāciju:", payload);
+      
+      // Simulējam tīkla pieprasījumu
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setIsDone(true);
+      }, 1500);
+    };
+
+    if (isDone) {
+      return (
+        <div className="ok-box">
+          <h2>Paldies!</h2>
+          <p>Jūsu pieteikums ir saņemts. Mēs ar Jums sazināsimies tuvākajā laikā.</p>
+          <button className="btn-outline" style={{marginTop:'1rem'}} onClick={() => setIsDone(false)}>Veikt citu rezervāciju</button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="bk-grid">
+        {/* Kreisā puse: Kalendārs */}
+        <div className="b-panel">
+          <div className="panel-ttl">
+            <span className="panel-ttl-icon">📅</span> 
+            <span data-lv="Izvēlieties datumu" data-ru="Выберите дату">Izvēlieties datumu</span>
+          </div>
+          <div className="cal-hdr">
+            <button className="cal-btn" onClick={() => setViewDate(new Date(viewDate.setMonth(viewDate.getMonth() - 1)))}>‹</button>
+            <div className="cal-month">{months.lv[viewDate.getMonth()]} {viewDate.getFullYear()}</div>
+            <button className="cal-btn" onClick={() => setViewDate(new Date(viewDate.setMonth(viewDate.getMonth() + 1)))}>›</button>
+          </div>
+          <div className="cal-grid">
+            {["Pr", "Ot", "Tr", "Ce", "Pk", "Se", "Sv"].map(h => <div key={h} className="cal-hd">{h}</div>)}
+            {renderCalendar()}
+          </div>
+          
+          {selectedDate && (
+            <div style={{marginTop: '2rem'}}>
+              <div className="panel-ttl"><span className="panel-ttl-icon">🕒</span> Pieejamie laiki</div>
+              <div className="time-grid">
+                {timeSlots.map(t => (
+                  <div 
+                    key={t} 
+                    className={`time-chip ${selectedTime === t ? 'sel' : ''}`}
+                    onClick={() => setSelectedTime(t)}
+                  >
+                    {t}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Labā puse: Formas dati */}
+        <form className="b-panel" onSubmit={handleSubmit}>
+          <div className="panel-ttl">
+            <span className="panel-ttl-icon">👤</span> 
+            <span data-lv="Jūsu informācija" data-ru="Ваша информация">Jūsu informācija</span>
+          </div>
+          
+          <div className="f-group">
+            <label className="f-label">Vārds Uzvārds</label>
+            <input className="f-input" required type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+          </div>
+
+          <div className="f-row">
+            <div className="f-group">
+              <label className="f-label">E-pasts</label>
+              <input className="f-input" required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
+            </div>
+            <div className="f-group">
+              <label className="f-label">Tālrunis</label>
+              <input className="f-input" type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} />
+            </div>
+          </div>
+
+          <div className="info-chip">
+            {selectedDate && selectedTime 
+              ? `Izvēlēts: ${selectedDate.toLocaleDateString('lv-LV')} plkst. ${selectedTime}`
+              : "Lūdzu, izvēlieties datumu un laiku kalendārā."}
+          </div>
+
+          <button className="sub-btn" type="submit" disabled={!selectedDate || !selectedTime || isSubmitting}>
+            {isSubmitting ? <span className="spin"></span> : "Apstiprināt rezervāciju"}
+          </button>
+        </form>
+      </div>
+    );
+  }
+
+  const root = ReactDOM.createRoot(document.getElementById('booking-root'));
+  root.render(<BookingSystem />);
+</script>
+    
 </body>
 </html>
