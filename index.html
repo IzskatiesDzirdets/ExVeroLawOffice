@@ -542,20 +542,21 @@ footer {
     <img src="logo_bez_fona.svg" alt="Ex Vero Law Office" id="nav-logo-img">
     <div class="nav-logo-text">
       <span class="nav-logo-name" data-lv="Ex Vero" data-ru="Ex Vero">Ex Vero</span>
-      <span class="nav-logo-sub" data-lv="Law Office" data-ru="Юридический офис">Law Office</span>
+      <span class="nav-logo-sub" data-lv="Law Office" data-en="Law Office" data-ru="Юридический офис">Law Office</span>
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="#about" data-lv="Par mums" data-ru="О нас">Par mums</a></li>
-    <li><a href="#services" data-lv="Pakalpojumi" data-ru="Услуги">Pakalpojumi</a></li>
+<li><a href="#about" data-lv="Par mums" data-en="About Us" data-ru="О нас">Par mums</a></li>
+<li><a href="#services" data-lv="Pakalpojumi" data-en="Services" data-ru="Услуги">Pakalpojumi</a></li>
     <li><a href="#booking" data-lv="Konsultācija" data-ru="Консультация">Konsultācija</a></li>
     <li><a href="#contact" data-lv="Kontakti" data-ru="Контакты">Kontakti</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:1rem;">
     <div class="lang-switch">
-      <button class="lang-btn active" id="btn-lv" onclick="setLang('lv')">LV</button>
-      <button class="lang-btn" id="btn-ru" onclick="setLang('ru')">RU</button>
-    </div>
+  <button class="lang-btn active" id="btn-lv" onclick="setLang('lv')">LV</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btn-ru" onclick="setLang('ru')">RU</button>
+</div>
     <a href="#booking" class="nav-cta" data-lv="Rezervēt" data-ru="Записаться">Rezervēt</a>
   </div>
   <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
@@ -569,10 +570,11 @@ footer {
   <a href="#services" id="mm2" data-lv="Pakalpojumi" data-ru="Услуги">Pakalpojumi</a>
   <a href="#booking" id="mm3" data-lv="Konsultācija" data-ru="Консультация">Konsultācija</a>
   <a href="#contact" id="mm4" data-lv="Kontakti" data-ru="Контакты">Kontakti</a>
-  <div class="lang-switch" style="margin-top:.5rem;">
-    <button class="lang-btn active" onclick="setLang('lv');closeMobile()">LV</button>
-    <button class="lang-btn" onclick="setLang('ru');closeMobile()">RU</button>
-  </div>
+ <div class="lang-switch" style="margin-top:.5rem;">
+  <button class="lang-btn active" onclick="setLang('lv');closeMobile()">LV</button>
+  <button class="lang-btn" onclick="setLang('en');closeMobile()">EN</button>
+  <button class="lang-btn" onclick="setLang('ru');closeMobile()">RU</button>
+</div>
 </div>
 
 <!-- HERO -->
@@ -581,10 +583,10 @@ footer {
   <div class="hero-grid"></div>
   <div class="hero-inner">
     <div class="hero-eyebrow" data-lv="Juridiskais birojs · Rīga · Kopš 2007" data-ru="Юридический офис · Рига · С 2007 года">Juridiskais birojs · Rīga · Kopš 2007</div>
-    <h1 class="hero-h1">
-      <span data-lv="Profesionāli juridiskie risinājumi" data-ru="Профессиональные юридические решения">Profesionāli juridiskie risinājumi</span><br>
-      <em data-lv="kopš 2007. gada" data-ru="с 2007 года">kopš 2007. gada</em>
-    </h1>
+ <h1 class="hero-h1">
+  <span data-lv="Profesionāli juridiskie risinājumi" data-en="Professional Legal Solutions" data-ru="Профессиональные юридические решения">Profesionāli juridiskie risinājumi</span><br>
+  <em data-lv="kopš 2007. gada" data-en="since 2007" data-ru="с 2007 года">kopš 2007. gada</em>
+</h1>
     <p class="hero-sub" data-lv="Pieredze korporatīvajās, civiltiesībās un FinTech juridiskajā atbalstā. Precizitāte. Konfidencialitāte. Rezultāts." data-ru="Опыт в корпоративном праве, гражданском праве и юридической поддержке FinTech. Точность. Конфиденциальность. Результат.">
       Pieredze korporatīvajās, civiltiesībās un FinTech juridiskajā atbalstā. Precizitāte. Konfidencialitāte. Rezultāts.
     </p>
@@ -659,7 +661,7 @@ footer {
         <div class="srv-icon">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 17h7M17 14v7"/></svg>
         </div>
-        <div class="srv-name" data-lv="Korporatīvās tiesības" data-ru="Корпоративное право">Korporatīvās tiesības</div>
+        <div class="srv-name" data-lv="Korporatīvās tiesības" data-en="Corporate Law" data-ru="Корпоративное право">Korporatīvās tiesības</div>
         <p class="srv-desc" data-lv="Uzņēmumu dibināšana, pārstrukturēšana, M&A darījumi, akcionāru līgumi, korporatīvā pārvaldība un atbilstība regulējumam." data-ru="Регистрация компаний, реструктуризация, M&A сделки, акционерные соглашения, корпоративное управление и соответствие требованиям.">Uzņēmumu dibināšana, pārstrukturēšana, M&A darījumi, akcionāru līgumi, korporatīvā pārvaldība un atbilstība regulējumam.</p>
         <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
       </div>
@@ -1265,6 +1267,65 @@ function BookingApp() {
 
 ReactDOM.render(<BookingApp />, document.getElementById('booking-app'));
 </script>
+  <script>
+// 1. Galvenā valodas pārslēgšanas funkcija
+function setLang(lang) {
+  // Saglabājam izvēli pārlūkā
+  localStorage.setItem('preferredLang', lang);
+  
+  // Nomainām "active" klasi pogām navigācijā un mobilajā izvēlnē
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if(btn.innerText.toLowerCase() === lang) {
+      btn.classList.add('active');
+    }
+  });
+
+  // Atrodam visus elementus, kam ir data-lv un nomainām tekstu
+  document.querySelectorAll('[data-lv]').forEach(el => {
+    const txt = el.getAttribute('data-' + lang);
+    if (txt) {
+      // Ja tekstā ir HTML tagi (piemēram, <em>), lietojam innerHTML
+      if (txt.includes('<')) {
+        el.innerHTML = txt;
+      } else {
+        el.innerText = txt;
+      }
+    }
+  });
+
+  // Nomainām lapas pamata valodu SEO nolūkiem
+  const root = document.getElementById('html-root');
+  if(root) root.lang = lang;
+}
+
+// 2. Papildus funkcijas navigācijai (lai strādātu mobilais menu)
+function closeMobile() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburger');
+  if(menu) menu.classList.remove('open');
+  if(btn) btn.classList.remove('open');
+}
+
+// 3. Kad lapa ir ielādējusies, ieslēdzam saglabāto valodu
+document.addEventListener('DOMContentLoaded', () => {
+  const savedLang = localStorage.getItem('preferredLang') || 'lv';
+  setLang(savedLang);
+  
+  // Hamburger menu loģika (lai strādātu atvēršana)
+  const ham = document.getElementById('hamburger');
+  const mm = document.getElementById('mobileMenu');
+  if(ham && mm) {
+    ham.onclick = () => {
+      ham.classList.toggle('open');
+      mm.classList.toggle('open');
+    };
+  }
+});
+</script>
+
+</body>
+</html>
 
 </body>
 </html>
