@@ -779,6 +779,832 @@ const c=document.getElementById('booking-app');
 if(c) ReactDOM.render(<BookingApp/>,c);
 })();
 </script>
+     <!DOCTYPE html>
+<html lang="lv" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ex Vero Law Office — Juridiskais birojs Rīgā</title>
+<meta name="description" content="Ex Vero Law Office — profesionāli juridiskie pakalpojumi kopš 2007. gada. Korporatīvās tiesības, FinTech, civiltiesības. Rezervējiet konsultāciju.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://exvero.lv/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://exvero.lv/">
+<meta property="og:title" content="Ex Vero Law Office — Juridiskais birojs Rīgā">
+<meta property="og:description" content="Profesionāli juridiskie pakalpojumi kopš 2007. gada. Korporatīvās tiesības, FinTech, civiltiesības.">
+<meta property="og:locale" content="lv_LV">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LegalService","name":"Ex Vero Law Office","url":"https://exvero.lv","telephone":"+37129613155","email":"office@exvero.lv","address":{"@type":"PostalAddress","addressLocality":"Rīga","addressCountry":"LV"},"openingHours":"Mo-Fr 09:00-17:00","foundingDate":"2007"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>emailjs.init("YHTsjioMXMQ917e10");</script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- ═══ GALVENAIS JS — DEFINĒTS <HEAD> ═══
+     Šeit definētās funkcijas ir globālas un pieejamas
+     onclick="" atribūtos NEKAVĒJOTIES, bez gaidīšanas.
+-->
+<script>
+var LANG = 'lv';
+try { LANG = localStorage.getItem('exvero_lang') || 'lv'; } catch(e){}
+
+function setLang(l) {
+  LANG = l;
+  try { localStorage.setItem('exvero_lang', l); } catch(e){}
+  var root = document.getElementById('html-root');
+  if (root) root.lang = l;
+
+  // Desktop + mobilās valodu pogas
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    var bl = btn.getAttribute('data-lang');
+    if (!bl) return;
+    btn.classList.toggle('active', bl === l);
+    btn.setAttribute('aria-pressed', bl === l ? 'true' : 'false');
+  });
+
+  // Visi tulkojamie elementi
+  document.querySelectorAll('[data-lv]').forEach(function(el) {
+    var val = el.getAttribute('data-' + l) || el.getAttribute('data-lv');
+    if (!val) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = val;
+    } else if (val.indexOf('<') !== -1) {
+      el.innerHTML = val;
+    } else {
+      el.textContent = val;
+    }
+  });
+
+  // Paziņo React booking komponentam
+  if (window._bookingSetLang) window._bookingSetLang(l);
+}
+
+function getCurrentLang() { return LANG; }
+
+function closeMobile() {
+  var hb = document.getElementById('hamburger');
+  var mm = document.getElementById('mobileMenu');
+  if (hb) { hb.classList.remove('open'); hb.setAttribute('aria-expanded', 'false'); }
+  if (mm) mm.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function toggleMobile() {
+  var hb = document.getElementById('hamburger');
+  var mm = document.getElementById('mobileMenu');
+  if (!hb || !mm) return;
+  var isOpen = mm.classList.toggle('open');
+  hb.classList.toggle('open', isOpen);
+  hb.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+</script>
+
+<style>
+:root {
+  --black:#0A0A0A; --dark:#111318; --dark2:#1A1D24; --dark3:#22252E;
+  --border:rgba(255,255,255,.08); --border2:rgba(255,255,255,.14);
+  --gold:#C9A84C; --gold-l:#E2C878; --gold-d:#A8883A;
+  --white:#FAFAF8; --gray:#8A8F9A; --gray-l:#B8BCC8; --text:#D8DDE8;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--black);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:2px}
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  padding:1.1rem 4rem;
+  display:flex; align-items:center; justify-content:space-between;
+  background:rgba(10,10,10,.75);
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid transparent;
+  transition:background .35s, border-color .35s, padding .35s;
+}
+nav.scrolled {
+  background:rgba(10,10,10,.97);
+  border-bottom-color:var(--border);
+  padding:.8rem 4rem;
+}
+.nav-logo{display:flex;align-items:center;gap:.9rem;text-decoration:none;flex-shrink:0}
+.nav-logo img{height:36px;width:auto;display:block}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.1}
+.nav-logo-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:var(--white);letter-spacing:.02em}
+.nav-logo-sub{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.75rem;color:var(--gray-l);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{padding:.5rem 1.3rem;border-radius:2px;background:var(--gold);color:var(--black);font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .25s;white-space:nowrap}
+.nav-cta:hover{background:var(--gold-l)}
+.lang-switch{display:flex;gap:.3rem;align-items:center}
+.lang-btn{background:none;border:1px solid var(--border2);color:var(--gray);font-size:.7rem;font-weight:500;padding:.3rem .55rem;border-radius:2px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.lang-btn.active,.lang-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── HAMBURGER ── */
+.hamburger {
+  display:none;
+  flex-direction:column; justify-content:center; align-items:center; gap:5px;
+  cursor:pointer; border:none; background:none; z-index:1002;
+  width:44px; height:44px; flex-shrink:0; padding:0;
+  -webkit-tap-highlight-color:transparent; touch-action:manipulation;
+}
+.hamburger span {
+  display:block; width:22px; height:2px; background:var(--white);
+  border-radius:2px; transition:all .3s; pointer-events:none;
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ── MOBILE MENU ── */
+.mobile-menu {
+  display:none; position:fixed; inset:0;
+  background:var(--black); z-index:1001;
+  flex-direction:column; align-items:center; justify-content:center; gap:2rem;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;color:var(--white);text-decoration:none;transition:color .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.mobile-menu a:hover,.mobile-menu a:active{color:var(--gold)}
+.mobile-menu .lang-switch{margin-top:.5rem}
+.mobile-menu .lang-btn{font-size:.82rem;padding:.4rem .75rem}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:var(--black)}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(42,58,92,.28) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(201,168,76,.06) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;z-index:0;opacity:.03;background-image:linear-gradient(var(--border2) 1px,transparent 1px),linear-gradient(90deg,var(--border2) 1px,transparent 1px);background-size:60px 60px}
+.hero-inner{position:relative;z-index:2;max-width:820px;padding:9rem 2rem 8rem;display:flex;flex-direction:column;align-items:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.7rem;border:1px solid rgba(201,168,76,.25);border-radius:2px;padding:.38rem 1rem;margin-bottom:2.2rem;font-size:.68rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:18px;height:1px;background:var(--gold-d)}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:500;line-height:1.18;color:var(--white);letter-spacing:-.01em;margin-bottom:1.4rem}
+.hero-h1 em{font-style:italic;color:var(--gold-l);font-weight:400}
+.hero-sub{font-size:1rem;color:var(--gray-l);line-height:1.8;max-width:520px;margin:0 auto 2.6rem;font-weight:300}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:4rem}
+.btn-primary{padding:.85rem 2.2rem;background:var(--gold);color:var(--black);font-weight:600;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;font-family:'Outfit',sans-serif;text-decoration:none;transition:all .28s;display:inline-block}
+.btn-primary:hover{background:var(--gold-l);transform:translateY(-1px)}
+.btn-outline{padding:.85rem 2.2rem;background:transparent;color:var(--white);font-weight:500;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border2);border-radius:2px;cursor:pointer;font-family:'Outfit',sans-serif;text-decoration:none;transition:all .28s;display:inline-block}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-stats{position:absolute;bottom:0;left:0;right:0;background:var(--dark2);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr)}
+.hst{padding:1.4rem 1rem;text-align:center;border-right:1px solid var(--border)}
+.hst:last-child{border-right:none}
+.hst-n{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:600;color:var(--gold);display:block;line-height:1}
+.hst-l{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-top:.3rem;display:block}
+
+/* ── SECTIONS ── */
+.section{padding:6rem 4rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.sec-label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.sec-label::before{content:'';width:24px;height:1px;background:var(--gold-d)}
+.sec-h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:500;color:var(--white);line-height:1.2;margin-bottom:1rem}
+.sec-h2 em{font-style:italic;color:var(--gold-l)}
+.sec-sub{color:var(--gray-l);font-weight:300;font-size:.95rem;line-height:1.8;max-width:560px}
+.divider{width:48px;height:1px;background:var(--gold-d);margin:1.4rem 0}
+
+<!-- ABOUT -->
+<section class="about-sec section rv" id="about" aria-labelledby="about-heading">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div class="sec-label" data-lv="Par biroju" data-en="About the firm" data-ru="О бюро">Par biroju</div>
+        <h2 class="sec-h2" id="about-heading">
+          <span data-lv="Uzticams juridiskais partneris" data-en="Trusted legal partner" data-ru="Надёжный юридический партнёр">Uzticams juridiskais partneris</span><br>
+          <em data-lv="jau 18 gadus" data-en="for 18 years" data-ru="уже 18 лет">jau 18 gadus</em>
+        </h2>
+        <div class="divider" aria-hidden="true"></div>
+        <p class="sec-sub" style="margin-bottom:1.2rem;" data-lv="Ex Vero Law Office – uzticams juridiskais partneris kopš 2007. gada. Mēs palīdzam uzņēmumiem un privātpersonām risināt juridiskos jautājumus ar precizitāti, konfidencialitāti un profesionālismu." data-en="Ex Vero Law Office – a trusted legal partner since 2007. We help businesses and individuals resolve legal matters with precision, confidentiality and professionalism." data-ru="Ex Vero Law Office – надёжный юридический партнёр с 2007 года. Мы помогаем компаниям и частным лицам решать юридические вопросы с точностью, конфиденциальностью и профессионализмом.">
+          Ex Vero Law Office – uzticams juridiskais partneris kopš 2007. gada. Mēs palīdzam uzņēmumiem un privātpersonām risināt juridiskos jautājumus ar precizitāti, konfidencialitāti un profesionālismu.
+        </p>
+        <p class="sec-sub" data-lv="Mūsu komanda apvieno dziļu juridisko zināšanu bāzi ar praktisku pieredzi gan Latvijas, gan starptautiskajā tiesību laukā." data-en="Our team combines deep legal knowledge with practical experience in both Latvian and international law." data-ru="Наша команда сочетает глубокую юридическую базу знаний с практическим опытом как в латвийском, так и в международном праве.">
+          Mūsu komanda apvieno dziļu juridisko zināšanu bāzi ar praktisku pieredzi gan Latvijas, gan starptautiskajā tiesību laukā.
+        </p>
+      </div>
+      <div class="about-right">
+        <div class="about-card">
+          <span class="about-card-ico" aria-hidden="true">01</span>
+          <h3 data-lv="Precizitāte" data-en="Precision" data-ru="Точность">Precizitāte</h3>
+          <p data-lv="Katrs dokuments un juridisks lēmums tiek sagatavots ar augstāko rūpību." data-en="Every document and legal decision is prepared with the highest care." data-ru="Каждый документ и юридическое решение подготавливается с максимальной тщательностью.">Katrs dokuments un juridisks lēmums tiek sagatavots ar augstāko rūpību.</p>
+        </div>
+        <div class="about-card">
+          <span class="about-card-ico" aria-hidden="true">02</span>
+          <h3 data-lv="Konfidencialitāte" data-en="Confidentiality" data-ru="Конфиденциальность">Konfidencialitāte</h3>
+          <p data-lv="Klienta informācija vienmēr paliek stingri konfidenciāla." data-en="Client information always remains strictly confidential." data-ru="Информация клиента всегда остаётся строго конфиденциальной.">Klienta informācija vienmēr paliek stingri konfidenciāla.</p>
+        </div>
+        <div class="about-card">
+          <span class="about-card-ico" aria-hidden="true">03</span>
+          <h3 data-lv="Rezultāts" data-en="Results" data-ru="Результат">Rezultāts</h3>
+          <p data-lv="Mūsu mērķis ir sasniegt optimālu rezultātu katram klientam." data-en="Our goal is to achieve the optimal outcome for every client." data-ru="Наша цель — достичь оптимального результата для каждого клиента.">Mūsu mērķis ir sasniegt optimālu rezultātu katram klientam.</p>
+        </div>
+        <div class="about-card">
+          <span class="about-card-ico" aria-hidden="true">04</span>
+          <h3 data-lv="Pieredze" data-en="Experience" data-ru="Опыт">Pieredze</h3>
+          <p data-lv="18+ gadi praksē — korporatīvajās, civiltiesībās, FinTech." data-en="18+ years of practice — corporate law, civil law, FinTech." data-ru="18+ лет практики — корпоративное право, гражданское право, FinTech.">18+ gadi praksē — korporatīvajās, civiltiesībās, FinTech.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-sec section rv" id="services" aria-labelledby="services-heading">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:600px;margin:0 auto;">
+      <div class="sec-label" style="justify-content:center;" data-lv="Pakalpojumi" data-en="Services" data-ru="Услуги">Pakalpojumi</div>
+      <h2 class="sec-h2" id="services-heading" data-lv="Juridiskās prakses <em>jomas</em>" data-en="Areas of legal <em>practice</em>" data-ru="Области юридической <em>практики</em>">Juridiskās prakses <em>jomas</em></h2>
+    </div>
+    <div class="services-grid" role="list">
+      <article class="srv-card" role="listitem">
+        <span class="srv-num" aria-hidden="true">01</span>
+        <div class="srv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17h7M17 14v7"/></svg>
+        </div>
+        <h3 class="srv-name" data-lv="Korporatīvās tiesības" data-en="Corporate Law" data-ru="Корпоративное право">Korporatīvās tiesības</h3>
+        <p class="srv-desc" data-lv="Uzņēmumu dibināšana, pārstrukturēšana, M&amp;A darījumi, akcionāru līgumi, korporatīvā pārvaldība un atbilstība regulējumam." data-en="Company formation, restructuring, M&amp;A transactions, shareholder agreements, corporate governance and regulatory compliance." data-ru="Регистрация компаний, реструктуризация, M&amp;A сделки, акционерные соглашения, корпоративное управление и соответствие требованиям.">Uzņēmumu dibināšana, pārstrukturēšana, M&amp;A darījumi, akcionāru līgumi, korporatīvā pārvaldība un atbilstība regulējumam.</p>
+        <div class="srv-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </article>
+      <article class="srv-card" role="listitem">
+        <span class="srv-num" aria-hidden="true">02</span>
+        <div class="srv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3 class="srv-name" data-lv="FinTech juridiskie pakalpojumi" data-en="FinTech Legal Services" data-ru="Юридические услуги FinTech">FinTech juridiskie pakalpojumi</h3>
+        <p class="srv-desc" data-lv="Regulatīvā atbilstība, licencēšana, kriptovalūtu un maksājumu pakalpojumu tiesiskais nodrošinājums, DORA un AML prasības." data-en="Regulatory compliance, licensing, legal support for crypto and payment services, DORA and AML requirements." data-ru="Регуляторное соответствие, лицензирование, правовое обеспечение криптовалют и платёжных услуг, требования DORA и AML.">Regulatīvā atbilstība, licencēšana, kriptovalūtu un maksājumu pakalpojumu tiesiskais nodrošinājums, DORA un AML prasības.</p>
+        <div class="srv-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </article>
+      <article class="srv-card" role="listitem">
+        <span class="srv-num" aria-hidden="true">03</span>
+        <div class="srv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="srv-name" data-lv="Civiltiesības" data-en="Civil Law" data-ru="Гражданское право">Civiltiesības</h3>
+        <p class="srv-desc" data-lv="Līgumu sagatavošana un apstrīdēšana, īpašuma tiesības, mantojuma lietas, parādu piedziņa un strīdu risināšana." data-en="Contract drafting and disputes, property rights, inheritance matters, debt recovery and dispute resolution." data-ru="Подготовка и оспаривание договоров, имущественные права, наследственные дела, взыскание долгов и урегулирование споров.">Līgumu sagatavošana un apstrīdēšana, īpašuma tiesības, mantojuma lietas, parādu piedziņa un strīdu risināšana.</p>
+        <div class="srv-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </article>
+      <article class="srv-card" role="listitem">
+        <span class="srv-num" aria-hidden="true">04</span>
+        <div class="srv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="srv-name" data-lv="Darba tiesības" data-en="Labour Law" data-ru="Трудовое право">Darba tiesības</h3>
+        <p class="srv-desc" data-lv="Darba līgumu izstrāde, atlaišanas strīdi, darba koplīgumi, arodbiedrību attiecības un darba drošības atbilstība." data-en="Employment contract drafting, dismissal disputes, collective agreements, union relations and health &amp; safety compliance." data-ru="Разработка трудовых договоров, споры об увольнении, коллективные договоры, отношения с профсоюзами и соблюдение охраны труда.">Darba līgumu izstrāde, atlaišanas strīdi, darba koplīgumi, arodbiedrību attiecības un darba drošības atbilstība.</p>
+        <div class="srv-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </article>
+      <article class="srv-card" role="listitem">
+        <span class="srv-num" aria-hidden="true">05</span>
+        <div class="srv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 class="srv-name" data-lv="Administratīvās tiesības" data-en="Administrative Law" data-ru="Административное право">Administratīvās tiesības</h3>
+        <p class="srv-desc" data-lv="Pārsūdzības valsts iestādēs, atļauju un licenču iegūšana, administratīvo lēmumu apstrīdēšana un publisko iepirkumu jautājumi." data-en="Appeals to state authorities, obtaining permits and licenses, challenging administrative decisions and public procurement matters." data-ru="Обжалование в государственных органах, получение разрешений и лицензий, оспаривание административных решений и вопросы публичных закупок.">Pārsūdzības valsts iestādēs, atļauju un licenču iegūšana, administratīvo lēmumu apstrīdēšana un publisko iepirkumu jautājumi.</p>
+        <div class="srv-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </article>
+      <article class="srv-card" role="listitem">
+        <span class="srv-num" aria-hidden="true">06</span>
+        <div class="srv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+        </div>
+        <h3 class="srv-name" data-lv="Pārstāvība tiesā un šķīrējtiesā" data-en="Court and Arbitration Representation" data-ru="Представительство в суде и арбитраже">Pārstāvība tiesā un šķīrējtiesā</h3>
+        <p class="srv-desc" data-lv="Profesionāla pārstāvība Latvijas tiesās, šķīrējtiesās un starptautiskos strīdu izšķiršanas procesos. Lietu stratēģija un taktika." data-en="Professional representation in Latvian courts, arbitration and international dispute resolution proceedings. Case strategy and tactics." data-ru="Профессиональное представительство в судах Латвии, арбитраже и международных процедурах разрешения споров. Стратегия и тактика дел.">Profesionāla pārstāvība Latvijas tiesās, šķīrējtiesās un starptautiskos strīdu izšķiršanas procesos. Lietu stratēģija un taktika.</p>
+        <div class="srv-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust-sec section rv" style="padding:0;" aria-label="Mūsu rādītāji">
+  <div class="trust-inner">
+    <div class="trust-grid" role="list">
+      <div class="trust-item" role="listitem">
+        <span class="trust-n">18+</span>
+        <span class="trust-label" data-lv="Gadu pieredze" data-en="Years experience" data-ru="Лет опыта">Gadu pieredze</span>
+        <p class="trust-desc" data-lv="Stabila prakse kopš 2007. gada gan Latvijā, gan starptautiskā mērogā." data-en="Stable practice since 2007, both in Latvia and internationally." data-ru="Стабильная практика с 2007 года как в Латвии, так и на международном уровне.">Stabila prakse kopš 2007. gada gan Latvijā, gan starptautiskā mērogā.</p>
+      </div>
+      <div class="trust-item" role="listitem">
+        <span class="trust-n">1000+</span>
+        <span class="trust-label" data-lv="Veiksmīgas lietas" data-en="Successful cases" data-ru="Успешных дел">Veiksmīgas lietas</span>
+        <p class="trust-desc" data-lv="Plašs pieredzes klāsts — no privātpersonām līdz lieliem korporatīviem klientiem." data-en="Wide range of experience — from private individuals to large corporate clients." data-ru="Широкий спектр опыта — от частных лиц до крупных корпоративных клиентов.">Plašs pieredzes klāsts — no privātpersonām līdz lieliem korporatīviem klientiem.</p>
+      </div>
+      <div class="trust-item" role="listitem">
+        <span class="trust-n">100%</span>
+        <span class="trust-label" data-lv="Konfidencialitāte" data-en="Confidentiality" data-ru="Конфиденциальность">Konfidencialitāte un precizitāte</span>
+        <p class="trust-desc" data-lv="Klienta intereses un datu aizsardzība ir mūsu prioritāte katrā darbā." data-en="Client interests and data protection are our priority in every matter." data-ru="Защита интересов клиента и данных — наш приоритет в каждой работе.">Klienta intereses un datu aizsardzība ir mūsu prioritāte katrā darbā.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec section rv" id="testimonials" aria-labelledby="testi-heading">
+  <div class="section-inner">
+    <div class="sec-label" data-lv="Klientu viedokļi" data-en="Client testimonials" data-ru="Отзывы клиентов">Klientu viedokļi</div>
+    <h2 class="sec-h2" id="testi-heading" data-lv="Ko saka mūsu <em>klienti</em>" data-en="What our <em>clients</em> say" data-ru="Что говорят наши <em>клиенты</em>">Ko saka mūsu <em>klienti</em></h2>
+    <div class="testi-grid">
+      <blockquote class="testi-card">
+        <p class="testi-quote" data-lv="Ex Vero komanda sniedza izcilu juridisko atbalstu mūsu uzņēmuma pārstrukturēšanas procesā. Profesionalitāte un precizitāte ir to, ko var sagaidīt no šī biroja." data-en="The Ex Vero team provided outstanding legal support during our company's restructuring process. Professionalism and precision are what you can expect from this firm." data-ru="Команда Ex Vero оказала превосходную юридическую поддержку в процессе реструктуризации нашей компании. Профессионализм и точность — это то, чего можно ожидать от этого бюро.">Ex Vero komanda sniedza izcilu juridisko atbalstu mūsu uzņēmuma pārstrukturēšanas procesā. Profesionalitāte un precizitāte ir to, ko var sagaidīt no šī biroja.</p>
+        <footer class="testi-author">
+          <div class="testi-av" aria-hidden="true">AK</div>
+          <div><cite class="testi-name">A. Kalniņš</cite><span class="testi-role" data-lv="SIA valdes loceklis" data-en="LLC board member" data-ru="Член правления ООО">SIA valdes loceklis</span></div>
+        </footer>
+      </blockquote>
+      <blockquote class="testi-card">
+        <p class="testi-quote" data-lv="Sadarbojamies ar Ex Vero Law Office jau vairākus gadus. Viņu zināšanas FinTech regulatīvajos jautājumos ir neaizstājamas mūsu darbībā." data-en="We have been working with Ex Vero Law Office for several years. Their expertise in FinTech regulatory matters is invaluable to our operations." data-ru="Мы сотрудничаем с Ex Vero Law Office уже несколько лет. Их знания в области регулирования FinTech незаменимы для нашей деятельности.">Sadarbojamies ar Ex Vero Law Office jau vairākus gadus. Viņu zināšanas FinTech regulatīvajos jautājumos ir neaizstājamas mūsu darbībā.</p>
+        <footer class="testi-author">
+          <div class="testi-av" aria-hidden="true">MB</div>
+          <div><cite class="testi-name">M. Bērziņš</cite><span class="testi-role" data-lv="FinTech uzņēmuma dibinātājs" data-en="FinTech company founder" data-ru="Основатель FinTech компании">FinTech uzņēmuma dibinātājs</span></div>
+        </footer>
+      </blockquote>
+      <blockquote class="testi-card">
+        <p class="testi-quote" data-lv="Augsti vērtēju šī biroja pieeju — vienmēr skaidra komunikācija, savlaicīga atbilde un reāls rezultāts. Iesaku visiem, kas meklē uzticamu juridisku partneri." data-en="I highly value this firm's approach — always clear communication, timely response and real results. I recommend them to anyone looking for a reliable legal partner." data-ru="Высоко ценю подход этого бюро — всегда чёткая коммуникация, своевременный ответ и реальный результат. Рекомендую всем, кто ищет надёжного юридического партнёра.">Augsti vērtēju šī biroja pieeju — vienmēr skaidra komunikācija, savlaicīga atbilde un reāls rezultāts. Iesaku visiem, kas meklē uzticamu juridisku partneri.</p>
+        <footer class="testi-author">
+          <div class="testi-av" aria-hidden="true">IL</div>
+          <div><cite class="testi-name">I. Liepiņa</cite><span class="testi-role" data-lv="Privātpersona" data-en="Private individual" data-ru="Частное лицо">Privātpersona</span></div>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-sec section rv" id="booking" aria-labelledby="booking-heading">
+  <div class="section-inner">
+    <div class="sec-label" data-lv="Rezervācija" data-en="Booking" data-ru="Запись">Rezervācija</div>
+    <h2 class="sec-h2" id="booking-heading" data-lv="Rezervēt juridisko <em>konsultāciju</em>" data-en="Book a legal <em>consultation</em>" data-ru="Записаться на юридическую <em>консультацию</em>">Rezervēt juridisko <em>konsultāciju</em></h2>
+    <p class="sec-sub" data-lv="Izvēlieties piemērotu datumu un laiku. Konsultācija ilgst 60 minūtes. Darba laiks: 09:00–17:00." data-en="Choose a suitable date and time. Consultation lasts 60 minutes. Working hours: 09:00–17:00." data-ru="Выберите подходящую дату и время. Консультация длится 60 минут. Рабочее время: 09:00–17:00.">Izvēlieties piemērotu datumu un laiku. Konsultācija ilgst 60 minūtes. Darba laiks: 09:00–17:00.</p>
+    <div id="booking-app" role="region" aria-label="Rezervācijas sistēma"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-sec section rv" id="contact" aria-labelledby="contact-heading">
+  <div class="section-inner">
+    <div class="sec-label" data-lv="Kontakti" data-en="Contact" data-ru="Контакты">Kontakti</div>
+    <h2 class="sec-h2" id="contact-heading" data-lv="Sazinieties <em>ar mums</em>" data-en="Get in <em>touch</em>" data-ru="Свяжитесь <em>с нами</em>">Sazinieties <em>ar mums</em></h2>
+    <div class="contact-grid" style="margin-top:3rem;">
+      <div>
+        <div class="c-item">
+          <div class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div>
+            <h3 data-lv="Telefons" data-en="Phone" data-ru="Телефон">Telefons</h3>
+            <a href="tel:+37129613155" aria-label="Zvanīt: +371 29 613 155">+371 29 613 155</a>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div>
+            <h3 data-lv="E-pasts" data-en="Email" data-ru="E-mail">E-pasts</h3>
+            <a href="mailto:office@exvero.lv" aria-label="Rakstīt uz office@exvero.lv">office@exvero.lv</a>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+          <div>
+            <h3>Facebook</h3>
+            <a href="https://facebook.com/exvero" target="_blank" rel="noopener noreferrer" aria-label="Ex Vero Facebook lapa (atveras jaunā cilnē)">Ex Vero Law Office</a>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7.05 11.5 7.35 11.76a1 1 0 0 0 1.3 0C13 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg></div>
+          <div>
+            <h3 data-lv="Adrese" data-en="Address" data-ru="Адрес">Adrese</h3>
+            <p data-lv="Rīga, Latvija" data-en="Riga, Latvia" data-ru="Рига, Латвия">Rīga, Latvija</p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div>
+            <h3 data-lv="Darba laiks" data-en="Working hours" data-ru="Рабочее время">Darba laiks</h3>
+            <p data-lv="Pirmdiena–Piektdiena: 09:00–17:00" data-en="Monday–Friday: 09:00–17:00" data-ru="Понедельник–Пятница: 09:00–17:00">Pirmdiena–Piektdiena: 09:00–17:00</p>
+          </div>
+        </div>
+      </div>
+      <div class="map-box">
+        <h3>Ex Vero Law Office</h3>
+        <p data-lv="Juridiskais birojs ar 18 gadu pieredzi. Mēs sniedzam profesionālus juridiskos pakalpojumus privātpersonām un uzņēmumiem." data-en="A law firm with 18 years of experience. We provide professional legal services to individuals and businesses." data-ru="Юридическое бюро с 18-летним опытом. Мы предоставляем профессиональные юридические услуги частным лицам и компаниям.">Juridiskais birojs ar 18 gadu pieredzi. Mēs sniedzam profesionālus juridiskos pakalpojumus privātpersonām un uzņēmumiem.</p>
+        <a href="mailto:office@exvero.lv" class="map-btn" data-lv="Rakstīt e-pastu" data-en="Send an email" data-ru="Написать e-mail">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Rakstīt e-pastu
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer role="contentinfo">
+  <div class="foot-logo">
+    <img src="logo_bez_fona.svg" alt="Ex Vero Law Office" width="28" height="28" style="filter:brightness(0) invert(1) opacity(.5);">
+    <span style="font-family:'Playfair Display',serif;font-size:.85rem;color:var(--gray);font-style:italic;">Law Office</span>
+  </div>
+  <span class="foot-copy">© 2026 Ex Vero Law Office. <span data-lv="Visas tiesības aizsargātas." data-en="All rights reserved." data-ru="Все права защищены.">Visas tiesības aizsargātas.</span></span>
+  <nav class="foot-links" aria-label="Kājenes navigācija">
+    <a href="#about" data-lv="Par mums" data-en="About" data-ru="О нас">Par mums</a>
+    <a href="#services" data-lv="Pakalpojumi" data-en="Services" data-ru="Услуги">Pakalpojumi</a>
+    <a href="#booking" data-lv="Rezervācija" data-en="Booking" data-ru="Запись">Rezervācija</a>
+  </nav>
+</footer>
+
+<!-- ═══ CORE JS ═══ -->
+<script>
+(function(){
+  'use strict';
+
+  /* ── Nav scroll ── */
+  var nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── Mobile menu ── */
+  var hb = document.getElementById('hamburger');
+  var mm = document.getElementById('mobileMenu');
+
+  function closeMobile(){
+    hb.classList.remove('open');
+    mm.classList.remove('open');
+    hb.setAttribute('aria-expanded', 'false');
+    hb.setAttribute('aria-label', 'Atvērt izvēlni');
+    document.body.style.overflow = '';
+  }
+  window.closeMobile = closeMobile;
+
+  hb.addEventListener('click', function(){
+    var isOpen = hb.classList.toggle('open');
+    mm.classList.toggle('open', isOpen);
+    hb.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    hb.setAttribute('aria-label', isOpen ? 'Aizvērt izvēlni' : 'Atvērt izvēlni');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    if(isOpen) {
+      var firstLink = mm.querySelector('a');
+      if(firstLink) firstLink.focus();
+    }
+  });
+
+  /* Close mobile menu when a link is clicked */
+  mm.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeMobile);
+  });
+
+  /* Escape key closes mobile menu */
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && mm.classList.contains('open')) {
+      closeMobile();
+      hb.focus();
+    }
+  });
+
+  /* ── Reveal on scroll ── */
+  if('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(x){
+        if(x.isIntersecting) { x.target.classList.add('vis'); io.unobserve(x.target); }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.rv').forEach(function(el){ el.classList.add('vis'); });
+  }
+
+  /* ── Toast ── */
+  window.showToast = function(msg, duration){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, duration || 3000);
+  };
+
+  /* ── Language switcher ── */
+  var currentLang = localStorage.getItem('preferredLang') || 'lv';
+
+  window.setLang = function(lang){
+    currentLang = lang;
+    localStorage.setItem('preferredLang', lang);
+
+    /* Update lang attribute */
+    var root = document.getElementById('html-root');
+    if(root) root.lang = lang;
+
+    /* Update button states */
+    ['lv','en','ru'].forEach(function(l){
+      var btn = document.getElementById('btn-' + l);
+      if(!btn) return;
+      btn.classList.toggle('active', l === lang);
+      btn.setAttribute('aria-pressed', l === lang ? 'true' : 'false');
+    });
+    /* Update mobile lang buttons */
+    document.querySelectorAll('.mobile-menu .lang-btn').forEach(function(btn){
+      var btnLang = btn.getAttribute('onclick') && btn.getAttribute('onclick').match(/setLang\('(\w+)'\)/);
+      if(btnLang) btn.classList.toggle('active', btnLang[1] === lang);
+    });
+
+    /* Update text content — support lv, en, ru */
+    document.querySelectorAll('[data-lv]').forEach(function(el){
+      var val = el.getAttribute('data-' + lang) || el.getAttribute('data-lv');
+      if(!val) return;
+      if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = val;
+      } else if(val.includes('<')) {
+        el.innerHTML = val;
+      } else {
+        el.textContent = val;
+      }
+    });
+
+    /* Notify React booking component */
+    if(window._updateBookingLang) window._updateBookingLang(lang);
+  };
+
+  window.getCurrentLang = function(){ return currentLang; };
+
+  /* ── Init on DOMContentLoaded ── */
+  document.addEventListener('DOMContentLoaded', function(){
+    setLang(currentLang);
+  });
+
+  /* Run immediately if already loaded */
+  if(document.readyState !== 'loading') {
+    setLang(currentLang);
+  }
+
+})();
+</script>
+
+<!-- Supabase client init -->
+<script>
+(function(){
+  var SB_URL = 'https://ibnvqljclchzlbvfwugj.supabase.co';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlibnZxbGpjbGNoemxidmZ3dWdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEyNDM4MjIsImV4cCI6MjA4NjgxOTgyMn0.oQqSvLbbDcWDpgJdDYde11sd6SX96snBIYs1FzfcCvo';
+  window._sb = window.supabase.createClient(SB_URL, SB_KEY);
+})();
+</script>
+
+<!-- ═══ BOOKING REACT APP ═══ -->
+<script type="text/babel">
+(function(){
+const { useState, useEffect, useCallback, useRef } = React;
+
+const sb = window._sb;
+
+const TIMES = ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00'];
+const MAX_DAYS = 60;
+const MIN_DAYS = 1;
+const MAX_PER_DAY = 8;
+const MAX_NAME = 80;
+const MAX_EMAIL = 120;
+const MAX_PHONE = 30;
+const MAX_NOTES = 500;
+
+const TOPICS = {
+  lv: [
+    '', 'Korporatīvās tiesības', 'FinTech juridiskie pakalpojumi',
+    'Civiltiesības', 'Darba tiesības', 'Administratīvās tiesības',
+    'Pārstāvība tiesā / šķīrējtiesā', 'Cits jautājums'
+  ],
+  en: [
+    '', 'Corporate Law', 'FinTech Legal Services',
+    'Civil Law', 'Labour Law', 'Administrative Law',
+    'Court / Arbitration Representation', 'Other matter'
+  ],
+  ru: [
+    '', 'Корпоративное право', 'Юридические услуги FinTech',
+    'Гражданское право', 'Трудовое право', 'Административное право',
+    'Представительство в суде / арбитраже', 'Другой вопрос'
+  ]
+};
+
+const TX = {
+  lv: {
+    calTitle: 'Izvēlieties datumu',
+    formTitle: 'Kontaktinformācija',
+    noDate: 'Lūdzu izvēlieties konsultācijas datumu kalendārā',
+    noTime: 'Lūdzu izvēlieties piemērotu laiku',
+    selDateTime: (d,t) => `${d} plkst. ${t}`,
+    name: 'Vārds, Uzvārds', namePh: 'Jānis Bērziņš',
+    company: 'Uzņēmums (neobligāti)', companyPh: 'SIA Uzņēmums',
+    email: 'E-pasts', emailPh: 'email@domain.lv',
+    phone: 'Telefons', phonePh: '+371 2X XXX XXX',
+    topic: 'Konsultācijas tēma',
+    topicPh: 'Izvēlieties tēmu...',
+    notes: 'Papildu informācija (neobligāti)', notesPh: 'Īss jautājuma apraksts...',
+    submit: 'Rezervēt konsultāciju',
+    submitting: 'Apstrādā...',
+    okTitle: n => `Paldies, ${n}!`,
+    okSub: 'Jūsu konsultācija ir rezervēta. Sazināsimies 24 stundu laikā, lai apstiprinātu.',
+    newBook: 'Jauna rezervācija',
+    avail: 'Brīvs', full: 'Aizņemts', sel: 'Izvēlēts',
+    timeLabel: 'Konsultācijas laiks (60 min)',
+    weekdays: ['P','O','T','C','Pk','S','Sv'],
+    err: {
+      date: 'Lūdzu izvēlieties datumu.',
+      time: 'Lūdzu izvēlieties laiku.',
+      topic: 'Lūdzu izvēlieties konsultācijas tēmu.',
+      name: 'Lūdzu ievadiet vārdu un uzvārdu.',
+      email: 'Lūdzu ievadiet derīgu e-pasta adresi.',
+      phone: 'Lūdzu ievadiet telefona numuru.',
+      server: 'Radās kļūda. Lūdzu sazinieties: office@exvero.lv'
+    }
+  },
+  en: {
+    calTitle: 'Select a date',
+    formTitle: 'Contact information',
+    noDate: 'Please select a date on the calendar',
+    noTime: 'Please select a time slot',
+    selDateTime: (d,t) => `${d} at ${t}`,
+    name: 'Full name', namePh: 'John Smith',
+    company: 'Company (optional)', companyPh: 'Company Ltd',
+    email: 'Email address', emailPh: 'email@domain.com',
+    phone: 'Phone number', phonePh: '+371 2X XXX XXX',
+    topic: 'Consultation topic',
+    topicPh: 'Select a topic...',
+    notes: 'Additional information (optional)', notesPh: 'Brief description of your matter...',
+    submit: 'Book consultation',
+    submitting: 'Processing...',
+    okTitle: n => `Thank you, ${n}!`,
+    okSub: 'Your consultation has been booked. We will contact you within 24 hours to confirm.',
+    newBook: 'New booking',
+    avail: 'Available', full: 'Full', sel: 'Selected',
+    timeLabel: 'Consultation time (60 min)',
+    weekdays: ['Mo','Tu','We','Th','Fr','Sa','Su'],
+    err: {
+      date: 'Please select a date.',
+      time: 'Please select a time.',
+      topic: 'Please select a consultation topic.',
+      name: 'Please enter your full name.',
+      email: 'Please enter a valid email address.',
+      phone: 'Please enter a phone number.',
+      server: 'An error occurred. Please contact: office@exvero.lv'
+    }
+  },
+  ru: {
+    calTitle: 'Выберите дату',
+    formTitle: 'Контактная информация',
+    noDate: 'Пожалуйста, выберите дату в календаре',
+    noTime: 'Пожалуйста, выберите время',
+    selDateTime: (d,t) => `${d} в ${t}`,
+    name: 'Имя, Фамилия', namePh: 'Иван Иванов',
+    company: 'Компания (необязательно)', companyPh: 'ООО Компания',
+    email: 'Адрес e-mail', emailPh: 'email@domain.ru',
+    phone: 'Номер телефона', phonePh: '+371 2X XXX XXX',
+    topic: 'Тема консультации',
+    topicPh: 'Выберите тему...',
+    notes: 'Дополнительная информация (необязательно)', notesPh: 'Краткое описание вопроса...',
+    submit: 'Записаться на консультацию',
+    submitting: 'Обработка...',
+    okTitle: n => `Спасибо, ${n}!`,
+    okSub: 'Ваша консультация забронирована. Мы свяжемся с вами в течение 24 часов для подтверждения.',
+    newBook: 'Новая запись',
+    avail: 'Свободно', full: 'Занято', sel: 'Выбрано',
+    timeLabel: 'Время консультации (60 мин)',
+    weekdays: ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],
+    err: {
+      date: 'Пожалуйста, выберите дату.',
+      time: 'Пожалуйста, выберите время.',
+      topic: 'Пожалуйста, выберите тему консультации.',
+      name: 'Пожалуйста, введите имя и фамилию.',
+      email: 'Пожалуйста, введите корректный e-mail.',
+      phone: 'Пожалуйста, введите номер телефона.',
+      server: 'Произошла ошибка. Пожалуйста, напишите: office@exvero.lv'
+    }
+  }
+};
+
+function padZ(n){ return String(n).padStart(2,'0'); }
+function fmtDate(y,m,d){ return `${y}-${padZ(m+1)}-${padZ(d)}`; }
+function isValidEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim()); }
+function isValidPhone(p){ return p.trim().replace(/\D/g,'').length >= 7; }
+
+function getToday(){ var t = new Date(); t.setHours(0,0,0,0); return t; }
+function addDays(d,n){ var r = new Date(d); r.setDate(r.getDate()+n); return r; }
+
+function BookingApp(){
+  const [lang, setLangState] = useState(() => window.getCurrentLang ? window.getCurrentLang() : 'lv');
+  const [viewDate, setViewDate] = useState(new Date());
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selDate, setSelDate] = useState(null);
+  const [selTime, setSelTime] = useState(null);
+  const [form, setForm] = useState({ name:'', company:'', email:'', phone:'', topic:'', notes:'' });
+  const [touched, setTouched] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState(null);
+
+  const tx = TX[lang] || TX.lv;
+  const topics = TOPICS[lang] || TOPICS.lv;
+
+  useEffect(() => {
+    window._updateBookingLang = l => setLangState(l);
+    return () => { window._updateBookingLang = null; };
+  }, []);
+
+  const fetchBookings = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await sb.from('legal_consultations').select('consult_date,consult_time');
+      if(error) throw error;
+      setBookings(data || []);
+    } catch(e) {
+      console.warn('Supabase fetch error:', e);
+      setBookings([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { fetchBookings(); }, [fetchBookings]);
+
+  /* Derived helpers */
+  const bookingsOnDate = useCallback(date =>
+    bookings.filter(b => b.consult_date === date), [bookings]);
+
+  const takenTimesOnDate = useCallback(date =>
+    bookings.filter(b => b.consult_date === date).map(b => b.consult_time), [bookings]);
+
+  const isDayAvailable = useCallback((y, m, day) => {
+    const dt = new Date(y, m, day);
+    const today = getToday();
+    const minDate = addDays(today, MIN_DAYS);
+    const maxDate = addDays(today, MAX_DAYS);
+    if(dt < minDate || dt > maxDate) return false;
+    const dow = dt.getDay();
+    if(dow === 0 || dow === 6) return false;
+    const dateStr = fmtDate(y, m, day);
+    return bookingsOnDate(dateStr).length < MAX_PER_DAY;
+  }, [bookingsOnDate]);
+
+  const validate = () => {
+    const t = tx.err;
+    if(!selDate) return t.date;
+    if(!selTime) return t.time;
+    if(!form.topic) return t.topic;
+    if(!form.name.trim() || form.name.trim().length < 2) return t.name;
+    if(!isValidEmail(form.email)) return t.email;
+    if(!isValidPhone(form.phone)) return t.phone;
+    return null;
+  };
+
+  const handleSubmit = async () => {
+    const ve = validate();
+    if(ve) { setError(ve); return; }
+    setSubmitting(true);
+    setError(null);
+    try {
+      const payload = {
+        consult_date: selDate,
+        consult_time: selTime,
+        client_name: form.name.trim(),
+        company: form.company.trim() || null,
+        client_email: form.email.trim().toLowerCase(),
+        client_phone: form.phone.trim(),
+        topic: form.topic,
+        notes: form.notes.trim() || null,
+        lang
+      };
+      const { error: dbErr } = await sb.from('legal_consultations').insert([payload]);
+      if(dbErr) throw dbErr;
+
+      try {
+        await emailjs.send('service_d52bopv', 'template_azl3ud8', {
+          to_email: form.email,
+          client_name: form.name,
+          client_email: form.email,
+          client_phone: form.phone,
+          booking_date: selDate,
+          host_name: 'Ex Vero Law Office',
+          event_type: form.topic,
+          guest_count: 1,
+          notes: `Laiks: ${selTime}${form.company ? `. Uzņ.: ${form.company}` : ''}${form.notes ? `. ${form.notes}` : ''}`
+        });
+      } catch(emailErr) {
+        console.warn('Email send non-critical error:', emailErr);
+      }
+
+      await fetchBookings();
+      setDone(true);
+      window.showToast(lang === 'ru' ? 'Запись успешна!' : lang === 'en' ? 'Booking confirmed!' : 'Rezervācija veiksmīga!');
+    } catch(err) {
+      console.error('Booking submit error:', err);
+      setError(tx.err.server);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleReset = () => {
+    setDone(false);
+    setSelDate(null);
+    setSelTime(null);
+    setForm({ name:'', company:'', email:'', phone:'', topic:'', notes:'' });
+    setTouched({});
+    setError(null);
+  };
 
 </body>
 </html>
