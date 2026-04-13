@@ -13,8 +13,6 @@
 <meta property="og:title" content="Ex Vero Law Office — Juridiskais birojs Rīgā">
 <meta property="og:description" content="Profesionāli juridiskie pakalpojumi kopš 2007. gada.">
 <meta property="og:locale" content="lv_LV">
-<meta property="og:locale:alternate" content="ru_RU">
-<meta property="og:locale:alternate" content="en_GB">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LegalService","name":"Ex Vero Law Office","url":"https://exvero.lv","telephone":"+37129613155","email":"office@exvero.lv","address":{"@type":"PostalAddress","addressLocality":"Rīga","addressCountry":"LV"},"openingHours":"Mo-Fr 09:00-17:00","foundingDate":"2007","serviceType":["Corporate Law","FinTech Legal Services","Civil Law","Labour Law","Administrative Law","Litigation"]}
 </script>
@@ -49,26 +47,24 @@
   --green: #2E7D52;
   --red: #8B2E2E;
   --nav-h: 72px;
-  --safe-left: env(safe-area-inset-left, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
-body{font-family:'Outfit',sans-serif;background:var(--black);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+body{font-family:'Outfit',sans-serif;background:var(--black);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--dark);}
 ::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:2px;}
 
-/* ── SKIP LINK ── */
 .skip-link{position:absolute;top:-100%;left:1rem;z-index:9999;background:var(--gold);color:var(--black);padding:.5rem 1rem;border-radius:2px;font-weight:600;font-size:.82rem;text-decoration:none;transition:top .2s;}
 .skip-link:focus{top:1rem;}
 
 /* ════════════════════════════════
-   NAVIGATION
+   NAV
 ════════════════════════════════ */
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);padding:0 4rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s;}
-.nav.scrolled{background:rgba(10,10,10,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:60px;}
+.nav.scrolled{background:rgba(10,10,10,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:60px;}
 .nav-logo{display:flex;align-items:center;gap:.9rem;text-decoration:none;flex-shrink:0;}
+/* Logo - PNG with transparent bg, no filter needed */
 .nav-logo-img{height:38px;width:auto;display:block;}
 .nav-logo-text{display:flex;flex-direction:column;line-height:1.1;}
 .nav-logo-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:var(--white);letter-spacing:.02em;}
@@ -90,12 +86,11 @@ body{font-family:'Outfit',sans-serif;background:var(--black);color:var(--text);o
 .hamburger.open span:nth-child(2){opacity:0;}
 .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
-/* ── MOBILE MENU ── */
 .mobile-menu{display:none;position:fixed;inset:0;background:var(--black);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:2rem;overflow-y:auto;}
 .mobile-menu.open{display:flex;}
 .mm-nav{display:flex;flex-direction:column;align-items:center;gap:1.2rem;width:100%;margin-bottom:2rem;}
-.mm-nav a{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;color:var(--white);text-decoration:none;letter-spacing:.02em;transition:color .2s;-webkit-tap-highlight-color:transparent;}
-.mm-nav a:hover,.mm-nav a:focus{color:var(--gold);}
+.mm-nav a{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;color:var(--white);text-decoration:none;letter-spacing:.02em;transition:color .2s;}
+.mm-nav a:hover{color:var(--gold);}
 .mm-lang{display:flex;gap:.5rem;margin-bottom:2rem;}
 .mm-lang .lang-btn{padding:.4rem .8rem;font-size:.78rem;}
 .mm-cta{display:inline-block;padding:.8rem 2rem;background:var(--gold);color:var(--black);font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;}
@@ -113,9 +108,9 @@ body{font-family:'Outfit',sans-serif;background:var(--black);color:var(--text);o
 .hero-h1 em{font-style:italic;color:var(--gold-l);font-weight:400;}
 .hero-sub{font-size:1rem;color:var(--gray-l);line-height:1.8;max-width:520px;margin:0 auto 2.6rem;font-weight:300;}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:4rem;}
-.btn-primary{padding:.85rem 2.2rem;background:var(--gold);color:var(--black);font-weight:600;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;font-family:'Outfit',sans-serif;text-decoration:none;transition:all .28s;display:inline-block;-webkit-tap-highlight-color:transparent;}
+.btn-primary{padding:.85rem 2.2rem;background:var(--gold);color:var(--black);font-weight:600;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;font-family:'Outfit',sans-serif;text-decoration:none;transition:all .28s;display:inline-block;}
 .btn-primary:hover{background:var(--gold-l);transform:translateY(-1px);}
-.btn-outline{padding:.85rem 2.2rem;background:transparent;color:var(--white);font-weight:500;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border2);border-radius:2px;cursor:pointer;font-family:'Outfit',sans-serif;text-decoration:none;transition:all .28s;display:inline-block;-webkit-tap-highlight-color:transparent;}
+.btn-outline{padding:.85rem 2.2rem;background:transparent;color:var(--white);font-weight:500;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border2);border-radius:2px;cursor:pointer;font-family:'Outfit',sans-serif;text-decoration:none;transition:all .28s;display:inline-block;}
 .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
 .hero-stats{position:absolute;bottom:0;left:0;right:0;background:var(--dark2);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);}
 .hst{padding:1.4rem .5rem;text-align:center;border-right:1px solid var(--border);}
@@ -150,25 +145,41 @@ body{font-family:'Outfit',sans-serif;background:var(--black);color:var(--text);o
 .ac-desc{font-size:.8rem;color:var(--gray);line-height:1.7;}
 
 /* ════════════════════════════════
-   SERVICES
+   SERVICES — INFINITE CAROUSEL
 ════════════════════════════════ */
 .services-sec{background:var(--black);}
 .srv-hdr{text-align:center;max-width:600px;margin:0 auto 3rem;}
 .srv-hdr .sec-label{justify-content:center;}
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
-.srv-card{background:var(--black);padding:2.2rem 2rem 3.5rem;transition:all .3s;position:relative;overflow:hidden;}
+
+/* Carousel wrapper */
+.srv-carousel-wrap{position:relative;overflow:hidden;}
+.srv-carousel-track{display:flex;transition:transform .45s cubic-bezier(.25,.46,.45,.94);will-change:transform;}
+.srv-slide{flex:0 0 33.333%;padding:0 .5rem;box-sizing:border-box;}
+@media(max-width:1100px){.srv-slide{flex:0 0 50%;}}
+@media(max-width:640px){.srv-slide{flex:0 0 100%;}}
+
+.srv-card{background:var(--dark2);border:1px solid var(--border);border-radius:3px;padding:2.2rem 2rem 3.5rem;transition:all .3s;position:relative;overflow:hidden;height:100%;}
 .srv-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.05),transparent);opacity:0;transition:opacity .3s;}
-.srv-card:hover{background:var(--dark2);}
+.srv-card:hover{background:var(--dark3);border-color:rgba(201,168,76,.2);}
 .srv-card:hover::after{opacity:1;}
 .srv-num{font-size:.6rem;letter-spacing:.18em;color:var(--gold-d);font-weight:600;display:block;margin-bottom:1rem;}
 .srv-icon{width:38px;height:38px;margin-bottom:1rem;border:1px solid var(--border2);border-radius:2px;display:flex;align-items:center;justify-content:center;}
 .srv-icon svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
 .srv-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:500;color:var(--white);margin-bottom:.6rem;line-height:1.3;}
-.srv-desc{font-size:.79rem;color:var(--gray);line-height:1.75;margin-bottom:1.2rem;}
-.srv-cta{position:absolute;bottom:1.4rem;left:2rem;right:2rem;display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-d);text-decoration:none;border:none;background:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .25s;padding:.4rem 0;border-bottom:1px solid transparent;-webkit-tap-highlight-color:transparent;}
+.srv-desc{font-size:.79rem;color:var(--gray);line-height:1.75;margin-bottom:3rem;}
+.srv-cta{position:absolute;bottom:1.4rem;left:2rem;right:2rem;display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-d);text-decoration:none;border:none;background:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .25s;padding:.4rem 0;border-bottom:1px solid transparent;}
 .srv-cta:hover{color:var(--gold);border-bottom-color:var(--gold);}
 .srv-cta svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s;flex-shrink:0;}
 .srv-cta:hover svg{transform:translateX(3px);}
+
+/* Carousel nav */
+.srv-nav{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:2rem;}
+.srv-nav-btn{width:40px;height:40px;border-radius:2px;border:1px solid var(--border2);background:var(--dark3);color:var(--gray-l);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.srv-nav-btn:hover{border-color:var(--gold);color:var(--gold);}
+.srv-nav-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.srv-dots{display:flex;gap:.4rem;}
+.srv-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);border:none;cursor:pointer;padding:0;transition:all .25s;}
+.srv-dot.active{background:var(--gold);width:18px;border-radius:3px;}
 
 /* ════════════════════════════════
    TRUST STATS
@@ -182,20 +193,15 @@ body{font-family:'Outfit',sans-serif;background:var(--black);color:var(--text);o
 .trust-desc{font-size:.82rem;color:var(--gray-l);line-height:1.65;font-weight:300;}
 
 /* ════════════════════════════════
-   TESTIMONIALS — SLIDER
+   TESTIMONIALS
 ════════════════════════════════ */
 .testi-sec{background:var(--dark);overflow:hidden;}
 .testi-slider-wrap{position:relative;margin-top:3rem;}
 .testi-track{display:flex;transition:transform .45s cubic-bezier(.25,.46,.45,.94);will-change:transform;}
-.testi-slide{flex:0 0 100%;padding:0 0;box-sizing:border-box;}
-/* Desktop: 3 per view */
-@media(min-width:861px){
-  .testi-slide{flex:0 0 33.333%;}
-}
-@media(min-width:861px) and (max-width:1100px){
-  .testi-slide{flex:0 0 50%;}
-}
-.testi-card{background:var(--dark2);border:1px solid var(--border);border-radius:3px;padding:2rem 1.8rem;transition:border-color .3s;margin:0 .6rem;}
+.testi-slide{flex:0 0 33.333%;padding:0 .5rem;box-sizing:border-box;}
+@media(max-width:1100px){.testi-slide{flex:0 0 50%;}}
+@media(max-width:860px){.testi-slide{flex:0 0 100%;}}
+.testi-card{background:var(--dark2);border:1px solid var(--border);border-radius:3px;padding:2rem 1.8rem;transition:border-color .3s;margin:0 .1rem;}
 .testi-card:hover{border-color:rgba(201,168,76,.2);}
 .testi-quote{font-family:'Playfair Display',serif;font-size:.93rem;font-style:italic;color:var(--text);line-height:1.8;margin-bottom:1.4rem;}
 .testi-quote::before{content:'\201C';color:var(--gold-d);font-size:1.5rem;line-height:0;vertical-align:-.35em;margin-right:.1em;}
@@ -204,11 +210,11 @@ body{font-family:'Outfit',sans-serif;background:var(--black);color:var(--text);o
 .testi-name{font-size:.82rem;font-weight:500;color:var(--white);display:block;}
 .testi-role{font-size:.72rem;color:var(--gray);}
 .slider-nav{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:2rem;}
-.slider-btn{width:36px;height:36px;border-radius:2px;border:1px solid var(--border2);background:var(--dark3);color:var(--gray-l);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.slider-btn{width:36px;height:36px;border-radius:2px;border:1px solid var(--border2);background:var(--dark3);color:var(--gray-l);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
 .slider-btn:hover{border-color:var(--gold);color:var(--gold);}
 .slider-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .slider-dots{display:flex;gap:.4rem;}
-.slider-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);border:none;cursor:pointer;padding:0;transition:all .25s;-webkit-tap-highlight-color:transparent;}
+.slider-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);border:none;cursor:pointer;padding:0;transition:all .25s;}
 .slider-dot.active{background:var(--gold);width:18px;border-radius:3px;}
 
 /* ════════════════════════════════
@@ -219,13 +225,13 @@ body{font-family:'Outfit',sans-serif;background:var(--black);color:var(--text);o
 .b-panel{background:var(--dark2);border:1px solid var(--border);border-radius:3px;padding:2rem;}
 .panel-ttl{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:500;color:var(--white);margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem;}
 .cal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
-.cal-btn{background:var(--dark3);border:1px solid var(--border);border-radius:2px;width:32px;height:32px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--gray-l);transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.cal-btn{background:var(--dark3);border:1px solid var(--border);border-radius:2px;width:32px;height:32px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--gray-l);transition:all .2s;}
 .cal-btn:hover{border-color:var(--gold);color:var(--gold);}
 .cal-btn:disabled{opacity:.25;cursor:not-allowed;}
 .cal-month{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:500;color:var(--white);}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
 .cal-hd{text-align:center;font-size:.58rem;font-weight:600;color:var(--gray);padding:.3rem 0;text-transform:uppercase;letter-spacing:.04em;}
-.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:2px;cursor:pointer;transition:all .18s;font-size:.74rem;font-weight:400;border:1px solid transparent;min-height:28px;-webkit-tap-highlight-color:transparent;}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:2px;cursor:pointer;transition:all .18s;font-size:.74rem;font-weight:400;border:1px solid transparent;min-height:28px;}
 .cal-day.empty{cursor:default;}
 .cal-day.past{opacity:.15;cursor:not-allowed;pointer-events:none;}
 .cal-day.avail{background:rgba(46,125,82,.12);border-color:rgba(46,125,82,.3);color:var(--text);}
@@ -237,20 +243,20 @@ body{font-family:'Outfit',sans-serif;background:var(--black);color:var(--text);o
 .leg-item{display:flex;align-items:center;gap:.3rem;color:var(--gray);}
 .leg-dot{width:8px;height:8px;border-radius:1px;flex-shrink:0;}
 .time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.3rem;margin-top:.5rem;}
-.time-chip{padding:.5rem .2rem;border:1px solid var(--border);border-radius:2px;cursor:pointer;text-align:center;font-size:.72rem;font-weight:400;color:var(--gray-l);transition:all .18s;background:var(--dark3);font-family:'Outfit',sans-serif;-webkit-tap-highlight-color:transparent;}
+.time-chip{padding:.5rem .2rem;border:1px solid var(--border);border-radius:2px;cursor:pointer;text-align:center;font-size:.72rem;font-weight:400;color:var(--gray-l);transition:all .18s;background:var(--dark3);font-family:'Outfit',sans-serif;}
 .time-chip:hover:not(:disabled){border-color:var(--gold);color:var(--gold);}
 .time-chip.sel{background:var(--gold);border-color:var(--gold);color:var(--black);font-weight:600;}
 .time-chip.taken{opacity:.18;cursor:not-allowed;text-decoration:line-through;}
 .f-group{margin-bottom:.8rem;}
 .f-label{display:block;font-weight:500;font-size:.66rem;color:var(--gray-l);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em;}
-.f-input,.f-area{width:100%;padding:.65rem .9rem;border:1px solid var(--border);border-radius:2px;font-family:'Outfit',sans-serif;font-size:.85rem;color:var(--white);background:var(--dark3);transition:border-color .2s;-webkit-appearance:none;appearance:none;}
+.f-input,.f-area{width:100%;padding:.65rem .9rem;border:1px solid var(--border);border-radius:2px;font-family:'Outfit',sans-serif;font-size:.85rem;color:var(--white);background:var(--dark3);transition:border-color .2s;}
 .f-input:focus,.f-area:focus{outline:none;border-color:var(--gold);}
 .f-area{min-height:80px;resize:vertical;}
 .f-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
 .f-select{width:100%;padding:.65rem .9rem;border:1px solid var(--border);border-radius:2px;font-family:'Outfit',sans-serif;font-size:.85rem;color:var(--white);background:var(--dark3);cursor:pointer;transition:border-color .2s;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238A8F9A'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .9rem center;}
 .f-select:focus{outline:none;border-color:var(--gold);}
 .f-select option{background:var(--dark2);color:var(--white);}
-.sub-btn{width:100%;padding:1rem;background:var(--gold);color:var(--black);border:none;border-radius:2px;font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:.5rem;-webkit-tap-highlight-color:transparent;}
+.sub-btn{width:100%;padding:1rem;background:var(--gold);color:var(--black);border:none;border-radius:2px;font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:.5rem;}
 .sub-btn:hover:not(:disabled){background:var(--gold-l);transform:translateY(-1px);}
 .sub-btn:disabled{opacity:.3;cursor:not-allowed;transform:none;}
 .sel-chip{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);border-radius:2px;padding:.6rem .9rem;margin-bottom:.85rem;font-size:.8rem;color:var(--gold-l);}
@@ -282,11 +288,12 @@ body{font-family:'Outfit',sans-serif;background:var(--black);color:var(--text);o
 .map-btn:hover{border-color:var(--gold);color:var(--gold);}
 
 /* ════════════════════════════════
-   FOOTER
+   FOOTER — Logo bez filtera
 ════════════════════════════════ */
 footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
 .foot-logo{display:flex;align-items:center;gap:.7rem;}
-.foot-logo img{height:28px;}
+/* Logo apakšā: PNG ar caurspīdīgu fonu — BEZ filtera, tāpat kā augšā */
+.foot-logo-img{height:28px;width:auto;display:block;}
 .foot-copy{font-size:.7rem;color:var(--gray);opacity:.5;}
 .foot-links{display:flex;gap:1.8rem;}
 .foot-links a{color:var(--gray);text-decoration:none;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;}
@@ -299,30 +306,24 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
 /* ════════════════════════════════
-   REVEAL ANIMATION
+   REVEAL
 ════════════════════════════════ */
 .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
 .rv.vis{opacity:1;transform:none;}
 
 /* ════════════════════════════════
-   RESPONSIVE — TABLET
+   RESPONSIVE
 ════════════════════════════════ */
 @media(max-width:1100px){
   .nav{padding:0 2rem;}
   .section{padding:5rem 2rem;}
-  .services-grid{grid-template-columns:repeat(2,1fr);}
   footer{padding:1.5rem 2rem;}
-  .testi-slide{flex:0 0 50%;}
 }
-/* ════════════════════════════════
-   RESPONSIVE — MOBILE
-════════════════════════════════ */
 @media(max-width:860px){
   .nav-links,.nav-right{display:none;}
   .hamburger{display:flex;}
   .about-grid{grid-template-columns:1fr;gap:2.5rem;}
   .about-cards{grid-template-columns:1fr 1fr;}
-  .services-grid{grid-template-columns:1fr;}
   .bk-grid{grid-template-columns:1fr;}
   .contact-grid{grid-template-columns:1fr;gap:2rem;}
   .trust-grid{grid-template-columns:1fr;}
@@ -330,7 +331,6 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
   .trust-item:last-child{border-bottom:none;}
   .hero-stats{grid-template-columns:repeat(2,1fr);}
   .hero-inner{padding:calc(var(--nav-h) + 3rem) 1.5rem 6rem;}
-  .testi-slide{flex:0 0 100%;}
   .f-row{grid-template-columns:1fr;}
   .b-panel{padding:1.5rem 1.2rem;}
   .section{padding:4rem 1.5rem;}
@@ -340,7 +340,6 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
   .hero-stats{grid-template-columns:1fr 1fr;}
   .hst{padding:1rem .4rem;}
   .hst-n{font-size:1.25rem;}
-  .hst-l{font-size:.54rem;}
   .time-grid{grid-template-columns:repeat(3,1fr);}
   .hero-btns{flex-direction:column;align-items:center;}
   .hero-btns .btn-primary,.hero-btns .btn-outline{width:100%;max-width:280px;text-align:center;}
@@ -358,11 +357,10 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
 <a class="skip-link" href="#main-content">Pāriet uz galveno saturu</a>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- ══════════════════════════════
-     NAV
-══════════════════════════════ -->
+<!-- NAV -->
 <nav class="nav" id="main-nav" role="navigation" aria-label="Galvenā navigācija">
   <a href="#home" class="nav-logo" aria-label="Ex Vero Law Office — sākumlapa">
+    <!-- PNG ar caurspīdīgu fonu — nav nepieciešams nekāds filtrs -->
     <img src="logo_bez_fona.svg" alt="Ex Vero" class="nav-logo-img" width="38" height="38"
          onerror="this.style.display='none'">
     <div class="nav-logo-text">
@@ -389,27 +387,23 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
   </button>
 </nav>
 
-<!-- ══════════════════════════════
-     MOBILE MENU
-══════════════════════════════ -->
+<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobilā navigācija">
   <nav class="mm-nav" aria-label="Navigācija">
-    <a href="#about" data-i18n="navAbout">Par mums</a>
-    <a href="#services" data-i18n="navServices">Pakalpojumi</a>
-    <a href="#booking" data-i18n="navConsult">Konsultācija</a>
-    <a href="#contact" data-i18n="navContact">Kontakti</a>
+    <a href="#about" data-i18n="navAbout" onclick="closeMobile()">Par mums</a>
+    <a href="#services" data-i18n="navServices" onclick="closeMobile()">Pakalpojumi</a>
+    <a href="#booking" data-i18n="navConsult" onclick="closeMobile()">Konsultācija</a>
+    <a href="#contact" data-i18n="navContact" onclick="closeMobile()">Kontakti</a>
   </nav>
   <div class="mm-lang" role="group" aria-label="Valodas izvēle">
-    <button class="lang-btn" onclick="setLang('lv');closeMobile()" aria-label="Latviešu">LV</button>
-    <button class="lang-btn" onclick="setLang('en');closeMobile()" aria-label="English">EN</button>
-    <button class="lang-btn" onclick="setLang('ru');closeMobile()" aria-label="Русский">RU</button>
+    <button class="lang-btn" onclick="setLang('lv');closeMobile()">LV</button>
+    <button class="lang-btn" onclick="setLang('en');closeMobile()">EN</button>
+    <button class="lang-btn" onclick="setLang('ru');closeMobile()">RU</button>
   </div>
   <a href="#booking" class="mm-cta" data-i18n="navBook" onclick="closeMobile()">Rezervēt</a>
 </div>
 
-<!-- ══════════════════════════════
-     HERO
-══════════════════════════════ -->
+<!-- HERO -->
 <section class="hero" id="home" aria-label="Galvenā sadaļa">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-grid" aria-hidden="true"></div>
@@ -433,9 +427,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     ABOUT
-══════════════════════════════ -->
+<!-- ABOUT -->
 <section class="about-sec section rv" id="about" aria-labelledby="about-h">
   <div class="section-inner">
     <div class="about-grid">
@@ -460,72 +452,33 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     SERVICES
-══════════════════════════════ -->
+<!-- SERVICES — INFINITE CAROUSEL -->
 <section class="services-sec section rv" id="services" aria-labelledby="services-h">
   <div class="section-inner">
     <div class="srv-hdr">
       <div class="sec-label" data-i18n="navServices">Pakalpojumi</div>
       <h2 class="sec-h2" id="services-h"><span data-i18n="servTitle">Juridiskās prakses</span> <em data-i18n="servTitleEm">jomas</em></h2>
     </div>
-    <div class="services-grid" role="list">
 
-      <article class="srv-card" role="listitem">
-        <span class="srv-num">01</span>
-        <div class="srv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17h7M17 14v7"/></svg></div>
-        <h3 class="srv-name" data-i18n="s1N">Korporatīvās tiesības</h3>
-        <p class="srv-desc" data-i18n="s1D">Uzņēmumu dibināšana, pārstrukturēšana, M&amp;A darījumi, akcionāru līgumi, korporatīvā pārvaldība un atbilstība regulējumam.</p>
-        <a href="#booking" class="srv-cta" data-i18n="srvCta">Pieteikties konsultācijai <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </article>
+    <div class="srv-carousel-wrap" id="srv-carousel-wrap">
+      <div class="srv-carousel-track" id="srv-carousel-track">
+        <!-- Slides injected by JS -->
+      </div>
+    </div>
 
-      <article class="srv-card" role="listitem">
-        <span class="srv-num">02</span>
-        <div class="srv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg></div>
-        <h3 class="srv-name" data-i18n="s2N">FinTech juridiskie pakalpojumi</h3>
-        <p class="srv-desc" data-i18n="s2D">Regulatīvā atbilstība, licencēšana, kriptovalūtu un maksājumu pakalpojumu tiesiskais nodrošinājums, DORA un AML prasības.</p>
-        <a href="#booking" class="srv-cta" data-i18n="srvCta">Pieteikties konsultācijai <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </article>
-
-      <article class="srv-card" role="listitem">
-        <span class="srv-num">03</span>
-        <div class="srv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-        <h3 class="srv-name" data-i18n="s3N">Civiltiesības</h3>
-        <p class="srv-desc" data-i18n="s3D">Līgumu sagatavošana un apstrīdēšana, īpašuma tiesības, mantojuma lietas, parādu piedziņa un strīdu risināšana.</p>
-        <a href="#booking" class="srv-cta" data-i18n="srvCta">Pieteikties konsultācijai <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </article>
-
-      <article class="srv-card" role="listitem">
-        <span class="srv-num">04</span>
-        <div class="srv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <h3 class="srv-name" data-i18n="s4N">Darba tiesības</h3>
-        <p class="srv-desc" data-i18n="s4D">Darba līgumu izstrāde, atlaišanas strīdi, darba koplīgumi, arodbiedrību attiecības un darba drošības atbilstība.</p>
-        <a href="#booking" class="srv-cta" data-i18n="srvCta">Pieteikties konsultācijai <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </article>
-
-      <article class="srv-card" role="listitem">
-        <span class="srv-num">05</span>
-        <div class="srv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <h3 class="srv-name" data-i18n="s5N">Administratīvās tiesības</h3>
-        <p class="srv-desc" data-i18n="s5D">Pārsūdzības valsts iestādēs, atļauju un licenču iegūšana, administratīvo lēmumu apstrīdēšana un publisko iepirkumu jautājumi.</p>
-        <a href="#booking" class="srv-cta" data-i18n="srvCta">Pieteikties konsultācijai <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </article>
-
-      <article class="srv-card" role="listitem">
-        <span class="srv-num">06</span>
-        <div class="srv-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></div>
-        <h3 class="srv-name" data-i18n="s6N">Pārstāvība tiesā un šķīrējtiesā</h3>
-        <p class="srv-desc" data-i18n="s6D">Profesionāla pārstāvība Latvijas tiesās, šķīrējtiesās un starptautiskos strīdu izšķiršanas procesos. Lietu stratēģija un taktika.</p>
-        <a href="#booking" class="srv-cta" data-i18n="srvCta">Pieteikties konsultācijai <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </article>
-
+    <div class="srv-nav" aria-label="Pakalpojumu navigācija">
+      <button class="srv-nav-btn" id="srv-prev" aria-label="Iepriekšējais">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="srv-dots" id="srv-dots"></div>
+      <button class="srv-nav-btn" id="srv-next" aria-label="Nākamais">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     TRUST STATS
-══════════════════════════════ -->
+<!-- TRUST STATS -->
 <section class="trust-sec section rv" style="padding:0" aria-label="Statistika">
   <div class="trust-grid" role="list">
     <div class="trust-item" role="listitem">
@@ -546,55 +499,47 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     TESTIMONIALS SLIDER
-══════════════════════════════ -->
+<!-- TESTIMONIALS -->
 <section class="testi-sec section rv" id="testimonials" aria-labelledby="testi-h">
   <div class="section-inner">
     <div class="sec-label" data-i18n="testiLabel">Klientu viedokļi</div>
     <h2 class="sec-h2" id="testi-h"><span data-i18n="testiTitle">Ko saka mūsu</span> <em data-i18n="testiTitleEm">klienti</em></h2>
-
-    <div class="testi-slider-wrap" id="testi-slider" role="region" aria-label="Atsauksmes" aria-roledescription="karuselis">
+    <div class="testi-slider-wrap" id="testi-slider" role="region" aria-label="Atsauksmes">
       <div class="testi-track" id="testi-track">
-
-        <div class="testi-slide" role="group" aria-roledescription="slaids" aria-label="1 no 3">
+        <div class="testi-slide">
           <blockquote class="testi-card">
-            <p class="testi-quote" data-i18n="t1Q">Ex Vero komanda sniedza izcilu juridisko atbalstu mūsu uzņēmuma pārstrukturēšanas procesā. Profesionalitāte un precizitāte ir to, ko var sagaidīt no šī biroja.</p>
+            <p class="testi-quote" data-i18n="t1Q">Ex Vero komanda sniedza izcilu juridisko atbalstu mūsu uzņēmuma pārstrukturēšanas procesā.</p>
             <footer class="testi-author">
               <div class="testi-av" aria-hidden="true">AK</div>
               <div><cite class="testi-name">A. Kalniņš</cite><span class="testi-role" data-i18n="t1R">SIA valdes loceklis</span></div>
             </footer>
           </blockquote>
         </div>
-
-        <div class="testi-slide" role="group" aria-roledescription="slaids" aria-label="2 no 3">
+        <div class="testi-slide">
           <blockquote class="testi-card">
-            <p class="testi-quote" data-i18n="t2Q">Sadarbojamies ar Ex Vero Law Office jau vairākus gadus. Viņu zināšanas FinTech regulatīvajos jautājumos ir neaizstājamas mūsu darbībā.</p>
+            <p class="testi-quote" data-i18n="t2Q">Sadarbojamies ar Ex Vero Law Office jau vairākus gadus. Viņu zināšanas FinTech regulatīvajos jautājumos ir neaizstājamas.</p>
             <footer class="testi-author">
               <div class="testi-av" aria-hidden="true">MB</div>
               <div><cite class="testi-name">M. Bērziņš</cite><span class="testi-role" data-i18n="t2R">FinTech uzņēmuma dibinātājs</span></div>
             </footer>
           </blockquote>
         </div>
-
-        <div class="testi-slide" role="group" aria-roledescription="slaids" aria-label="3 no 3">
+        <div class="testi-slide">
           <blockquote class="testi-card">
-            <p class="testi-quote" data-i18n="t3Q">Augsti vērtēju šī biroja pieeju — vienmēr skaidra komunikācija, savlaicīga atbilde un reāls rezultāts. Iesaku visiem, kas meklē uzticamu juridisku partneri.</p>
+            <p class="testi-quote" data-i18n="t3Q">Augsti vērtēju šī biroja pieeju — vienmēr skaidra komunikācija, savlaicīga atbilde un reāls rezultāts.</p>
             <footer class="testi-author">
               <div class="testi-av" aria-hidden="true">IL</div>
               <div><cite class="testi-name">I. Liepiņa</cite><span class="testi-role" data-i18n="t3R">Privātpersona</span></div>
             </footer>
           </blockquote>
         </div>
-
       </div>
-
       <div class="slider-nav" aria-label="Navigācija">
-        <button class="slider-btn" id="sl-prev" aria-label="Iepriekšējā atsauksme">
+        <button class="slider-btn" id="sl-prev" aria-label="Iepriekšējā">
           <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
         <div class="slider-dots" role="tablist" id="sl-dots"></div>
-        <button class="slider-btn" id="sl-next" aria-label="Nākamā atsauksme">
+        <button class="slider-btn" id="sl-next" aria-label="Nākamā">
           <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
@@ -602,9 +547,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     BOOKING
-══════════════════════════════ -->
+<!-- BOOKING -->
 <section class="booking-sec section rv" id="booking" aria-labelledby="booking-h">
   <div class="section-inner">
     <div class="sec-label" data-i18n="bookLabel">Rezervācija</div>
@@ -614,9 +557,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     CONTACT
-══════════════════════════════ -->
+<!-- CONTACT -->
 <section class="contact-sec section rv" id="contact" aria-labelledby="contact-h">
   <div class="section-inner">
     <div class="sec-label" data-i18n="navContact">Kontakti</div>
@@ -648,7 +589,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
         <h3>Ex Vero Law Office</h3>
         <p data-i18n="mapDesc">Juridiskais birojs ar 18 gadu pieredzi. Mēs sniedzam profesionālus juridiskos pakalpojumus privātpersonām un uzņēmumiem.</p>
         <a href="mailto:office@exvero.lv" class="map-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           <span data-i18n="mapBtn">Rakstīt e-pastu</span>
         </a>
       </div>
@@ -658,7 +599,9 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
 
 <footer role="contentinfo">
   <div class="foot-logo">
-    <img src="logo_bez_fona.svg" alt="Ex Vero" style="height:28px;filter:brightness(0) invert(1) opacity(.5)" onerror="this.style.display='none'">
+    <!-- Logo apakšā: tāds pats PNG ar caurspīdīgu fonu — BEZ filtera -->
+    <img src="logo_bez_fona.svg" alt="Ex Vero" class="foot-logo-img"
+         onerror="this.style.display='none'">
     <span style="font-family:'Playfair Display',serif;font-size:.85rem;color:var(--gray);font-style:italic;">Law Office</span>
   </div>
   <span class="foot-copy">© 2026 Ex Vero Law Office. <span data-i18n="footCopy">Visas tiesības aizsargātas.</span></span>
@@ -669,9 +612,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
   </nav>
 </footer>
 
-<!-- ══════════════════════════════
-     TRANSLATIONS
-══════════════════════════════ -->
+<!-- TRANSLATIONS -->
 <script>
 var I18N = {
   lv:{
@@ -681,7 +622,7 @@ var I18N = {
     heroBtn1:'Rezervēt konsultāciju',heroBtn2:'Sazināties',
     stat1:'Gadu pieredze',stat2:'Lietas',stat3:'Prakses jomas',stat4:'Konfidencialitāte',
     aboutLabel:'Par biroju',aboutTitle:'Uzticams juridiskais partneris',aboutYears:'jau 18 gadus',
-    aboutP1:'Ex Vero Law Office – uzticams juridiskais partneris kopš 2007. gada. Mēs palīdzam uzņēmumiem un privātpersonām risināt juridiskos jautājumus ar precizitāti, konfidencialitāti un profesionālismu.',
+    aboutP1:'Ex Vero Law Office – uzticams juridiskais partneris kopš 2007. gada.',
     aboutP2:'Mūsu komanda apvieno dziļu juridisko zināšanu bāzi ar praktisku pieredzi gan Latvijas, gan starptautiskajā tiesību laukā.',
     ac1T:'Precizitāte',ac1D:'Katrs dokuments un juridisks lēmums tiek sagatavots ar augstāko rūpību.',
     ac2T:'Konfidencialitāte',ac2D:'Klienta informācija vienmēr paliek stingri konfidenciāla.',
@@ -716,7 +657,7 @@ var I18N = {
     heroBtn1:'Book a Consultation',heroBtn2:'Contact Us',
     stat1:'Years experience',stat2:'Cases',stat3:'Practice areas',stat4:'Confidentiality',
     aboutLabel:'About the firm',aboutTitle:'Trusted legal partner',aboutYears:'for 18 years',
-    aboutP1:'Ex Vero Law Office – a trusted legal partner since 2007. We help businesses and individuals resolve legal matters with precision, confidentiality and professionalism.',
+    aboutP1:'Ex Vero Law Office – a trusted legal partner since 2007.',
     aboutP2:'Our team combines deep legal knowledge with practical experience in both Latvian and international law.',
     ac1T:'Precision',ac1D:'Every document and legal decision is prepared with the highest care.',
     ac2T:'Confidentiality',ac2D:'Client information always remains strictly confidential.',
@@ -728,7 +669,7 @@ var I18N = {
     s3N:'Civil Law',s3D:'Contract drafting and disputes, property rights, inheritance matters, debt recovery and dispute resolution.',
     s4N:'Labour Law',s4D:'Employment contract drafting, dismissal disputes, collective agreements, union relations and health & safety compliance.',
     s5N:'Administrative Law',s5D:'Appeals to state authorities, obtaining permits and licenses, challenging administrative decisions and public procurement matters.',
-    s6N:'Court & Arbitration Representation',s6D:'Professional representation in Latvian courts, arbitration and international dispute resolution proceedings. Case strategy and tactics.',
+    s6N:'Court & Arbitration Representation',s6D:'Professional representation in Latvian courts, arbitration and international dispute resolution proceedings.',
     trust1D:'Stable practice since 2007, both in Latvia and internationally.',
     trust2L:'Successful cases',trust2D:'Wide range of experience — from private individuals to large corporate clients.',
     trust3D:'Client interests and data protection are our priority in every matter.',
@@ -751,26 +692,26 @@ var I18N = {
     heroBtn1:'Записаться на консультацию',heroBtn2:'Связаться',
     stat1:'Лет опыта',stat2:'Дел',stat3:'Практик',stat4:'Конфиденциальность',
     aboutLabel:'О бюро',aboutTitle:'Надёжный юридический партнёр',aboutYears:'уже 18 лет',
-    aboutP1:'Ex Vero Law Office – надёжный юридический партнёр с 2007 года. Мы помогаем компаниям и частным лицам решать юридические вопросы с точностью, конфиденциальностью и профессионализмом.',
-    aboutP2:'Наша команда сочетает глубокую юридическую базу знаний с практическим опытом как в латвийском, так и в международном праве.',
+    aboutP1:'Ex Vero Law Office – надёжный юридический партнёр с 2007 года.',
+    aboutP2:'Наша команда сочетает глубокую юридическую базу знаний с практическим опытом в латвийском и международном праве.',
     ac1T:'Точность',ac1D:'Каждый документ и юридическое решение подготавливается с максимальной тщательностью.',
     ac2T:'Конфиденциальность',ac2D:'Информация клиента всегда остаётся строго конфиденциальной.',
     ac3T:'Результат',ac3D:'Наша цель — достичь оптимального результата для каждого клиента.',
     ac4T:'Опыт',ac4D:'18+ лет практики — корпоративное право, гражданское право, FinTech.',
     servTitle:'Области юридической',servTitleEm:'практики',srvCta:'Записаться на консультацию',
-    s1N:'Корпоративное право',s1D:'Регистрация компаний, реструктуризация, M&A сделки, акционерные соглашения, корпоративное управление и соответствие требованиям.',
-    s2N:'Юридические услуги FinTech',s2D:'Регуляторное соответствие, лицензирование, правовое обеспечение криптовалют и платёжных услуг, требования DORA и AML.',
-    s3N:'Гражданское право',s3D:'Подготовка и оспаривание договоров, имущественные права, наследственные дела, взыскание долгов и урегулирование споров.',
-    s4N:'Трудовое право',s4D:'Разработка трудовых договоров, споры об увольнении, коллективные договоры, отношения с профсоюзами и соблюдение охраны труда.',
-    s5N:'Административное право',s5D:'Обжалование в государственных органах, получение разрешений и лицензий, оспаривание административных решений и вопросы публичных закупок.',
-    s6N:'Представительство в суде и арбитраже',s6D:'Профессиональное представительство в судах Латвии, арбитраже и международных процедурах разрешения споров. Стратегия и тактика дел.',
+    s1N:'Корпоративное право',s1D:'Регистрация компаний, реструктуризация, M&A сделки, акционерные соглашения, корпоративное управление.',
+    s2N:'Юридические услуги FinTech',s2D:'Регуляторное соответствие, лицензирование, правовое обеспечение криптовалют и платёжных услуг, DORA и AML.',
+    s3N:'Гражданское право',s3D:'Подготовка и оспаривание договоров, имущественные права, наследственные дела, взыскание долгов.',
+    s4N:'Трудовое право',s4D:'Разработка трудовых договоров, споры об увольнении, коллективные договоры и охрана труда.',
+    s5N:'Административное право',s5D:'Обжалование в государственных органах, получение разрешений, оспаривание административных решений.',
+    s6N:'Представительство в суде и арбитраже',s6D:'Профессиональное представительство в судах Латвии, арбитраже и международных процедурах.',
     trust1D:'Стабильная практика с 2007 года как в Латвии, так и на международном уровне.',
     trust2L:'Успешных дел',trust2D:'Широкий спектр опыта — от частных лиц до крупных корпоративных клиентов.',
     trust3D:'Защита интересов клиента и данных — наш приоритет в каждой работе.',
     testiLabel:'Отзывы клиентов',testiTitle:'Что говорят наши',testiTitleEm:'клиенты',
-    t1Q:'Команда Ex Vero оказала превосходную юридическую поддержку в процессе реструктуризации нашей компании. Профессионализм и точность — это то, чего можно ожидать от этого бюро.',t1R:'Член правления ООО',
-    t2Q:'Мы сотрудничаем с Ex Vero Law Office уже несколько лет. Их знания в области регулирования FinTech незаменимы для нашей деятельности.',t2R:'Основатель FinTech компании',
-    t3Q:'Высоко ценю подход этого бюро — всегда чёткая коммуникация, своевременный ответ и реальный результат. Рекомендую всем, кто ищет надёжного юридического партнёра.',t3R:'Частное лицо',
+    t1Q:'Команда Ex Vero оказала превосходную юридическую поддержку в процессе реструктуризации нашей компании.',t1R:'Член правления ООО',
+    t2Q:'Мы сотрудничаем с Ex Vero Law Office уже несколько лет. Их знания в области регулирования FinTech незаменимы.',t2R:'Основатель FinTech компании',
+    t3Q:'Высоко ценю подход этого бюро — всегда чёткая коммуникация, своевременный ответ и реальный результат.',t3R:'Частное лицо',
     bookLabel:'Запись',bookTitle:'Записаться на юридическую',bookTitleEm:'консультацию',
     bookSub:'Выберите подходящую дату и время. Консультация длится 60 минут. Рабочее время: 09:00–17:00.',
     contactTitle:'Свяжитесь',contactTitleEm:'с нами',
@@ -780,114 +721,150 @@ var I18N = {
     mapBtn:'Написать e-mail',footCopy:'Все права защищены.'
   }
 };
+
+/* Service card data */
+var SERVICES_DATA = [
+  {num:'01',iconSvg:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17h7M17 14v7"/>',nameKey:'s1N',descKey:'s1D'},
+  {num:'02',iconSvg:'<circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/>',nameKey:'s2N',descKey:'s2D'},
+  {num:'03',iconSvg:'<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>',nameKey:'s3N',descKey:'s3D'},
+  {num:'04',iconSvg:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',nameKey:'s4N',descKey:'s4D'},
+  {num:'05',iconSvg:'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',nameKey:'s5N',descKey:'s5D'},
+  {num:'06',iconSvg:'<circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/>',nameKey:'s6N',descKey:'s6D'}
+];
 </script>
 
-<!-- ══════════════════════════════
-     CORE JS
-══════════════════════════════ -->
+<!-- CORE JS -->
 <script>
 (function(){
 'use strict';
 
-/* ── Auto-detect browser language ── */
 function detectLang(){
-  var saved = localStorage.getItem('preferredLang');
-  if(saved && I18N[saved]) return saved;
-  var nav = (navigator.language || navigator.userLanguage || 'lv').toLowerCase();
+  var saved=localStorage.getItem('preferredLang');
+  if(saved&&I18N[saved]) return saved;
+  var nav=(navigator.language||'lv').toLowerCase();
   if(nav.startsWith('ru')) return 'ru';
   if(nav.startsWith('en')) return 'en';
   return 'lv';
 }
+var currentLang=detectLang();
 
-var currentLang = detectLang();
+/* Nav scroll */
+var nav=document.getElementById('main-nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>50);},{passive:true});
 
-/* ── Nav scroll ── */
-var nav = document.getElementById('main-nav');
-window.addEventListener('scroll',function(){
-  nav.classList.toggle('scrolled',window.scrollY>50);
-},{passive:true});
-
-/* ── Mobile menu ── */
-var hb = document.getElementById('hamburger');
-var mm = document.getElementById('mobileMenu');
-
+/* Mobile menu */
+var hb=document.getElementById('hamburger');
+var mm=document.getElementById('mobileMenu');
 function closeMobile(){
-  hb.classList.remove('open');
-  mm.classList.remove('open');
-  hb.setAttribute('aria-expanded','false');
-  hb.setAttribute('aria-label','Atvērt izvēlni');
-  document.body.style.overflow='';
+  hb.classList.remove('open');mm.classList.remove('open');
+  hb.setAttribute('aria-expanded','false');document.body.style.overflow='';
 }
-window.closeMobile = closeMobile;
-
+window.closeMobile=closeMobile;
 hb.addEventListener('click',function(){
-  var open = hb.classList.toggle('open');
+  var open=hb.classList.toggle('open');
   mm.classList.toggle('open',open);
   hb.setAttribute('aria-expanded',open?'true':'false');
   document.body.style.overflow=open?'hidden':'';
-  if(open){var fl=mm.querySelector('a');if(fl)fl.focus();}
 });
-mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMobile);});
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape'&&mm.classList.contains('open')){closeMobile();hb.focus();}
 });
 
-/* ── Testimonials Slider ── */
+/* ════════════════════════════════
+   SERVICES INFINITE CAROUSEL
+   Rotē pa apli — aiz pēdējā nāk pirmais, pirms pirmā ir pēdējais
+════════════════════════════════ */
 (function(){
-  var track = document.getElementById('testi-track');
-  var dotsContainer = document.getElementById('sl-dots');
-  var slides = track ? track.querySelectorAll('.testi-slide') : [];
-  if(!slides.length) return;
+  var track=document.getElementById('srv-carousel-track');
+  var dotsC=document.getElementById('srv-dots');
+  if(!track) return;
 
-  var current = 0;
-  var perView = 1;
-  var total = slides.length;
+  var total=SERVICES_DATA.length; // 6
+  var perView=3;
+  var current=0; // logical index 0..5
   var autoTimer;
 
   function getPerView(){
-    return window.innerWidth > 1100 ? 3 : window.innerWidth > 860 ? 2 : 1;
+    return window.innerWidth>1100?3:window.innerWidth>640?2:1;
+  }
+
+  /* Build slides */
+  function buildSlides(lang){
+    var tx=I18N[lang]||I18N.lv;
+    track.innerHTML='';
+    SERVICES_DATA.forEach(function(s,i){
+      var slide=document.createElement('div');
+      slide.className='srv-slide';
+      slide.setAttribute('data-idx',i);
+      slide.innerHTML='<div class="srv-card">'+
+        '<span class="srv-num">0'+(i+1)+'</span>'+
+        '<div class="srv-icon" aria-hidden="true"><svg viewBox="0 0 24 24">'+s.iconSvg+'</svg></div>'+
+        '<h3 class="srv-name">'+tx[s.nameKey]+'</h3>'+
+        '<p class="srv-desc">'+tx[s.descKey]+'</p>'+
+        '<button class="srv-cta" onclick="goToBooking()" aria-label="'+tx.srvCta+'">'+
+          tx.srvCta+' <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'+
+        '</button>'+
+      '</div>';
+      track.appendChild(slide);
+    });
+    // Duplicate first and last groups for infinite illusion
+    // (simple infinite: we clone beginning/end slides)
+    refreshSlideWidths();
+    goTo(current,false);
+  }
+
+  function refreshSlideWidths(){
+    perView=getPerView();
+    var slides=track.querySelectorAll('.srv-slide');
+    var w=(100/perView)+'%';
+    slides.forEach(function(s){s.style.flex='0 0 '+w;s.style.maxWidth=w;});
   }
 
   function numPages(){
-    return Math.ceil(total / perView);
+    return Math.ceil(total/perView);
   }
 
   function buildDots(){
-    dotsContainer.innerHTML='';
-    var pages = numPages();
-    for(var i=0;i<pages;i++){
+    dotsC.innerHTML='';
+    var p=numPages();
+    for(var i=0;i<p;i++){
       var d=document.createElement('button');
-      d.className='slider-dot'+(i===0?' active':'');
-      d.setAttribute('role','tab');
+      d.className='srv-dot'+(i===0?' active':'');
       d.setAttribute('aria-label','Lappuse '+(i+1));
-      d.setAttribute('aria-selected',i===0?'true':'false');
-      (function(idx){d.addEventListener('click',function(){goTo(idx);});})(i);
-      dotsContainer.appendChild(d);
+      (function(idx){d.addEventListener('click',function(){goTo(idx*perView);});})(i);
+      dotsC.appendChild(d);
     }
   }
 
-  function goTo(page){
-    var pages=numPages();
-    current=Math.max(0,Math.min(page,pages-1));
-    var offset = current * perView * (100/total);
-    track.style.transform='translateX(-'+offset+'%)';
-    dotsContainer.querySelectorAll('.slider-dot').forEach(function(d,i){
-      d.classList.toggle('active',i===current);
-      d.setAttribute('aria-selected',i===current?'true':'false');
+  /* goTo: logical slide index (0-based), wraps around */
+  function goTo(idx,animate){
+    if(animate===undefined) animate=true;
+    current=((idx%total)+total)%total; // wrap
+    var pct=(current/total)*100;
+    if(!animate){
+      track.style.transition='none';
+    } else {
+      track.style.transition='transform .45s cubic-bezier(.25,.46,.45,.94)';
+    }
+    track.style.transform='translateX(-'+pct+'%)';
+
+    // Update dots
+    var activePage=Math.floor(current/perView);
+    dotsC.querySelectorAll('.srv-dot').forEach(function(d,i){
+      d.classList.toggle('active',i===activePage);
     });
     clearAuto();startAuto();
   }
 
-  function next(){goTo((current+1)%numPages());}
-  function prev(){goTo((current-1+numPages())%numPages());}
-
-  function startAuto(){autoTimer=setInterval(next,5000);}
+  function next(){goTo(current+perView);}
+  function prev(){goTo(current-perView);}
+  function startAuto(){autoTimer=setInterval(next,4000);}
   function clearAuto(){clearInterval(autoTimer);}
 
-  document.getElementById('sl-next').addEventListener('click',function(){next();});
-  document.getElementById('sl-prev').addEventListener('click',function(){prev();});
+  document.getElementById('srv-next').addEventListener('click',function(){next();});
+  document.getElementById('srv-prev').addEventListener('click',function(){prev();});
 
-  /* Touch swipe */
+  /* Touch */
   var startX=0;
   track.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;},{passive:true});
   track.addEventListener('touchend',function(e){
@@ -895,63 +872,120 @@ document.addEventListener('keydown',function(e){
     if(Math.abs(dx)>40){dx<0?next():prev();}
   },{passive:true});
 
-  function init(){
-    perView=getPerView();
-    /* Set slide widths via track */
-    slides.forEach(function(s){s.style.flex='0 0 '+(100/total*(total/perView>total?1:1))+'%';});
-    /* Actually set correctly */
-    slides.forEach(function(s){s.style.flex='0 0 '+(100/total)+'%';});
-    buildDots();
-    goTo(0);
-    startAuto();
-  }
-
-  window.addEventListener('resize',function(){
-    var p=getPerView();
-    if(p!==perView){perView=p;buildDots();goTo(0);}
-  });
-
-  init();
   /* Pause on hover */
   track.parentElement.addEventListener('mouseenter',clearAuto);
   track.parentElement.addEventListener('mouseleave',startAuto);
+
+  window.addEventListener('resize',function(){
+    var p=getPerView();
+    if(p!==perView){perView=p;refreshSlideWidths();buildDots();goTo(current,false);}
+  });
+
+  /* Initial build */
+  buildSlides(currentLang);
+  buildDots();
+  startAuto();
+
+  /* Expose rebuild for lang switch */
+  window._rebuildServices=function(lang){buildSlides(lang);buildDots();};
 })();
 
-/* ── Reveal on scroll ── */
+/* Scroll to booking from service card */
+window.goToBooking=function(){
+  var el=document.getElementById('booking');
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+};
+
+/* ════════════════════════════════
+   TESTIMONIALS SLIDER (circular)
+════════════════════════════════ */
+(function(){
+  var track=document.getElementById('testi-track');
+  var dotsC=document.getElementById('sl-dots');
+  if(!track) return;
+  var slides=track.querySelectorAll('.testi-slide');
+  var total=slides.length;
+  if(!total) return;
+  var current=0,perView=1,autoTimer;
+
+  function getPerView(){
+    return window.innerWidth>1100?3:window.innerWidth>860?2:1;
+  }
+
+  function numPages(){return Math.ceil(total/perView);}
+
+  function buildDots(){
+    dotsC.innerHTML='';
+    for(var i=0;i<numPages();i++){
+      var d=document.createElement('button');
+      d.className='slider-dot'+(i===0?' active':'');
+      d.setAttribute('role','tab');
+      d.setAttribute('aria-label','Lappuse '+(i+1));
+      (function(idx){d.addEventListener('click',function(){goTo(idx*perView);});})(i);
+      dotsC.appendChild(d);
+    }
+  }
+
+  function goTo(idx){
+    current=((idx%total)+total)%total;
+    var pct=(current/total)*100;
+    track.style.transition='transform .45s cubic-bezier(.25,.46,.45,.94)';
+    track.style.transform='translateX(-'+pct+'%)';
+    var activePage=Math.floor(current/perView);
+    dotsC.querySelectorAll('.slider-dot').forEach(function(d,i){
+      d.classList.toggle('active',i===activePage);
+    });
+    clearAuto();startAuto();
+  }
+
+  function next(){goTo(current+perView);}
+  function prev(){goTo(current-perView);}
+  function startAuto(){autoTimer=setInterval(next,5500);}
+  function clearAuto(){clearInterval(autoTimer);}
+
+  function init(){
+    perView=getPerView();
+    var w=(100/total)+'%';
+    slides.forEach(function(s){s.style.flex='0 0 '+w;s.style.maxWidth=w;});
+    buildDots();goTo(0);startAuto();
+  }
+
+  document.getElementById('sl-next').addEventListener('click',function(){next();});
+  document.getElementById('sl-prev').addEventListener('click',function(){prev();});
+  track.addEventListener('touchstart',function(e){var sx=e.touches[0].clientX;
+    track.addEventListener('touchend',function h(e2){var dx=e2.changedTouches[0].clientX-sx;if(Math.abs(dx)>40){dx<0?next():prev();}track.removeEventListener('touchend',h);},{passive:true});
+  },{passive:true});
+  track.parentElement.addEventListener('mouseenter',clearAuto);
+  track.parentElement.addEventListener('mouseleave',startAuto);
+  window.addEventListener('resize',function(){var p=getPerView();if(p!==perView){perView=p;var w2=(100/total)+'%';slides.forEach(function(s){s.style.flex='0 0 '+w2;s.style.maxWidth=w2;});buildDots();goTo(0);}});
+  init();
+})();
+
+/* Reveal on scroll */
 if('IntersectionObserver' in window){
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(x){if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target);}});
   },{threshold:.06});
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
-}else{
-  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('vis');});
-}
+}else{document.querySelectorAll('.rv').forEach(function(el){el.classList.add('vis');});}
 
-/* ── Toast ── */
+/* Toast */
 window.showToast=function(msg,duration){
   var t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('show');
   setTimeout(function(){t.classList.remove('show');},duration||4000);
 };
 
-/* ── Language switcher ── */
+/* Language switcher */
 window.setLang=function(lang){
   if(!I18N[lang]) return;
   currentLang=lang;
   localStorage.setItem('preferredLang',lang);
   document.getElementById('html-root').lang=lang;
-
   ['lv','en','ru'].forEach(function(l){
     var b=document.getElementById('btn-'+l);
-    if(!b) return;
-    b.classList.toggle('active',l===lang);
-    b.setAttribute('aria-pressed',l===lang?'true':'false');
+    if(b){b.classList.toggle('active',l===lang);b.setAttribute('aria-pressed',l===lang?'true':'false');}
   });
-  document.querySelectorAll('.mm-lang .lang-btn').forEach(function(b){
-    var m=(b.getAttribute('onclick')||'').match(/setLang\('(\w+)'\)/);
-    if(m) b.classList.toggle('active',m[1]===lang);
-  });
-
   var tx=I18N[lang];
   document.querySelectorAll('[data-i18n]').forEach(function(el){
     var key=el.getAttribute('data-i18n');
@@ -960,20 +994,18 @@ window.setLang=function(lang){
     if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){el.placeholder=val;}
     else{el.textContent=val;}
   });
-
+  /* Rebuild services carousel with new lang */
+  if(window._rebuildServices) window._rebuildServices(lang);
   if(window._updateBookingLang) window._updateBookingLang(lang);
 };
 
 window.getCurrentLang=function(){return currentLang;};
-
-function init(){setLang(currentLang);}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
-else{init();}
-
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){setLang(currentLang);});}
+else{setLang(currentLang);}
 })();
 </script>
 
-<!-- ── Supabase init ── -->
+<!-- Supabase init -->
 <script>
 (function(){
   try{
@@ -981,13 +1013,11 @@ else{init();}
       'https://ibnvqljclchzlbvfwugj.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlibnZxbGpjbGNoemxidmZ3dWdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEyNDM4MjIsImV4cCI6MjA4NjgxOTgyMn0.oQqSvLbbDcWDpgJdDYde11sd6SX96snBIYs1FzfcCvo'
     );
-  }catch(e){console.warn('Supabase init failed:',e);}
+  }catch(e){console.warn('Supabase:',e);}
 })();
 </script>
 
-<!-- ══════════════════════════════
-     BOOKING REACT APP
-══════════════════════════════ -->
+<!-- BOOKING REACT APP -->
 <script type="text/babel">
 (function(){
 const{useState,useEffect,useCallback}=React;
@@ -1012,7 +1042,7 @@ const TX={
     fTopic:'Konsultācijas tēma *',fTopicPh:'Izvēlieties tēmu...',
     fNotes:'Papildu informācija (neobligāti)',fNotesPh:'Īss jautājuma apraksts...',
     submit:'Rezervēt konsultāciju',submitting:'Apstrādā...',
-    okTitle:n=>`Paldies, ${n}!`,okSub:'Jūsu konsultācija ir rezervēta. Sazināsimies 24 stundu laikā, lai apstiprinātu.',
+    okTitle:n=>`Paldies, ${n}!`,okSub:'Jūsu konsultācija ir rezervēta. Sazināsimies 24 stundu laikā.',
     newBook:'Jauna rezervācija',avail:'Brīvs',full:'Aizņemts',sel:'Izvēlēts',
     timeLabel:'Konsultācijas laiks (60 min)',
     weekdays:['P','O','T','C','Pk','S','Sv'],
@@ -1028,12 +1058,12 @@ const TX={
     fTopic:'Consultation topic *',fTopicPh:'Select a topic...',
     fNotes:'Additional information (optional)',fNotesPh:'Brief description of your matter...',
     submit:'Book consultation',submitting:'Processing...',
-    okTitle:n=>`Thank you, ${n}!`,okSub:'Your consultation has been booked. We will contact you within 24 hours to confirm.',
+    okTitle:n=>`Thank you, ${n}!`,okSub:'Your consultation has been booked. We will contact you within 24 hours.',
     newBook:'New booking',avail:'Available',full:'Full',sel:'Selected',
     timeLabel:'Consultation time (60 min)',
     weekdays:['Mo','Tu','We','Th','Fr','Sa','Su'],
     contact24:'We will contact you within 24h · office@exvero.lv',
-    err:{date:'Please select a date.',time:'Please select a time.',topic:'Please select a topic.',name:'Please enter your full name.',email:'Please enter a valid email address.',phone:'Please enter a phone number.',server:'An error occurred. Contact: office@exvero.lv',noSb:'Service unavailable. Please contact: office@exvero.lv'}
+    err:{date:'Please select a date.',time:'Please select a time.',topic:'Please select a topic.',name:'Please enter your full name.',email:'Please enter a valid email.',phone:'Please enter a phone number.',server:'An error occurred. Contact: office@exvero.lv',noSb:'Service unavailable. Please contact: office@exvero.lv'}
   },
   ru:{
     calTitle:'Выберите дату',formTitle:'Контактная информация',
@@ -1044,7 +1074,7 @@ const TX={
     fTopic:'Тема консультации *',fTopicPh:'Выберите тему...',
     fNotes:'Дополнительная информация (необязательно)',fNotesPh:'Краткое описание вопроса...',
     submit:'Записаться на консультацию',submitting:'Обработка...',
-    okTitle:n=>`Спасибо, ${n}!`,okSub:'Ваша консультация забронирована. Мы свяжемся с вами в течение 24 часов.',
+    okTitle:n=>`Спасибо, ${n}!`,okSub:'Ваша консультация забронирована. Мы свяжемся в течение 24 часов.',
     newBook:'Новая запись',avail:'Свободно',full:'Занято',sel:'Выбрано',
     timeLabel:'Время консультации (60 мин)',
     weekdays:['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],
@@ -1078,10 +1108,7 @@ function BookingApp(){
   const topics=TOPICS[lang]||TOPICS.lv;
 
   useEffect(()=>{
-    window._updateBookingLang=l=>{
-      setLang(l);
-      setForm(p=>({...p,topic:''}));
-    };
+    window._updateBookingLang=l=>{setLang(l);setForm(p=>({...p,topic:''}));};
     return()=>{window._updateBookingLang=null;};
   },[]);
 
@@ -1092,10 +1119,8 @@ function BookingApp(){
       const{data,error}=await window._sb.from('legal_consultations').select('consult_date,consult_time');
       if(error) throw error;
       setBookings(data||[]);
-    }catch(e){
-      console.warn('Supabase:',e);
-      setBookings([]);setLoadErr(true);
-    }finally{setLoading(false);}
+    }catch(e){console.warn('Supabase:',e);setBookings([]);setLoadErr(true);}
+    finally{setLoading(false);}
   },[]);
 
   useEffect(()=>{fetchBookings();},[fetchBookings]);
@@ -1129,36 +1154,20 @@ function BookingApp(){
     if(!window._sb){setErr(tx.err.noSb);return;}
     setSubmitting(true);setErr(null);
     try{
-      const payload={
-        consult_date:selDate,consult_time:selTime,
-        client_name:form.name.trim(),company:form.company.trim()||null,
-        client_email:form.email.trim().toLowerCase(),client_phone:form.phone.trim(),
-        topic:form.topic,notes:form.notes.trim()||null,lang
-      };
+      const payload={consult_date:selDate,consult_time:selTime,client_name:form.name.trim(),company:form.company.trim()||null,client_email:form.email.trim().toLowerCase(),client_phone:form.phone.trim(),topic:form.topic,notes:form.notes.trim()||null,lang};
       const{error:dbErr}=await window._sb.from('legal_consultations').insert([payload]);
       if(dbErr) throw dbErr;
       try{
-        await emailjs.send('service_d52bopv','template_azl3ud8',{
-          to_email:form.email,client_name:form.name,client_email:form.email,
-          client_phone:form.phone,booking_date:selDate,host_name:'Ex Vero Law Office',
-          event_type:form.topic,guest_count:1,
-          notes:`${selTime}${form.company?'. '+form.company:''}${form.notes?'. '+form.notes:''}`
-        });
+        await emailjs.send('service_d52bopv','template_azl3ud8',{to_email:form.email,client_name:form.name,client_email:form.email,client_phone:form.phone,booking_date:selDate,host_name:'Ex Vero Law Office',event_type:form.topic,guest_count:1,notes:`${selTime}${form.company?'. '+form.company:''}${form.notes?'. '+form.notes:''}`});
       }catch(e){console.warn('Email:',e);}
       await fetchBookings();
       setDone(true);
       window.showToast(lang==='ru'?'Запись успешна!':lang==='en'?'Booking confirmed!':'Rezervācija veiksmīga!');
-    }catch(e){
-      console.error(e);setErr(tx.err.server);
-    }finally{setSubmitting(false);}
+    }catch(e){console.error(e);setErr(tx.err.server);}
+    finally{setSubmitting(false);}
   };
 
-  const reset=()=>{
-    setDone(false);setSelDate(null);setSelTime(null);
-    setForm({name:'',company:'',email:'',phone:'',topic:'',notes:''});
-    setTouched({});setErr(null);
-  };
-
+  const reset=()=>{setDone(false);setSelDate(null);setSelTime(null);setForm({name:'',company:'',email:'',phone:'',topic:'',notes:''});setTouched({});setErr(null);};
   const touch=f=>setTouched(p=>({...p,[f]:true}));
   const field=(f,v)=>setForm(p=>({...p,[f]:v}));
 
@@ -1169,22 +1178,15 @@ function BookingApp(){
   const canPrev=new Date(calY,calM,1)>new Date(tod.getFullYear(),tod.getMonth(),1);
   const monthLbl=viewDate.toLocaleDateString(lang==='lv'?'lv-LV':lang==='ru'?'ru-RU':'en-GB',{month:'long',year:'numeric'});
 
-  if(loading) return(
-    <div className="loading-wrap" role="status" aria-live="polite">
-      <div className="big-spin" aria-hidden="true"/>
-    </div>
-  );
+  if(loading) return(<div className="loading-wrap" role="status"><div className="big-spin" aria-hidden="true"/></div>);
 
   if(done) return(
     <div className="ok-box" role="alert">
-      <div style={{fontSize:'2.4rem',marginBottom:'1rem',color:'var(--gold)'}} aria-hidden="true">✓</div>
+      <div style={{fontSize:'2.4rem',marginBottom:'1rem',color:'var(--gold)'}}>✓</div>
       <h2>{tx.okTitle((form.name.split(' ')[0])||form.name)}</h2>
       <p>{tx.okSub}</p>
       <p style={{color:'var(--gold)',fontSize:'.82rem',margin:'.8rem 0 1.8rem'}}>{selDate} · {selTime} · {form.topic}</p>
-      <button onClick={reset}
-        style={{background:'transparent',border:'1px solid var(--border2)',color:'var(--gray-l)',padding:'.6rem 1.4rem',borderRadius:'2px',cursor:'pointer',fontFamily:"'Outfit',sans-serif",fontSize:'.78rem',letterSpacing:'.06em',textTransform:'uppercase'}}>
-        {tx.newBook}
-      </button>
+      <button onClick={reset} style={{background:'transparent',border:'1px solid var(--border2)',color:'var(--gray-l)',padding:'.6rem 1.4rem',borderRadius:'2px',cursor:'pointer',fontFamily:"'Outfit',sans-serif",fontSize:'.78rem',letterSpacing:'.06em',textTransform:'uppercase'}}>{tx.newBook}</button>
     </div>
   );
 
@@ -1192,144 +1194,91 @@ function BookingApp(){
 
   return(
     <div className="bk-grid">
-      {/* CALENDAR */}
       <div className="b-panel">
         <div className="panel-ttl">📅 {tx.calTitle}</div>
-
-        {loadErr&&(
-          <div className="err-box" style={{marginBottom:'1rem'}}>
-            ⚠ {lang==='ru'?'Ошибка загрузки.':lang==='en'?'Load error.':'Ielādes kļūda.'}
-            <button onClick={fetchBookings} style={{marginLeft:'auto',background:'none',border:'1px solid rgba(224,112,112,.4)',color:'#E07070',borderRadius:'2px',padding:'.15rem .5rem',cursor:'pointer',fontSize:'.7rem',fontFamily:'Outfit,sans-serif'}}>↻</button>
-          </div>
-        )}
-
+        {loadErr&&(<div className="err-box" style={{marginBottom:'1rem'}}>⚠ {lang==='ru'?'Ошибка загрузки.':lang==='en'?'Load error.':'Ielādes kļūda.'}<button onClick={fetchBookings} style={{marginLeft:'auto',background:'none',border:'1px solid rgba(224,112,112,.4)',color:'#E07070',borderRadius:'2px',padding:'.15rem .5rem',cursor:'pointer',fontSize:'.7rem',fontFamily:'Outfit,sans-serif'}}>↻</button></div>)}
         <div className="cal-hdr">
-          <button className="cal-btn" onClick={()=>setViewDate(p=>new Date(p.getFullYear(),p.getMonth()-1,1))}
-            disabled={!canPrev} aria-label="Iepriekšējais mēnesis">‹</button>
+          <button className="cal-btn" onClick={()=>setViewDate(p=>new Date(p.getFullYear(),p.getMonth()-1,1))} disabled={!canPrev} aria-label="Iepriekšējais mēnesis">‹</button>
           <div className="cal-month" aria-live="polite">{monthLbl}</div>
-          <button className="cal-btn" onClick={()=>setViewDate(p=>new Date(p.getFullYear(),p.getMonth()+1,1))}
-            aria-label="Nākamais mēnesis">›</button>
+          <button className="cal-btn" onClick={()=>setViewDate(p=>new Date(p.getFullYear(),p.getMonth()+1,1))} aria-label="Nākamais mēnesis">›</button>
         </div>
-
-        <div className="cal-grid" role="grid" aria-label={tx.calTitle}>
-          <div role="row" style={{display:'contents'}}>
-            {tx.weekdays.map(d=><div key={d} className="cal-hd" role="columnheader">{d}</div>)}
-          </div>
+        <div className="cal-grid" role="grid">
+          <div role="row" style={{display:'contents'}}>{tx.weekdays.map(d=><div key={d} className="cal-hd" role="columnheader">{d}</div>)}</div>
           {Array(fdow).fill(null).map((_,i)=><div key={'e'+i} className="cal-day empty" aria-hidden="true"/>)}
           {Array(dim).fill(null).map((_,i)=>{
-            const day=i+1;
-            const dt=new Date(calY,calM,day);
-            const past=dt<addDays(today0(),MIN_DAYS);
-            const wk=dt.getDay()===0||dt.getDay()===6;
-            const ds=fmtDate(calY,calM,day);
-            const full=onDate(ds).length>=MAX_PER_DAY;
-            const isSel=selDate===ds;
-            const avail=isAvail(calY,calM,day);
-            const click=!past&&!wk&&avail&&!full;
+            const day=i+1;const dt=new Date(calY,calM,day);
+            const past=dt<addDays(today0(),MIN_DAYS);const wk=dt.getDay()===0||dt.getDay()===6;
+            const ds=fmtDate(calY,calM,day);const full=onDate(ds).length>=MAX_PER_DAY;
+            const isSel=selDate===ds;const avail=isAvail(calY,calM,day);const click=!past&&!wk&&avail&&!full;
             let cls='cal-day';
             if(past||wk) cls+=' past';
             else if(isSel) cls+=' sel';
             else if(full) cls+=' full';
             else if(avail) cls+=' avail';
             else cls+=' disabled';
-            return(
-              <div key={day} className={cls} role="gridcell"
-                aria-label={`${day}${isSel?' — '+tx.sel:avail&&!full?' — '+tx.avail:full?' — '+tx.full:''}`}
-                aria-selected={isSel?'true':undefined}
-                tabIndex={click?0:-1}
-                onClick={()=>{if(click){setSelDate(ds);setSelTime(null);}}}
-                onKeyDown={e=>{if(click&&(e.key==='Enter'||e.key===' ')){e.preventDefault();setSelDate(ds);setSelTime(null);}}}>
-                {day}
-              </div>
-            );
+            return(<div key={day} className={cls} role="gridcell" tabIndex={click?0:-1}
+              onClick={()=>{if(click){setSelDate(ds);setSelTime(null);}}}
+              onKeyDown={e=>{if(click&&(e.key==='Enter'||e.key===' ')){e.preventDefault();setSelDate(ds);setSelTime(null);}}}>
+              {day}</div>);
           })}
         </div>
-
         <div className="legend">
           <div className="leg-item"><div className="leg-dot" style={{background:'rgba(46,125,82,.4)',border:'1px solid rgba(46,125,82,.6)'}}/>{tx.avail}</div>
           <div className="leg-item"><div className="leg-dot" style={{background:'rgba(139,46,46,.3)',border:'1px solid rgba(139,46,46,.5)'}}/>{tx.full}</div>
           <div className="leg-item"><div className="leg-dot" style={{background:'var(--gold)'}}/>{tx.sel}</div>
         </div>
-
         {selDate&&(
           <div style={{marginTop:'1.2rem'}}>
             <label className="f-label" id="time-lbl">{tx.timeLabel}</label>
             <div className="time-grid" role="group" aria-labelledby="time-lbl">
-              {TIMES.map(t=>{
-                const tk=taken.includes(t),isSel=selTime===t;
-                return(
-                  <button key={t}
-                    className={'time-chip'+(isSel?' sel':'')+(tk?' taken':'')}
-                    onClick={()=>{if(!tk)setSelTime(t);}}
-                    disabled={tk}
-                    aria-pressed={isSel?'true':'false'}
-                    aria-label={`${t}${tk?' — '+tx.full:''}`}>
-                    {t}
-                  </button>
-                );
+              {TIMES.map(t=>{const tk=taken.includes(t),isSel=selTime===t;
+                return(<button key={t} className={'time-chip'+(isSel?' sel':'')+(tk?' taken':'')}
+                  onClick={()=>{if(!tk)setSelTime(t);}} disabled={tk} aria-pressed={isSel?'true':'false'}>{t}</button>);
               })}
             </div>
           </div>
         )}
       </div>
 
-      {/* FORM */}
       <div className="b-panel">
         <div className="panel-ttl">📋 {tx.formTitle}</div>
-
         {!selDate&&<div className="info-chip" role="note">📅 {tx.noDate}</div>}
         {selDate&&selTime&&<div className="sel-chip" role="status">✓ {tx.selDT(selDate,selTime)}</div>}
         {selDate&&!selTime&&<div className="info-chip" role="note">🕐 {tx.noTime}</div>}
-        {err&&<div className="err-box" role="alert" aria-live="assertive">⚠ {err}</div>}
-
+        {err&&<div className="err-box" role="alert">⚠ {err}</div>}
         <div className="f-row">
           <div className="f-group">
             <label className="f-label" htmlFor="bk-name">{tx.fName}</label>
-            <input id="bk-name" type="text" className="f-input" value={form.name} maxLength={MAX_NAME}
-              onChange={e=>field('name',e.target.value)} onBlur={()=>touch('name')}
-              placeholder={tx.fNamePh} autoComplete="name" aria-required="true"
-              aria-invalid={touched.name&&form.name.trim().length<2?'true':'false'}/>
+            <input id="bk-name" type="text" className="f-input" value={form.name} maxLength={MAX_NAME} onChange={e=>field('name',e.target.value)} onBlur={()=>touch('name')} placeholder={tx.fNamePh} autoComplete="name" aria-required="true"/>
           </div>
           <div className="f-group">
             <label className="f-label" htmlFor="bk-co">{tx.fCompany}</label>
-            <input id="bk-co" type="text" className="f-input" value={form.company} maxLength={MAX_NAME}
-              onChange={e=>field('company',e.target.value)} placeholder={tx.fCompanyPh} autoComplete="organization"/>
+            <input id="bk-co" type="text" className="f-input" value={form.company} maxLength={MAX_NAME} onChange={e=>field('company',e.target.value)} placeholder={tx.fCompanyPh} autoComplete="organization"/>
           </div>
         </div>
         <div className="f-row">
           <div className="f-group">
             <label className="f-label" htmlFor="bk-email">{tx.fEmail}</label>
-            <input id="bk-email" type="email" className="f-input" value={form.email} maxLength={MAX_EMAIL}
-              onChange={e=>field('email',e.target.value)} onBlur={()=>touch('email')}
-              placeholder={tx.fEmailPh} autoComplete="email" inputMode="email" aria-required="true"
-              aria-invalid={touched.email&&!isEmail(form.email)?'true':'false'}/>
+            <input id="bk-email" type="email" className="f-input" value={form.email} maxLength={MAX_EMAIL} onChange={e=>field('email',e.target.value)} onBlur={()=>touch('email')} placeholder={tx.fEmailPh} autoComplete="email" inputMode="email" aria-required="true"/>
           </div>
           <div className="f-group">
             <label className="f-label" htmlFor="bk-phone">{tx.fPhone}</label>
-            <input id="bk-phone" type="tel" className="f-input" value={form.phone} maxLength={MAX_PHONE}
-              onChange={e=>field('phone',e.target.value)} onBlur={()=>touch('phone')}
-              placeholder={tx.fPhonePh} autoComplete="tel" inputMode="tel" aria-required="true"
-              aria-invalid={touched.phone&&!isPhone(form.phone)?'true':'false'}/>
+            <input id="bk-phone" type="tel" className="f-input" value={form.phone} maxLength={MAX_PHONE} onChange={e=>field('phone',e.target.value)} onBlur={()=>touch('phone')} placeholder={tx.fPhonePh} autoComplete="tel" inputMode="tel" aria-required="true"/>
           </div>
         </div>
         <div className="f-group">
           <label className="f-label" htmlFor="bk-topic">{tx.fTopic}</label>
-          <select id="bk-topic" className="f-select" value={form.topic}
-            onChange={e=>field('topic',e.target.value)} onBlur={()=>touch('topic')}
-            aria-required="true" aria-invalid={touched.topic&&!form.topic?'true':'false'}>
+          <select id="bk-topic" className="f-select" value={form.topic} onChange={e=>field('topic',e.target.value)} onBlur={()=>touch('topic')} aria-required="true">
             <option value="">{tx.fTopicPh}</option>
             {topics.map((t,i)=><option key={i} value={t}>{t}</option>)}
           </select>
         </div>
         <div className="f-group">
           <label className="f-label" htmlFor="bk-notes">{tx.fNotes}</label>
-          <textarea id="bk-notes" className="f-area" value={form.notes} maxLength={MAX_NOTES}
-            onChange={e=>field('notes',e.target.value)} placeholder={tx.fNotesPh}/>
+          <textarea id="bk-notes" className="f-area" value={form.notes} maxLength={MAX_NOTES} onChange={e=>field('notes',e.target.value)} placeholder={tx.fNotesPh}/>
           <div style={{textAlign:'right',fontSize:'.63rem',color:'var(--gray)',marginTop:'.2rem'}}>{form.notes.length}/{MAX_NOTES}</div>
         </div>
-
-        <button className="sub-btn" onClick={submit}
-          disabled={submitting||!selDate||!selTime} aria-busy={submitting?'true':'false'}>
+        <button className="sub-btn" onClick={submit} disabled={submitting||!selDate||!selTime} aria-busy={submitting?'true':'false'}>
           {submitting?<><span className="spin" aria-hidden="true"/>{tx.submitting}</>:tx.submit}
         </button>
         <p style={{fontSize:'.67rem',color:'var(--gray)',textAlign:'center',marginTop:'.7rem',letterSpacing:'.04em'}}>{tx.contact24}</p>
@@ -1340,12 +1289,8 @@ function BookingApp(){
 
 const el=document.getElementById('booking-app');
 if(el){
-  try{
-    const root=ReactDOM.createRoot(el);
-    root.render(<BookingApp/>);
-  }catch(e){
-    ReactDOM.render(<BookingApp/>,el);
-  }
+  try{const root=ReactDOM.createRoot(el);root.render(<BookingApp/>);}
+  catch(e){ReactDOM.render(<BookingApp/>,el);}
 }
 })();
 </script>
