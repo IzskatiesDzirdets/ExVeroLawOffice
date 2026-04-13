@@ -1293,4 +1293,23 @@ function BookingApp(){
         <button className="sub-btn" onClick={submit} disabled={submitting||!selDate||!selTime} aria-busy={submitting?'true':'false'}>
           {submitting?<><span className="spin" aria-hidden="true"/>{tx.submitting}</>:tx.submit}
         </button>
-        <p style={{fontSize:'.67rem',color:'var(--gray)',textAlign:'center',marginTop:'.7rem',letterSp
+        <p style={{fontSize:'.67rem',color:'var(--gray)',textAlign:'center',marginTop:'.7rem',letterSpacing:'.04em'}}>{tx.contact24}</p>
+      </div>
+    </div>
+  );
+}
+
+const el=document.getElementById('booking-app');
+if(el){
+  try{
+    const root=ReactDOM.createRoot(el);
+    root.render(<BookingApp/>);
+  }catch(e){
+    ReactDOM.render(<BookingApp/>,el);
+  }
+}
+})();
+</script>
+
+</body>
+</html>
