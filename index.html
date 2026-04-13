@@ -570,7 +570,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
         </div>
         <div class="c-item">
           <div class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <div><h3 data-i18n="ctEmail">E-pasts</h3><a href="mailto:office@exvero.lv">office@exvero.lv</a></div>
+          <div><h3 data-i18n="ctEmail">E-pasts</h3><a href="/cdn-cgi/l/email-protection#1a757c7c73797f5a7f626c7f687534766c"><span class="__cf_email__" data-cfemail="98f7fefef1fbfdd8fde0eefdeaf7b6f4ee">[email&#160;protected]</span></a></div>
         </div>
         <div class="c-item">
           <div class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
@@ -588,7 +588,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
       <div class="map-box">
         <h3>Ex Vero Law Office</h3>
         <p data-i18n="mapDesc">Juridiskais birojs ar 18 gadu pieredzi. Mēs sniedzam profesionālus juridiskos pakalpojumus privātpersonām un uzņēmumiem.</p>
-        <a href="mailto:office@exvero.lv" class="map-btn">
+        <a href="/cdn-cgi/l/email-protection#a7c8c1c1cec4c2e7c2dfd1c2d5c889cbd1" class="map-btn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           <span data-i18n="mapBtn">Rakstīt e-pastu</span>
         </a>
@@ -613,7 +613,7 @@ footer{background:var(--dark2);border-top:1px solid var(--border);padding:1.8rem
 </footer>
 
 <!-- TRANSLATIONS -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var I18N = {
   lv:{
     lawOffice:'Law Office',navAbout:'Par mums',navServices:'Pakalpojumi',navConsult:'Konsultācija',navContact:'Kontakti',navBook:'Rezervēt',
@@ -770,6 +770,12 @@ document.addEventListener('keydown',function(e){
   if(e.key==='Escape'&&mm.classList.contains('open')){closeMobile();hb.focus();}
 });
 
+/* Scroll to booking — defined early */
+window.goToBooking=function(){
+  var el=document.getElementById('booking');
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+};
+
 /* ════════════════════════════════
    SERVICES INFINITE CAROUSEL
    Rotē pa apli — aiz pēdējā nāk pirmais, pirms pirmā ir pēdējais
@@ -801,11 +807,17 @@ document.addEventListener('keydown',function(e){
         '<div class="srv-icon" aria-hidden="true"><svg viewBox="0 0 24 24">'+s.iconSvg+'</svg></div>'+
         '<h3 class="srv-name">'+tx[s.nameKey]+'</h3>'+
         '<p class="srv-desc">'+tx[s.descKey]+'</p>'+
-        '<button class="srv-cta" onclick="goToBooking()" aria-label="'+tx.srvCta+'">'+
+        '<button class="srv-cta" aria-label="'+tx.srvCta+'">'+
           tx.srvCta+' <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'+
         '</button>'+
       '</div>';
       track.appendChild(slide);
+      // Attach click listener directly — no inline onclick needed
+      var btn=slide.querySelector('.srv-cta');
+      if(btn) btn.addEventListener('click',function(){
+        var booking=document.getElementById('booking');
+        if(booking) booking.scrollIntoView({behavior:'smooth',block:'start'});
+      });
     });
     // Duplicate first and last groups for infinite illusion
     // (simple infinite: we clone beginning/end slides)
@@ -890,11 +902,7 @@ document.addEventListener('keydown',function(e){
   window._rebuildServices=function(lang){buildSlides(lang);buildDots();};
 })();
 
-/* Scroll to booking from service card */
-window.goToBooking=function(){
-  var el=document.getElementById('booking');
-  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-};
+
 
 /* ════════════════════════════════
    TESTIMONIALS SLIDER (circular)
@@ -1281,19 +1289,4 @@ function BookingApp(){
         <button className="sub-btn" onClick={submit} disabled={submitting||!selDate||!selTime} aria-busy={submitting?'true':'false'}>
           {submitting?<><span className="spin" aria-hidden="true"/>{tx.submitting}</>:tx.submit}
         </button>
-        <p style={{fontSize:'.67rem',color:'var(--gray)',textAlign:'center',marginTop:'.7rem',letterSpacing:'.04em'}}>{tx.contact24}</p>
-      </div>
-    </div>
-  );
-}
-
-const el=document.getElementById('booking-app');
-if(el){
-  try{const root=ReactDOM.createRoot(el);root.render(<BookingApp/>);}
-  catch(e){ReactDOM.render(<BookingApp/>,el);}
-}
-})();
-</script>
-
-</body>
-</html>
+        <p style={{fontSize:'.67rem',color:'var(--gray)',textAlign:'center',marginTop:'.7rem',letterSp
